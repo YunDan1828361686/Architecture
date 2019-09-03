@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 import { mapMutations } from 'vuex'
 export default {
   name: 'error_logger_page',
@@ -53,7 +53,7 @@ export default {
           title: '时间',
           render: (h, { row }) => {
             return (
-              <span>{ dayjs(row.time).format('YYYY-MM-DD HH:mm:ss') }</span>
+              <span>{ row.time }</span>
             )
           },
           sortable: true,
