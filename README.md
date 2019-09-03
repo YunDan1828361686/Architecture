@@ -31,7 +31,6 @@ iView Admin is a front-end management background integration solution. It based 
 - Permission Authentication
     - A list of filters
     - Permission to switch
-- i18n
 - Components
     - Rich Text Editor
     - Markdown Editor
