@@ -8,6 +8,11 @@ import config from '@/config'
 const { homeName } = config
 
 Vue.use(Router)
+// 左键点击tab报错
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 const router = new Router({
   routes,
   mode: 'hash'
