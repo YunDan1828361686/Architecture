@@ -7,7 +7,6 @@ import store from './store'
 import iView from 'iview'
 import config from '@/config'
 import { directive as clickOutside } from 'v-click-outside-x'
-import installPlugin from '@/plugin'
 import './index.less'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
@@ -20,7 +19,6 @@ Vue.use(VOrgTree)
 /**
  * @description 注册admin内置插件
  */
-installPlugin(Vue)
 /**
  * @description 生产环境关掉提示
  */

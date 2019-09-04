@@ -2,12 +2,13 @@
   <div class="user-avatar-dropdown">
     <Dropdown @on-click="handleClick">
       <Badge :dot="!!messageUnreadCount">
-        <Avatar :src="userAvatar"/>
+        <Avatar :src="userAvatar" />
       </Badge>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
         <DropdownItem name="message">
-          消息中心<Badge style="margin-left: 10px" :count="messageUnreadCount"></Badge>
+          个人信息
+          <Badge style="margin-left: 10px" :count="messageUnreadCount"></Badge>
         </DropdownItem>
         <DropdownItem name="logout">退出登录</DropdownItem>
       </DropdownMenu>
@@ -31,9 +32,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'handleLogOut'
-    ]),
+    ...mapActions(['handleLogOut']),
     logout () {
       this.handleLogOut().then(() => {
         this.$router.push({
@@ -48,9 +47,11 @@ export default {
     },
     handleClick (name) {
       switch (name) {
-        case 'logout': this.logout()
+        case 'logout':
+          this.logout()
           break
-        case 'message': this.message()
+        case 'message':
+          this.message()
           break
       }
     }
