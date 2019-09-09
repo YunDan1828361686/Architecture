@@ -10,12 +10,15 @@ import { directive as clickOutside } from 'v-click-outside-x'
 import './index.less'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
+import Qs from 'qs';
+
 // 实际打包时应该不引入mock
 /* eslint-disable */
 if (process.env.NODE_ENV !== 'production') require('@/mock')
 
 Vue.use(iView)
 Vue.use(VOrgTree)
+Vue.prototype.$Qs = Qs
 /**
  * @description 注册admin内置插件
  */

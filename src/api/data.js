@@ -6,16 +6,17 @@ export const errorReq = () => {
     method: 'post'
   })
 }
-export const uploadImg = formData => {
-  return axios.request({
-    url: 'image/upload',
-    data: formData
-  })
-}
 
 export const getOrgData = () => {
   return axios.request({
     url: 'get_org_data',
     method: 'get'
+  })
+}
+
+export const getTable1Data = () => {
+  return axios.request({
+    url: 'get_table1_data',
+    method: 'post'
   })
 }
