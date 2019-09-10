@@ -30,6 +30,7 @@
       highlight-row
       :data="tableData_1"
       :columns="tableColumns_1"
+      @on-sort-change="changeSort"
       @on-selection-change="Selected_change_1"
     ></Table>
     <Row>
@@ -99,7 +100,6 @@
   </div>
 </template>
 <script>
-import compareObject from "@/libs/filter_table";
 import { Spin } from "iview";
 import { getTable1Data } from "@/api/data";
 export default {
@@ -121,6 +121,14 @@ export default {
           type: "selection",
           width: 60,
           align: "center"
+        },
+        {
+          title: "序号",
+          key: "num_id",
+          align: "center",
+          minwidth: 100,
+          // 排序
+          sortable: "custom"
         },
         {
           title: "姓名",
@@ -148,6 +156,8 @@ export default {
           title: "地址",
           key: "address",
           align: "center",
+          ellipsis: true,
+          tooltip: true,
           minwidth: 200
         },
         {
@@ -211,6 +221,10 @@ export default {
         // 默认可下载的表头
         Columns_if: [
           {
+            title: "序号",
+            key: "num_id"
+          },
+          {
             title: "姓名",
             key: "name"
           },
@@ -258,11 +272,19 @@ export default {
       this.table_form_1.page_size = index;
       this.mockTableData_1();
     },
+    // 排序
+    changeSort(column, key, order) {
+      console.log(column, key, order);
+      // key为以哪个基准进行排序
+      // order为normal  默认
+      // order为asc     小到大 正序
+      // order为desc    大到小 倒序
+    },
     // 表格行查看
     show_1(index) {
       this.$Modal.info({
         title: "详情",
-        content: `姓名：${this.tableData_1[index].name}<br>年龄：${this.tableData_1[index].age}<br>地址：${this.tableData_1[index].address}`
+        content: `序号：${this.tableData_1[index].num_id}<br>姓名：${this.tableData_1[index].name}<br>年龄：${this.tableData_1[index].age}<br>地址：${this.tableData_1[index].address}`
       });
     },
     // 表格行删除

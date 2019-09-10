@@ -4,24 +4,28 @@ export default {
   size: 10,
   TableData: [
     {
-      name: "John Brown",
+      num_id: '1',
+      name: 'John Brown',
       age: 18,
-      address: "New York No. 1 Lake Park"
+      address: 'New York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1'
     },
     {
-      name: "Jim Green",
+      num_id: '2',
+      name: 'Jim Green',
       age: 24,
-      address: "London No. 1 Lake Park"
+      address: 'London No. 1 Lake Park'
     },
     {
-      name: "Joe Black",
+      num_id: '3',
+      name: 'Joe Black',
       age: 30,
-      address: "Sydney No. 1 Lake Park"
+      address: 'Sydney No. 1 Lake Park'
     },
     {
-      name: "Jon Snow",
+      num_id: '4',
+      name: 'Jon Snow',
       age: 26,
-      address: "Ottawa No. 2 Lake Park"
+      address: 'Ottawa No. 2 Lake Park'
     }
   ]
 }
