@@ -2,11 +2,12 @@
   <div>
     <Row style="margin-bottom:20px">
       <Col span="24" style="text-align: right;">
+        <Drawer_add ref="Drawer_add"></Drawer_add>
         <Tooltip content="新增" placement="bottom-start">
-          <Button type="info" icon="md-add"></Button>
+          <Button type="info" icon="md-add" @click="add_1"></Button>
         </Tooltip>
         <Tooltip content="删除" placement="bottom-start" style="margin-left: 20px">
-          <Button type="error" icon="md-trash"></Button>
+          <Button type="error" icon="md-trash" @click="removes_1"></Button>
         </Tooltip>
         <Dropdown style="margin-left: 20px" placement="bottom-start" @on-click="Dropdown_change_1">
           <Button type="primary">
@@ -26,9 +27,9 @@
       border
       stripe
       ref="table1"
-      :loading="loading_1"
       highlight-row
       :data="tableData_1"
+      :loading="loading_1"
       :columns="tableColumns_1"
       @on-sort-change="changeSort"
       @on-selection-change="Selected_change_1"
@@ -102,15 +103,20 @@
 <script>
 import { Spin } from "iview";
 import { getTable1Data } from "@/api/data";
+import Drawer_add from "./Drawer_add.vue";
 export default {
-  name: "Table-csv",
+  name: "Table_csv",
+  components: { Drawer_add },
   data() {
     return {
       // 导出全部表格数据
       modal_1: false,
       // 导出所选表格数据
       modal_2: false,
+      // 表格的loading
       loading_1: false,
+      // 新增的抽屉
+      Drawer_1: false,
       // 总页数
       table_total_1: 1,
       // 当前页码
@@ -291,10 +297,26 @@ export default {
     remove_1(index) {
       console.log(index);
     },
+    // 新增
+    add_1() {
+      this.$refs.Drawer_add.Drawer_1 = true;
+    },
+    // 表格多选删除
+    removes_1() {
+      if (this.selectedData_1.length == 0) {
+        this.$Message.warning({
+          content: "请先勾选要删除的数据！",
+          duration: 3
+        });
+        return;
+      }
+      console.log(this.selectedData_1);
+    },
     // 更多操作
     Dropdown_change_1(index) {
       // 刷新
       if (index == 1) {
+        // 需先重置参数如分页倒序检索条件
         this.mockTableData_1();
       }
       // 导出全部数据
@@ -368,7 +390,7 @@ export default {
         const element = this.export_csv_1.Columns[i];
         columns.push(this.export_csv_1.Columns_if[element]);
       }
-      // 赋值全部的表格数据
+      // 赋值勾选的表格数据
       this.export_csv_1.Data = this.selectedData_1;
       // 导出csv文件
       this.$refs.table1.exportCsv({

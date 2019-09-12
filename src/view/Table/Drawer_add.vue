@@ -1,7 +1,13 @@
 <template>
   <div>
-    <Button @click="Drawer_1 = true" type="primary">Create</Button>
-    <Drawer title="Create" v-model="Drawer_1" width="600" :mask-closable="false">
+    <!-- <Button @click="Drawer_1 = true" type="primary">Create</Button> -->
+    <Drawer
+      title="新增"
+      v-model="Drawer_1"
+      width="600"
+      @on-close="Drawer_close_1"
+      :mask-closable="false"
+    >
       <Form ref="formCustom_1" :model="formCustom_1" :rules="ruleValidate_1">
         <Row :gutter="32">
           <Col span="12">
@@ -97,7 +103,7 @@
           </Col>
         </Row>
         <FormItem label="备注" label-position="top" prop="remarks">
-          <Input type="textarea" v-model="formCustom_1.remarks" :rows="4" placeholder="请输入备注" />
+          <Input type="textarea" v-model="formCustom_1.remarks" :autosize="{minRows: 3,maxRows: 3}" placeholder="请输入备注" />
         </FormItem>
       </Form>
       <div class="drawer_footer">
@@ -294,6 +300,9 @@ export default {
     },
     handleReset(name) {
       this.$refs[name].resetFields();
+    },
+    Drawer_close_1() {
+      this.$refs.formCustom_1.resetFields();
     }
   }
 };
@@ -301,10 +310,10 @@ export default {
 <style>
 .drawer_footer {
   width: 100%;
-  /* position: absolute; */
-  /* bottom: 0; */
-  /* left: 0; */
-  /* z-index: 10; */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
   border-top: 1px solid #e8e8e8;
   padding: 10px 16px;
   text-align: right;

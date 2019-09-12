@@ -138,48 +138,48 @@ export default [
     component: Main,
     children: [
       {
-        path: 'Table-csv',
-        name: 'Table-csv',
+        path: 'Table_csv',
+        name: 'Table_csv',
         meta: {
           title: 'csv'
         },
-        component: () => import('@/view/Table/Table-csv.vue')
+        component: () => import('@/view/Table/Table_csv.vue')
       },
+      // {
+      //   path: 'level_2_2',
+      //   name: 'level_2_2',
+      //   meta: {
+      //     access: ['super_admin'],
+      //     showAlways: true,
+      //     title: '二级-2'
+      //   },
+      //   component: parentView,
+      //   children: [
+      //     {
+      //       path: 'level_2_2_1',
+      //       name: 'level_2_2_1',
+      //       meta: {
+      //         title: '三级'
+      //       },
+      //       component: () => import('@/view/Table/level-2-2/level-2-2-1.vue')
+      //     },
+      //     {
+      //       path: 'level_2_2_2',
+      //       name: 'level_2_2_2',
+      //       meta: {
+      //         title: '三级'
+      //       },
+      //       component: () => import('@/view/Table/level-2-2/level-2-2-2.vue')
+      //     }
+      //   ]
+      // },
       {
-        path: 'level_2_2',
-        name: 'level_2_2',
+        path: 'Table_excel',
+        name: 'Table_excel',
         meta: {
-          access: ['super_admin'],
-          showAlways: true,
-          title: '二级-2'
+          title: 'excel'
         },
-        component: parentView,
-        children: [
-          {
-            path: 'level_2_2_1',
-            name: 'level_2_2_1',
-            meta: {
-              title: '三级'
-            },
-            component: () => import('@/view/Table/level-2-2/level-2-2-1.vue')
-          },
-          {
-            path: 'level_2_2_2',
-            name: 'level_2_2_2',
-            meta: {
-              title: '三级'
-            },
-            component: () => import('@/view/Table/level-2-2/level-2-2-2.vue')
-          }
-        ]
-      },
-      {
-        path: 'level_2_3',
-        name: 'level_2_3',
-        meta: {
-          title: '二级-3'
-        },
-        component: () => import('@/view/Table/level-2-3.vue')
+        component: () => import('@/view/Table/Table_excel.vue')
       }
     ]
   },
