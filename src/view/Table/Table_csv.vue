@@ -1,25 +1,32 @@
 <template>
   <div>
     <Row style="margin-bottom:20px">
-      <Col span="24" style="text-align: right;">
-        <Drawer_add ref="Drawer_add"></Drawer_add>
-        <Tooltip content="新增" placement="bottom-start">
-          <Button type="info" icon="md-add" @click="add_1"></Button>
-        </Tooltip>
-        <Tooltip content="删除" placement="bottom-start" style="margin-left: 20px">
-          <Button type="error" icon="md-trash" @click="removes_1"></Button>
-        </Tooltip>
-        <Dropdown style="margin-left: 20px" placement="bottom-start" @on-click="Dropdown_change_1">
-          <Button type="primary">
-            更多操作
-            <Icon type="ios-arrow-down"></Icon>
-          </Button>
-          <DropdownMenu slot="list" style="text-align:left;">
-            <DropdownItem name="1">刷新</DropdownItem>
-            <DropdownItem name="2" divided>导出全部数据（csv）</DropdownItem>
-            <DropdownItem name="3" divided>导出所选数据（csv）</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+      <Col span="24">
+        <div style="float: left;">xxxxxxxxxx</div>
+        <div style="float: right;">
+          <Drawer_add ref="Drawer_add"></Drawer_add>
+          <Tooltip content="新增" placement="bottom-start">
+            <Button type="info" icon="md-add" @click="add_1"></Button>
+          </Tooltip>
+          <Tooltip content="删除" placement="bottom-start" style="margin-left: 20px">
+            <Button type="error" icon="md-trash" @click="removes_1"></Button>
+          </Tooltip>
+          <Dropdown
+            style="margin-left: 20px"
+            placement="bottom-start"
+            @on-click="Dropdown_change_1"
+          >
+            <Button type="primary">
+              更多操作
+              <Icon type="ios-arrow-down"></Icon>
+            </Button>
+            <DropdownMenu slot="list" style="text-align:left;">
+              <DropdownItem name="1">刷新</DropdownItem>
+              <DropdownItem name="2" divided>导出全部数据（csv）</DropdownItem>
+              <DropdownItem name="3" divided>导出所选数据（csv）</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </Col>
     </Row>
     <!-- 表格 -->

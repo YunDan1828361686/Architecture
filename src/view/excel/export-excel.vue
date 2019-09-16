@@ -1,5 +1,5 @@
 <style lang="less">
-    @import "./common.less";
+@import "./common.less";
 </style>
 <template>
   <div>
@@ -14,24 +14,24 @@
   </div>
 </template>
 <script>
-import excel from '@/libs/excel'
+import excel from "@/libs/excel";
 export default {
-  name: 'export-excel',
-  data () {
+  name: "export-excel",
+  data() {
     return {
       exportLoading: false,
       tableTitle: [
         {
-          title: '一级分类',
-          key: 'category1'
+          title: "一级分类",
+          key: "category1"
         },
         {
-          title: '二级分类',
-          key: 'category2'
+          title: "二级分类",
+          key: "category2"
         },
         {
-          title: '三级分类',
-          key: 'category3'
+          title: "三级分类",
+          key: "category3"
         }
       ],
       tableData: [
@@ -51,31 +51,27 @@ export default {
           category3: 9
         }
       ]
-    }
+    };
   },
   methods: {
-    exportExcel () {
+    exportExcel() {
       if (this.tableData.length) {
-        this.exportLoading = true
+        this.exportLoading = true;
         const params = {
-          title: ['一级分类', '二级分类', '三级分类'],
-          key: ['category1', 'category2', 'category3'],
+          title: ["一级分类", "二级分类", "三级分类"],
+          key: ["category1", "category2", "category3"],
           data: this.tableData,
           autoWidth: true,
-          filename: '分类列表'
-        }
-        excel.export_array_to_excel(params)
-        this.exportLoading = false
+          filename: "分类列表"
+        };
+        excel.export_array_to_excel(params);
+        this.exportLoading = false;
       } else {
-        this.$Message.info('表格数据不能为空！')
+        this.$Message.info("表格数据不能为空！");
       }
     }
   },
-  created () {
-
-  },
-  mounted () {
-
-  }
-}
+  created() {},
+  mounted() {}
+};
 </script>
