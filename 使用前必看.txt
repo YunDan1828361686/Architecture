@@ -1,0 +1,10 @@
+百度搜索node.js
+打开node.js中文网
+下载-windows安装包
+下载完成后打开Node.js command prompt
+输入npm install -g cnpm --registry=https://registry.npm.taobao.org    npm下载比较慢所以下载淘宝镜像  以后就使用cnpm下载  这样下载比较快
+
+以后启动项目则只需要进行以下步骤
+输入命令cd然后空格把vue项目拉进去  回车
+看vue项目内有没有node_modules  有就不用管了  没有的话就cnpm install回车
+启动项目则用npm run dev回车
