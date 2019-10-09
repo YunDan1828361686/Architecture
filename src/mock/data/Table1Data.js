@@ -1,5 +1,5 @@
 export default {
-  total: 4,
+  total: 40,
   current: 1,
   size: 10,
   TableData: [

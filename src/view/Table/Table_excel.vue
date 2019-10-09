@@ -1,25 +1,46 @@
 <template>
   <div>
     <Row style="margin-bottom:20px">
-      <Col span="24" style="text-align: right;">
-        <Drawer_add ref="Drawer_add"></Drawer_add>
-        <Tooltip content="新增" placement="bottom-start">
-          <Button type="info" icon="md-add" @click="add_1"></Button>
-        </Tooltip>
-        <Tooltip content="删除" placement="bottom-start" style="margin-left: 20px">
-          <Button type="error" icon="md-trash" @click="removes_1"></Button>
-        </Tooltip>
-        <Dropdown style="margin-left: 20px" placement="bottom-start" @on-click="Dropdown_change_1">
-          <Button type="primary">
-            更多操作
-            <Icon type="ios-arrow-down"></Icon>
-          </Button>
-          <DropdownMenu slot="list" style="text-align:left;">
-            <DropdownItem name="1">刷新</DropdownItem>
-            <DropdownItem name="2" divided>导出全部数据（excel）</DropdownItem>
-            <DropdownItem name="3" divided>导出所选数据（excel）</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+      <Col span="24">
+        <div style="float: left;">
+          <Input @on-search="search_input_change_1" search enter-button>
+            <Select
+              v-model="table_form_1.search_select_1"
+              slot="prepend"
+              style="width: 80px"
+              @on-change="search_select_change_1"
+            >
+              <Option value="全部">全部</Option>
+              <Option value="未成年">未成年</Option>
+              <Option value="已成年">已成年</Option>
+            </Select>
+            <!-- <Button slot="append" icon="ios-search"></Button> -->
+          </Input>
+        </div>
+        <div style="float: right;">
+          <Drawer_add ref="Drawer_add"></Drawer_add>
+          <Tooltip content="新增" placement="bottom-start">
+            <Button type="info" icon="md-add" @click="add_1"></Button>
+          </Tooltip>
+          <Tooltip content="删除" placement="bottom-start" style="margin-left: 20px">
+            <Button type="error" icon="md-trash" @click="removes_1"></Button>
+          </Tooltip>
+          <Dropdown
+            style="margin-left: 20px"
+            placement="bottom-start"
+            @on-click="Dropdown_change_1"
+          >
+            <Button type="primary">
+              更多操作
+              <Icon type="ios-arrow-down"></Icon>
+            </Button>
+            <DropdownMenu slot="list" style="text-align:left;">
+              <DropdownItem name="1">刷新</DropdownItem>
+              <DropdownItem name="2" divided>导出全部数据（excel）</DropdownItem>
+              <DropdownItem name="3" divided>导出所选数据（excel）</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </Col>
     </Row>
     <!-- 表格 -->
@@ -105,7 +126,6 @@ import { Spin } from "iview";
 import { getTable1Data } from "@/api/data";
 import Drawer_add from "./Drawer_add.vue";
 import excel from "@/libs/excel";
-
 export default {
   name: "Table_excel",
   components: { Drawer_add },
@@ -134,7 +154,7 @@ export default {
           title: "序号",
           key: "num_id",
           align: "center",
-          minwidth: 100,
+          width: 80,
           // 排序
           sortable: "custom"
         },
@@ -221,7 +241,10 @@ export default {
         // 获取第几页的数据
         page_current: "",
         // 分页的粒度
-        page_size: ""
+        page_size: "",
+        // 检索
+        age: "",
+        search_select_1: "全部"
       },
       // 导出数据时用的
       export_excel_1: {
@@ -257,6 +280,7 @@ export default {
     },
     // 表数据
     mockTableData_1() {
+      console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
       // 重置选中的数据
@@ -413,6 +437,15 @@ export default {
     // 导出所选数据 取消
     cancel_2() {
       this.modal_2 = false;
+    },
+    // 检索搜索框
+    search_input_change_1(index) {
+      this.table_form_1.age = index;
+      this.mockTableData_1();
+    },
+    // 检索选择框
+    search_select_change_1(index) {
+      this.mockTableData_1();
     }
   },
   watch: {
