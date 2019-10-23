@@ -11,6 +11,7 @@ export default {
 </script>
 
 <style lang="less">
+@deep: ~">>>";
 .size {
   width: 100%;
   height: 100%;
@@ -25,7 +26,7 @@ body {
 #app {
   .size;
 }
-#app /deep/ .ivu-spin-fix {
+#app @{deep} .ivu-spin-fix {
   z-index: 1000;
 }
 </style>

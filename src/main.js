@@ -11,7 +11,9 @@ import './index.less'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 import Qs from 'qs';
-
+// 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
+// cnpm i default-passive-events -S
+import 'default-passive-events'
 // 实际打包时应该不引入mock
 /* eslint-disable */
 if (process.env.NODE_ENV !== 'production') require('@/mock')

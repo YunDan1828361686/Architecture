@@ -91,7 +91,7 @@ export default {
       return this.$store.state.app.tagRouter
     },
     userAvatar () {
-      return this.$store.state.user.avatarImgPath
+      return this.$store.state.user.userName
     },
     cacheList () {
       const list = [
