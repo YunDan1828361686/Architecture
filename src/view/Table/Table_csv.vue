@@ -304,8 +304,11 @@ export default {
       this.mockTableData_1();
     },
     // 排序
-    changeSort(column, key, order) {
-      console.log(column, key, order);
+    changeSort(index) {
+      if (index.order == "normal") {
+        index.order = "";
+      }
+      console.log(index);
       // key为以哪个基准进行排序
       // order为normal  默认
       // order为asc     小到大 正序
