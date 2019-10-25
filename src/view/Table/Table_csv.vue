@@ -52,7 +52,7 @@
       :data="tableData_1"
       :loading="loading_1"
       :columns="tableColumns_1"
-      @on-sort-change="changeSort"
+      @on-sort-change="changeSort_1"
       @on-selection-change="Selected_change_1"
     ></Table>
     <Row>
@@ -279,7 +279,7 @@ export default {
     },
     // 表数据
     mockTableData_1() {
-      console.log(this.table_form_1);
+      // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
       // 重置选中的数据
@@ -304,7 +304,7 @@ export default {
       this.mockTableData_1();
     },
     // 排序
-    changeSort(index) {
+    changeSort_1(index) {
       if (index.order == "normal") {
         index.order = "";
       }

@@ -145,6 +145,22 @@ export default [
         },
         component: () => import('@/view/Table/Table_csv.vue')
       },
+      {
+        path: 'Table_excel',
+        name: 'Table_excel',
+        meta: {
+          title: 'excel'
+        },
+        component: () => import('@/view/Table/Table_excel.vue')
+      },
+      {
+        path: 'Table_pagination',
+        name: 'Table_pagination',
+        meta: {
+          title: 'pagination'
+        },
+        component: () => import('@/view/Table/Table_pagination.vue')
+      },
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',
@@ -173,14 +189,7 @@ export default [
       //     }
       //   ]
       // },
-      {
-        path: 'Table_excel',
-        name: 'Table_excel',
-        meta: {
-          title: 'excel'
-        },
-        component: () => import('@/view/Table/Table_excel.vue')
-      }
+
     ]
   },
   {

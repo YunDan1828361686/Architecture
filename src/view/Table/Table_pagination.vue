@@ -53,7 +53,10 @@
       :loading="loading_1"
       :columns="tableColumns_1"
       @on-sort-change="changeSort_1"
-      @on-selection-change="Selected_change_1"
+      @on-select="handleSelectRow_1"
+      @on-select-all="handleSelectAll_1"
+      @on-select-cancel="handleCancelRow_1"
+      @on-select-all-cancel="handleSelectAll_1"
     ></Table>
     <Row>
       <Col span="24">
@@ -123,11 +126,11 @@
 </template>
 <script>
 import { Spin } from "iview";
-import { getTable1Data } from "@/api/data";
+import { getTable2Data } from "@/api/data";
 import Drawer_add from "./Drawer_add.vue";
 import excel from "@/libs/excel";
 export default {
-  name: "Table_excel",
+  name: "Table_pagination",
   components: { Drawer_add },
   data() {
     return {
@@ -235,7 +238,9 @@ export default {
       // 表格数据
       tableData_1: [],
       // 表格勾选的数据函数
-      selectedData_1: [],
+      selectedData_1: new Set(),
+      //选中的总数量
+      selectedSum_1: 0,
       // 获取表格数据时用到的参数
       table_form_1: {
         // 获取第几页的数据
@@ -274,18 +279,52 @@ export default {
     };
   },
   methods: {
-    // 表格勾选的数据函数
-    Selected_change_1(selection, row) {
-      this.selectedData_1 = selection;
+    //  选中某一行
+    handleSelectRow_1(selection, row) {
+      this.selectedData_1.add(row.num_id);
+      this.selectedSum_1 = this.selectedData_1.size;
+      console.log(this.selectedSum_1, this.selectedData_1);
+    },
+    //  取消某一行
+    handleCancelRow_1(selection, row) {
+      this.selectedData_1.delete(row.num_id);
+      this.selectedSum_1 = this.selectedData_1.size;
+      console.log(this.selectedSum_1, this.selectedData_1);
+    },
+    handleSelectAll_1(selection) {
+      // 取消全选 数组为空
+      if (selection.length === 0) {
+        let data = this.$refs.table1.data;
+        data.forEach(item => {
+          if (this.selectedData_1.has(item.num_id)) {
+            this.selectedData_1.delete(item.num_id);
+          }
+        });
+      } else {
+        selection.forEach(item => {
+          this.selectedData_1.add(item.num_id);
+        });
+      }
+      //同步
+      this.selectedSum_1 = this.selectedData_1.size;
+      console.log(this.selectedSum_1, this.selectedData_1);
+    },
+    setChecked() {
+      // 找到绑定的table的ref对应的dom，找到table的objData对象，objData保存的是当前页的数据
+      let objData = this.$refs.table1.objData;
+      console.log(objData);
+      for (let index in objData) {
+        if (this.selectedData_1.has(objData[index].num_id)) {
+          objData[index]._isChecked = true;
+        }
+      }
     },
     // 表数据
     mockTableData_1() {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
-      // 重置选中的数据
-      this.selectedData_1 = [];
-      getTable1Data().then(res => {
+      getTable2Data(this.table_form_1).then(res => {
         // 总页数
         this.table_total_1 = res.data.total;
         // 当前页码
@@ -456,6 +495,7 @@ export default {
       // 给表格数据赋值后并渲染完成表格后执行
       this.$nextTick(function() {
         // Spin.hide();
+        this.setChecked();
         this.loading_1 = false;
       });
     }

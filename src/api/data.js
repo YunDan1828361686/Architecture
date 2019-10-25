@@ -20,3 +20,11 @@ export const getTable1Data = () => {
     method: 'post'
   })
 }
+
+export const getTable2Data = (res) => {
+  return axios.request({
+    url: 'get_table2_data',
+    method: 'post',
+    data: res
+  })
+}
