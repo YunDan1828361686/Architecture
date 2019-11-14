@@ -18,7 +18,7 @@
           </Input>
         </div>
         <div style="float: right;">
-          <Drawer_add ref="Drawer_add"></Drawer_add>
+          <Drawer_add ref="Drawer_add" @formCustom_1="formCustom_1_click"></Drawer_add>
           <Tooltip content="新增" placement="bottom-start">
             <Button type="info" icon="md-add" @click="add_1"></Button>
           </Tooltip>
@@ -369,6 +369,12 @@ export default {
     add_1() {
       this.$refs.Drawer_add.Drawer_1 = true;
     },
+    formCustom_1_click(data) {
+      this.$Message.success("Success!");
+      // 请求后再关闭抽屉并清空input
+      this.$refs.Drawer_add.Drawer_1 = false;
+      this.$refs.Drawer_add.$refs[data.element_form].resetFields();
+    },
     // 表格多选删除
     removes_1() {
       if (this.selectedData_1.length == 0) {
@@ -380,6 +386,7 @@ export default {
       }
       console.log(this.selectedData_1);
     },
+
     // 更多操作
     Dropdown_change_1(index) {
       // 刷新

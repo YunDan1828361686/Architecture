@@ -71,7 +71,7 @@
             </FormItem>
           </Col>
           <Col span="12">
-            <FormItem label="开始时间" label-position="top" prop="end_time">
+            <FormItem label="截止时间" label-position="top" prop="end_time">
               <TimePicker
                 type="time"
                 placeholder="请选择截止时间"
@@ -103,7 +103,12 @@
           </Col>
         </Row>
         <FormItem label="备注" label-position="top" prop="remarks">
-          <Input type="textarea" v-model="formCustom_1.remarks" :autosize="{minRows: 3,maxRows: 3}" placeholder="请输入备注" />
+          <Input
+            type="textarea"
+            v-model="formCustom_1.remarks"
+            :autosize="{minRows: 3,maxRows: 3}"
+            placeholder="请输入备注"
+          />
         </FormItem>
       </Form>
       <div class="drawer_footer">
@@ -141,7 +146,9 @@ export default {
         // 爱好
         hobby: [],
         // 备注
-        remarks: ""
+        remarks: "",
+        // form表单的id
+        element_form: ""
       },
       // 正则
       ruleValidate_1: {
@@ -288,11 +295,9 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("Success!");
-          console.log(this.formCustom_1);
-          // 请求后再关闭抽屉并清空input
-          // this.Drawer_1 = false;
-          // this.$refs[name].resetFields();
+          // 给他赋值子组件的表单元素
+          this.formCustom_1.element_form = name;
+          this.$emit("formCustom_1", this.formCustom_1);
         } else {
           this.$Message.error("表单验证不通过!");
         }
