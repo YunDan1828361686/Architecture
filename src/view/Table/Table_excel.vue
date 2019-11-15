@@ -18,28 +18,19 @@
           </Input>
         </div>
         <div style="float: right;">
-          <Drawer_add ref="Drawer_add"></Drawer_add>
+          <Drawer_add ref="Drawer_add" @formCustom_1_click="formCustom_1_click"></Drawer_add>
           <Tooltip content="新增" placement="bottom-start">
             <Button type="info" icon="md-add" @click="add_1"></Button>
           </Tooltip>
           <Tooltip content="删除" placement="bottom-start" style="margin-left: 20px">
             <Button type="error" icon="md-trash" @click="removes_1"></Button>
           </Tooltip>
-          <Dropdown
-            style="margin-left: 20px"
-            placement="bottom-start"
-            @on-click="Dropdown_change_1"
-          >
-            <Button type="primary">
-              更多操作
-              <Icon type="ios-arrow-down"></Icon>
-            </Button>
-            <DropdownMenu slot="list" style="text-align:left;">
-              <DropdownItem name="1">刷新</DropdownItem>
-              <DropdownItem name="2" divided>导出全部数据（excel）</DropdownItem>
-              <DropdownItem name="3" divided>导出所选数据（excel）</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <More_excel
+            ref="More_excel"
+            @Dropdown_change_1="Dropdown_change_1"
+            :table_total_1="table_total_1"
+            :export_excel_1="export_excel_1"
+          ></More_excel>
         </div>
       </Col>
     </Row>
@@ -72,69 +63,19 @@
         </div>
       </Col>
     </Row>
-    <!-- 导出全部数据 -->
-    <Modal v-model="modal_1" width="540">
-      <p slot="header">
-        <span>确认导出全部 {{table_total_1}} 条数据</span>
-      </p>
-      <Form :model="export_excel_1" label-position="right" :label-width="100">
-        <FormItem label="导出文件名">
-          <Input v-model="export_excel_1.name"></Input>
-        </FormItem>
-        <FormItem label="自定义导出列">
-          <Checkbox-group v-model="export_excel_1.Columns">
-            <Checkbox
-              v-for="(item,index) in this.export_excel_1.Columns_if"
-              :key="index"
-              :label="index"
-            >{{item.title}}</Checkbox>
-          </Checkbox-group>
-        </FormItem>
-      </Form>
-      <div slot="footer">
-        <Button type="text" size="large" @click="cancel_1">取消</Button>
-        <Button type="primary" size="large" @click="ok_1">确定</Button>
-      </div>
-    </Modal>
-    <Modal v-model="modal_2" width="540">
-      <p slot="header">
-        <span>确认导出全部 {{selectedData_1.length}} 条数据</span>
-      </p>
-      <Form :model="export_excel_1" label-position="right" :label-width="100">
-        <FormItem label="导出文件名">
-          <Input v-model="export_excel_1.name"></Input>
-        </FormItem>
-        <FormItem label="自定义导出列">
-          <Checkbox-group v-model="export_excel_1.Columns">
-            <Checkbox
-              v-for="(item,index) in this.export_excel_1.Columns_if"
-              :key="index"
-              :label="index"
-            >{{item.title}}</Checkbox>
-          </Checkbox-group>
-        </FormItem>
-      </Form>
-      <div slot="footer">
-        <Button type="text" size="large" @click="cancel_2">取消</Button>
-        <Button type="primary" size="large" @click="ok_2">确定</Button>
-      </div>
-    </Modal>
   </div>
 </template>
 <script>
 import { Spin } from "iview";
 import { getTable1Data } from "@/api/data";
 import Drawer_add from "./Drawer_add.vue";
-import excel from "@/libs/excel";
+import More_excel from "./More_excel.vue";
+
 export default {
   name: "Table_excel",
-  components: { Drawer_add },
+  components: { Drawer_add, More_excel },
   data() {
     return {
-      // 导出全部表格数据
-      modal_1: false,
-      // 导出所选表格数据
-      modal_2: false,
       // 表格的loading
       loading_1: false,
       // 新增的抽屉
@@ -162,7 +103,7 @@ export default {
           title: "姓名",
           key: "name",
           align: "center",
-          width: 200,
+          minwidth: 200,
           render: (h, params) => {
             return h("div", [
               h("Icon", {
@@ -330,6 +271,14 @@ export default {
     add_1() {
       this.$refs.Drawer_add.Drawer_1 = true;
     },
+    // 子传父自定义事件
+    formCustom_1_click(data) {
+      console.log(data);
+      this.$Message.success("Success!");
+      // 请求后再关闭抽屉并清空input
+      // this.$refs.Drawer_add.Drawer_1 = false;
+      // this.$refs.Drawer_add.$refs[data.element_form].resetFields();
+    },
     // 表格多选删除
     removes_1() {
       if (this.selectedData_1.length == 0) {
@@ -350,7 +299,29 @@ export default {
       }
       // 导出全部数据
       else if (index == 2) {
-        this.modal_1 = true;
+        // 请求接口获取该表格全部数据
+        this.export_excel_1.Data = [
+          {
+            num_id: "6",
+            name: "John Brown",
+            age: 18,
+            address:
+              "New York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1"
+          },
+          {
+            num_id: "8",
+            name: "Jim Green",
+            age: 24,
+            address: "London No. 1 Lake Park"
+          },
+          {
+            num_id: "10",
+            name: "Joe Black",
+            age: 30,
+            address: "Sydney No. 1 Lake Park"
+          }
+        ];
+        this.$refs.More_excel.modal_1 = true;
       }
       // 导出所选数据
       else if (index == 3) {
@@ -362,84 +333,9 @@ export default {
           });
           return;
         }
-        this.modal_2 = true;
+        this.export_excel_1.Data = this.selectedData_1;
+        this.$refs.More_excel.modal_2 = true;
       }
-    },
-    // 导出全部数据 确定
-    ok_1() {
-      // 表头
-      let title = [];
-      let key = [];
-      if (this.export_excel_1.Columns.length == 0) {
-        this.$Message.warning({
-          content: "请先勾选自定义导出列！",
-          duration: 3
-        });
-        return;
-      }
-      // 获取选取的表头按原本的顺序排
-      this.export_excel_1.Columns.sort(function(a, b) {
-        return a - b;
-      });
-      // title,key为排序后取出来对应索引的表头
-      for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
-        const element = this.export_excel_1.Columns[i];
-        title.push(this.export_excel_1.Columns_if[element].title);
-        key.push(this.export_excel_1.Columns_if[element].key);
-      }
-      // 赋值全部的表格数据
-      this.export_excel_1.Data = this.tableData_1;
-      // 导出excel文件
-      excel.export_array_to_excel({
-        title,
-        key,
-        data: this.export_excel_1.Data,
-        autoWidth: true,
-        filename: this.export_excel_1.name
-      });
-      this.modal_1 = false;
-    },
-    // 导出全部数据 取消
-    cancel_1() {
-      this.modal_1 = false;
-    },
-    // 导出所选数据 确定
-    ok_2() {
-      // 表头
-      let title = [];
-      let key = [];
-      if (this.export_excel_1.Columns.length == 0) {
-        this.$Message.warning({
-          content: "请先勾选自定义导出列！",
-          duration: 3
-        });
-        return;
-      }
-      // 获取选取的表头按原本的顺序排
-      this.export_excel_1.Columns.sort(function(a, b) {
-        return a - b;
-      });
-      // title,key为排序后取出来对应索引的表头
-      for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
-        const element = this.export_excel_1.Columns[i];
-        title.push(this.export_excel_1.Columns_if[element].title);
-        key.push(this.export_excel_1.Columns_if[element].key);
-      }
-      // 赋值勾选的表格数据
-      this.export_excel_1.Data = this.selectedData_1;
-      // 导出excel文件
-      excel.export_array_to_excel({
-        title,
-        key,
-        data: this.export_excel_1.Data,
-        autoWidth: true,
-        filename: this.export_excel_1.name
-      });
-      this.modal_2 = false;
-    },
-    // 导出所选数据 取消
-    cancel_2() {
-      this.modal_2 = false;
     },
     // 检索搜索框
     search_input_change_1(index) {

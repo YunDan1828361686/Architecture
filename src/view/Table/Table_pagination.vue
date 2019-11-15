@@ -18,7 +18,7 @@
           </Input>
         </div>
         <div style="float: right;">
-          <Drawer_add ref="Drawer_add" @formCustom_1="formCustom_1_click"></Drawer_add>
+          <Drawer_add ref="Drawer_add" @formCustom_1_click="formCustom_1_click"></Drawer_add>
           <Tooltip content="新增" placement="bottom-start">
             <Button type="info" icon="md-add" @click="add_1"></Button>
           </Tooltip>
@@ -61,7 +61,10 @@
     <Row>
       <Col span="24">
         <div style="margin:20px;display: flex;justify-content: space-between;align-items: center;">
-          <div>共{{table_total_1}}条记录</div>
+          <div>
+            <span style="margin-right:10px">共{{table_total_1}}条记录</span>
+            <span>已选择{{selectedSum_1}}条记录</span>
+          </div>
           <div>
             <Page
               :total="table_total_1"
@@ -140,8 +143,6 @@ export default {
       modal_2: false,
       // 表格的loading
       loading_1: false,
-      // 新增的抽屉
-      Drawer_1: false,
       // 总页数
       table_total_1: 1,
       // 当前页码
@@ -165,7 +166,7 @@ export default {
           title: "姓名",
           key: "name",
           align: "center",
-          width: 200,
+          minwidth: 200,
           render: (h, params) => {
             return h("div", [
               h("Icon", {
@@ -369,11 +370,13 @@ export default {
     add_1() {
       this.$refs.Drawer_add.Drawer_1 = true;
     },
+    // 子传父自定义事件
     formCustom_1_click(data) {
+      console.log(data);
       this.$Message.success("Success!");
       // 请求后再关闭抽屉并清空input
-      this.$refs.Drawer_add.Drawer_1 = false;
-      this.$refs.Drawer_add.$refs[data.element_form].resetFields();
+      // this.$refs.Drawer_add.Drawer_1 = false;
+      // this.$refs.Drawer_add.$refs[data.element_form].resetFields();
     },
     // 表格多选删除
     removes_1() {

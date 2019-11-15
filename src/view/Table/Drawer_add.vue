@@ -297,7 +297,7 @@ export default {
         if (valid) {
           // 给他赋值子组件的表单元素
           this.formCustom_1.element_form = name;
-          this.$emit("formCustom_1", this.formCustom_1);
+          this.$emit("formCustom_1_click", this.formCustom_1);
         } else {
           this.$Message.error("表单验证不通过!");
         }
@@ -312,7 +312,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped  lang="less">
 .drawer_footer {
   width: 100%;
   position: absolute;
