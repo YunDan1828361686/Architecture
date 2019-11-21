@@ -62,46 +62,46 @@
 </template>
 
 <script>
-import excel from "@/libs/excel";
+import excel from '@/libs/excel'
 export default {
-  props: ["table_total_1", "export_excel_1"],
-  data() {
+  props: ['table_total_1', 'export_excel_1'],
+  data () {
     return {
       // 导出全部表格数据
       modal_1: false,
       // 导出所选表格数据
       modal_2: false
-    };
+    }
   },
   methods: {
-    Dropdown_change_1(index) {
-      this.$emit("Dropdown_change_1", index);
+    Dropdown_change_1 (index) {
+      this.$emit('Dropdown_change_1', index)
     },
     // 导出全部数据 确定
-    ok_1() {
+    ok_1 () {
       // 表头
-      let title = [];
-      let key = [];
+      let title = []
+      let key = []
       if (this.export_excel_1.Columns.length == 0) {
         this.$Message.warning({
-          content: "请先勾选自定义导出列！",
+          content: '请先勾选自定义导出列！',
           duration: 3
-        });
-        return;
+        })
+        return
       }
       // 获取选取的表头按原本的顺序排
-      this.export_excel_1.Columns.sort(function(a, b) {
-        return a - b;
-      });
+      this.export_excel_1.Columns.sort(function (a, b) {
+        return a - b
+      })
       // 根据表数据里的num_id排序
-      this.export_excel_1.Data.sort(function(a, b) {
-        return a.num_id - b.num_id;
-      });
+      this.export_excel_1.Data.sort(function (a, b) {
+        return a.num_id - b.num_id
+      })
       // title,key为排序后取出来对应索引的表头
       for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
-        const element = this.export_excel_1.Columns[i];
-        title.push(this.export_excel_1.Columns_if[element].title);
-        key.push(this.export_excel_1.Columns_if[element].key);
+        const element = this.export_excel_1.Columns[i]
+        title.push(this.export_excel_1.Columns_if[element].title)
+        key.push(this.export_excel_1.Columns_if[element].key)
       }
       // 导出excel文件
       excel.export_array_to_excel({
@@ -110,38 +110,38 @@ export default {
         data: this.export_excel_1.Data,
         autoWidth: true,
         filename: this.export_excel_1.name
-      });
-      this.modal_1 = false;
+      })
+      this.modal_1 = false
     },
     // 导出全部数据 取消
-    cancel_1() {
-      this.modal_1 = false;
+    cancel_1 () {
+      this.modal_1 = false
     },
     // 导出所选数据 确定
-    ok_2() {
+    ok_2 () {
       // 表头
-      let title = [];
-      let key = [];
+      let title = []
+      let key = []
       if (this.export_excel_1.Columns.length == 0) {
         this.$Message.warning({
-          content: "请先勾选自定义导出列！",
+          content: '请先勾选自定义导出列！',
           duration: 3
-        });
-        return;
+        })
+        return
       }
       // 获取选取的表头按原本的顺序排
-      this.export_excel_1.Columns.sort(function(a, b) {
-        return a - b;
-      });
+      this.export_excel_1.Columns.sort(function (a, b) {
+        return a - b
+      })
       // 根据表数据里的num_id排序
-      this.export_excel_1.Data.sort(function(a, b) {
-        return a.num_id - b.num_id;
-      });
+      this.export_excel_1.Data.sort(function (a, b) {
+        return a.num_id - b.num_id
+      })
       // title,key为排序后取出来对应索引的表头
       for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
-        const element = this.export_excel_1.Columns[i];
-        title.push(this.export_excel_1.Columns_if[element].title);
-        key.push(this.export_excel_1.Columns_if[element].key);
+        const element = this.export_excel_1.Columns[i]
+        title.push(this.export_excel_1.Columns_if[element].title)
+        key.push(this.export_excel_1.Columns_if[element].key)
       }
       // 导出excel文件
       excel.export_array_to_excel({
@@ -150,15 +150,15 @@ export default {
         data: this.export_excel_1.Data,
         autoWidth: true,
         filename: this.export_excel_1.name
-      });
-      this.modal_2 = false;
+      })
+      this.modal_2 = false
     },
     // 导出所选数据 取消
-    cancel_2() {
-      this.modal_2 = false;
+    cancel_2 () {
+      this.modal_2 = false
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

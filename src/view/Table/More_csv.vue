@@ -63,93 +63,93 @@
 
 <script>
 export default {
-  props: ["table_total_1", "export_csv_1", "element"],
-  data() {
+  props: ['table_total_1', 'export_csv_1', 'element'],
+  data () {
     return {
       // 导出全部表格数据
       modal_1: false,
       // 导出所选表格数据
       modal_2: false
-    };
+    }
   },
   methods: {
-    Dropdown_change_1(index) {
-      this.$emit("Dropdown_change_1", index);
+    Dropdown_change_1 (index) {
+      this.$emit('Dropdown_change_1', index)
     },
     // 导出全部数据 确定
-    ok_1() {
+    ok_1 () {
       // 表头
-      let columns = [];
+      let columns = []
       if (this.export_csv_1.Columns.length == 0) {
         this.$Message.warning({
-          content: "请先勾选自定义导出列！",
+          content: '请先勾选自定义导出列！',
           duration: 3
-        });
-        return;
+        })
+        return
       }
       // 获取选取的表头按原本的顺序排
-      this.export_csv_1.Columns.sort(function(a, b) {
-        return a - b;
-      });
+      this.export_csv_1.Columns.sort(function (a, b) {
+        return a - b
+      })
       // 根据表数据里的num_id排序
-      this.export_csv_1.Data.sort(function(a, b) {
-        return a.num_id - b.num_id;
-      });
+      this.export_csv_1.Data.sort(function (a, b) {
+        return a.num_id - b.num_id
+      })
       // columns为排序后取出来对应索引的表头
       for (let i = 0; i < this.export_csv_1.Columns.length; i++) {
-        const element = this.export_csv_1.Columns[i];
-        columns.push(this.export_csv_1.Columns_if[element]);
+        const element = this.export_csv_1.Columns[i]
+        columns.push(this.export_csv_1.Columns_if[element])
       }
       // 导出csv文件
       this.element.exportCsv({
         filename: this.export_csv_1.name,
         columns: columns,
         data: this.export_csv_1.Data
-      });
-      this.modal_1 = false;
+      })
+      this.modal_1 = false
     },
     // 导出全部数据 取消
-    cancel_1() {
-      this.modal_1 = false;
+    cancel_1 () {
+      this.modal_1 = false
     },
     // 导出所选数据 确定
-    ok_2() {
+    ok_2 () {
       // 表头
-      let columns = [];
+      let columns = []
       if (this.export_csv_1.Columns.length == 0) {
         this.$Message.warning({
-          content: "请先勾选自定义导出列！",
+          content: '请先勾选自定义导出列！',
           duration: 3
-        });
-        return;
+        })
+        return
       }
       // 获取选取的表头按原本的顺序排
-      this.export_csv_1.Columns.sort(function(a, b) {
-        return a - b;
-      });
+      this.export_csv_1.Columns.sort(function (a, b) {
+        return a - b
+      })
       // 根据表数据里的num_id排序
-      this.export_csv_1.Data.sort(function(a, b) {
-        return a.num_id - b.num_id;
-      });
+      this.export_csv_1.Data.sort(function (a, b) {
+        return a.num_id - b.num_id
+      })
       // columns为排序后取出来对应索引的表头
       for (let i = 0; i < this.export_csv_1.Columns.length; i++) {
-        const element = this.export_csv_1.Columns[i];
-        columns.push(this.export_csv_1.Columns_if[element]);
+        const element = this.export_csv_1.Columns[i]
+        columns.push(this.export_csv_1.Columns_if[element])
       }
       // 导出csv文件
       this.element.exportCsv({
         filename: this.export_csv_1.name,
         columns: columns,
         data: this.export_csv_1.Data
-      });
-      this.modal_2 = false;
+      })
+      this.modal_2 = false
     },
     // 导出所选数据 取消
-    cancel_2() {
-      this.modal_2 = false;
+    cancel_2 () {
+      this.modal_2 = false
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
