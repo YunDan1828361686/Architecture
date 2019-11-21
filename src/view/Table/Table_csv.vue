@@ -45,12 +45,18 @@
       :loading="loading_1"
       :columns="tableColumns_1"
       @on-sort-change="changeSort_1"
-      @on-selection-change="Selected_change_1"
+      @on-select="handleSelectRow_1"
+      @on-select-all="handleSelectAll_1"
+      @on-select-cancel="handleCancelRow_1"
+      @on-select-all-cancel="handleSelectAll_1"
     ></Table>
     <Row>
       <Col span="24">
         <div style="margin:20px;display: flex;justify-content: space-between;align-items: center;">
-          <div>共{{table_total_1}}条记录</div>
+          <div>
+            <span style="margin-right:10px">共{{table_total_1}}条记录</span>
+            <span>已选择{{selectedSum_1}}条记录</span>
+          </div>
           <div>
             <Page
               :total="table_total_1"
@@ -68,7 +74,7 @@
 </template>
 <script>
 import { Spin } from "iview";
-import { getTable1Data } from "@/api/data";
+import { getTable2Data } from "@/api/data";
 import Drawer_add from "./Drawer_add.vue";
 import More_csv from "./More_csv.vue";
 export default {
@@ -173,8 +179,12 @@ export default {
       ],
       // 表格数据
       tableData_1: [],
-      // 表格勾选的数据函数
-      selectedData_1: [],
+      // 表格勾选的数据ID
+      selectedData_1: new Set(),
+      // 表格勾选的数据
+      selectedData_2: new Set(),
+      //选中的总数量
+      selectedSum_1: 0,
       // 获取表格数据时用到的参数
       table_form_1: {
         // 获取第几页的数据
@@ -213,18 +223,66 @@ export default {
     };
   },
   methods: {
-    // 表格勾选的数据函数
-    Selected_change_1(selection, row) {
-      this.selectedData_1 = selection;
+    //  选中某一行
+    handleSelectRow_1(selection, row) {
+      this.selectedData_1.add(row.num_id);
+      this.selectedData_2.add(row);
+      this.selectedSum_1 = this.selectedData_1.size;
+    },
+    //  取消某一行
+    handleCancelRow_1(selection, row) {
+      this.selectedData_1.delete(row.num_id);
+      this.selectedData_2.forEach(item => {
+        if (item.num_id == row.num_id) {
+          this.selectedData_2.delete(item);
+        }
+      });
+      this.selectedSum_1 = this.selectedData_1.size;
+    },
+    handleSelectAll_1(selection) {
+      // 取消全选 数组为空
+      if (selection.length === 0) {
+        let data = this.$refs.table1.data;
+        data.forEach(item => {
+          if (this.selectedData_1.has(item.num_id)) {
+            this.selectedData_1.delete(item.num_id);
+            this.selectedData_2.forEach(item_ => {
+              if (item_.num_id == item.num_id) {
+                this.selectedData_2.delete(item_);
+              }
+            });
+          }
+        });
+      } else {
+        selection.forEach(item => {
+          this.selectedData_1.add(item.num_id);
+          this.selectedData_2.forEach(item_ => {
+            if (item_.num_id == item.num_id) {
+              this.selectedData_2.delete(item_);
+            }
+          });
+          this.selectedData_2.add(item);
+        });
+      }
+      //同步
+      this.selectedSum_1 = this.selectedData_1.size;
+    },
+    setChecked() {
+      // 找到绑定的table的ref对应的dom，找到table的objData对象，objData保存的是当前页的数据
+      let objData = this.$refs.table1.objData;
+      console.log(objData);
+      for (let index in objData) {
+        if (this.selectedData_1.has(objData[index].num_id)) {
+          objData[index]._isChecked = true;
+        }
+      }
     },
     // 表数据
     mockTableData_1() {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
-      // 重置选中的数据
-      this.selectedData_1 = [];
-      getTable1Data().then(res => {
+      getTable2Data(this.table_form_1).then(res => {
         // 总页数
         this.table_total_1 = res.data.total;
         // 当前页码
@@ -279,20 +337,23 @@ export default {
     },
     // 表格多选删除
     removes_1() {
-      if (this.selectedData_1.length == 0) {
+      if (this.selectedSum_1 == 0) {
         this.$Message.warning({
           content: "请先勾选要删除的数据！",
           duration: 3
         });
         return;
       }
-      console.log(this.selectedData_1);
+      console.log(this.selectedData_2);
     },
     // 更多操作
     Dropdown_change_1(index) {
       // 刷新
       if (index == 1) {
         // 需先重置参数如分页倒序检索条件
+        this.selectedData_1 = new Set();
+        this.selectedData_2 = new Set();
+        this.selectedSum_1 = this.selectedData_1.size;
         this.mockTableData_1();
       }
       // 导出全部数据
@@ -325,14 +386,14 @@ export default {
       // 导出所选数据
       else if (index == 3) {
         // 如果没有勾选数据
-        if (this.selectedData_1.length == 0) {
+        if (this.selectedSum_1 == 0) {
           this.$Message.warning({
             content: "请先勾选要导出的数据！",
             duration: 3
           });
           return;
         }
-        this.export_csv_1.Data = this.selectedData_1;
+        this.export_csv_1.Data = [...this.selectedData_2];
         this.$refs.More_csv.modal_2 = true;
       }
     },
@@ -352,6 +413,7 @@ export default {
       // 给表格数据赋值后并渲染完成表格后执行
       this.$nextTick(function() {
         // Spin.hide();
+        this.setChecked();
         this.loading_1 = false;
       });
     }

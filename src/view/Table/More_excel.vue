@@ -93,6 +93,10 @@ export default {
       this.export_excel_1.Columns.sort(function(a, b) {
         return a - b;
       });
+      // 根据表数据里的num_id排序
+      this.export_excel_1.Data.sort(function(a, b) {
+        return a.num_id - b.num_id;
+      });
       // title,key为排序后取出来对应索引的表头
       for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
         const element = this.export_excel_1.Columns[i];
@@ -128,6 +132,10 @@ export default {
       // 获取选取的表头按原本的顺序排
       this.export_excel_1.Columns.sort(function(a, b) {
         return a - b;
+      });
+      // 根据表数据里的num_id排序
+      this.export_excel_1.Data.sort(function(a, b) {
+        return a.num_id - b.num_id;
       });
       // title,key为排序后取出来对应索引的表头
       for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
