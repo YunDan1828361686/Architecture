@@ -153,14 +153,6 @@ export default [
         },
         component: () => import('@/view/Table/Table_excel.vue')
       },
-      {
-        path: 'Table_pagination',
-        name: 'Table_pagination',
-        meta: {
-          title: 'pagination'
-        },
-        component: () => import('@/view/Table/Table_pagination.vue')
-      },
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',
