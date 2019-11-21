@@ -73,7 +73,7 @@
   </div>
 </template>
 <script>
-import { Spin } from 'iview'
+import { Spin } from 'view-design'
 import { getTable2Data } from '@/api/data'
 import Drawer_add from './Drawer_add.vue'
 import More_csv from './More_csv.vue'

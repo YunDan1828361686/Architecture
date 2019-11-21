@@ -4,13 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import iView from 'iview'
+// 4.x
+import iView from 'view-design'
+// import style
+import 'view-design/dist/styles/iview.css'
 import config from '@/config'
 import { directive as clickOutside } from 'v-click-outside-x'
 import './index.less'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
-import Qs from 'qs';
+import Qs from 'qs'
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
 // import 'default-passive-events'
