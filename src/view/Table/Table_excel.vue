@@ -39,6 +39,7 @@
       border
       stripe
       ref="table1"
+      height="518"
       highlight-row
       :data="tableData_1"
       :loading="loading_1"
@@ -101,7 +102,7 @@ export default {
           title: '序号',
           key: 'num_id',
           align: 'center',
-          width: 80,
+          width: 90,
           // 排序
           sortable: 'true'
         },
