@@ -119,7 +119,6 @@ export default {
       "setHomeRoute",
       "closeTag"
     ]),
-    ...mapActions(["handleLogin"]),
     turnToPage(route) {
       let { name, params, query } = {};
       if (typeof route === "string") name = route;

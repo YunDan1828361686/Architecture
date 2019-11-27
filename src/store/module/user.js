@@ -1,8 +1,4 @@
-import {
-  login,
-  logout,
-  getUserInfo
-} from '@/api/user'
+import { logout } from '@/api/user'
 import { setToken, getToken } from '@/libs/util'
 
 export default {
@@ -15,47 +11,31 @@ export default {
     hasGetInfo: false
   },
   mutations: {
-    setAvatar (state, avatarPath) {
+    setAvatar(state, avatarPath) {
       state.avatarImgPath = avatarPath
     },
-    setUserId (state, id) {
+    setUserId(state, id) {
       state.userId = id
     },
-    setUserName (state, name) {
+    setUserName(state, name) {
       state.userName = name
     },
-    setAccess (state, access) {
+    setAccess(state, access) {
       state.access = access
     },
-    setToken (state, token) {
+    setToken(state, token) {
       state.token = token
       setToken(token)
     },
-    setHasGetInfo (state, status) {
+    setHasGetInfo(state, status) {
       state.hasGetInfo = status
     }
   },
   getters: {
   },
   actions: {
-    // 登录
-    handleLogin ({ commit }, { userName, password }) {
-      userName = userName.trim()
-      return new Promise((resolve, reject) => {
-        login({
-          userName,
-          password
-        }).then(res => {
-          const data = res.data
-          commit('setToken', data.token)
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
-      })
-    },
     // 退出登录
-    handleLogOut ({ state, commit }) {
+    handleLogOut({ state, commit }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('setToken', '')
@@ -71,23 +51,37 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo ({ state, commit }) {
+    getUserInfo({ state, commit }, token) {
+      const USER = {
+        super_admin: {
+          name: 'super_admin',
+          user_id: '1',
+          access: ['super_admin', 'admin'],
+          token: 'super_admin',
+          avatar: 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png'
+        },
+        admin: {
+          name: 'admin',
+          user_id: '2',
+          access: ['admin'],
+          token: 'admin',
+          avatar: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
+        }
+      }
       return new Promise((resolve, reject) => {
-        try {
-          getUserInfo(state.token).then(res => {
-            const data = res.data
+        setTimeout(() => {
+          try {
+            let data = USER[token];
             commit('setAvatar', data.avatar)
             commit('setUserName', data.name)
             commit('setUserId', data.user_id)
             commit('setAccess', data.access)
             commit('setHasGetInfo', true)
             resolve(data)
-          }).catch(err => {
-            reject(err)
-          })
-        } catch (error) {
-          reject(error)
-        }
+          } catch (error) {
+            reject(error)
+          }
+        }, 2000)
       })
     }
   }
