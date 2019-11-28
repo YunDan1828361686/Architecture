@@ -33,9 +33,29 @@ module.exports = {
       .set('_c', resolve('src/components'))
   },
   // 设为false打包时不生成.map文件
-  productionSourceMap: false
+  productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   // devServer: {
   //   proxy: 'localhost:3000'
   // }
+  //webpack配置
+  configureWebpack: {
+    //关闭 webpack 的性能提示
+    performance: {
+      hints: false
+    },
+    //或者
+    //警告 webpack 的性能提示
+    performance: {
+      hints: 'warning',
+      //入口起点的最大体积
+      maxEntrypointSize: 50000000,
+      //生成文件的最大体积
+      maxAssetSize: 30000000,
+      //只给出 js 文件的性能提示
+      assetFilter: function (assetFilename) {
+        return assetFilename.endsWith('.js');
+      }
+    }
+  }
 }

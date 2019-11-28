@@ -19,6 +19,7 @@
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.0",
     "qs": "^6.7.0",
+    "tree-table-vue": "^1.1.0",
     "v-click-outside-x": "^4.0.19",
     "v-org-tree": "^1.0.6",
     "view-design": "^4.0.2",
@@ -26,7 +27,7 @@
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.16.0",
     "vuex": "^3.0.1",
-    "vuex-persistedstate": "^2.5.4",
+    "vuex-persistedstate": "^2.7.0",
     "xlsx": "^0.13.3"
   },
   "devDependencies": {

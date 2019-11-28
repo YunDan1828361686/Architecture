@@ -153,6 +153,22 @@ export default [
         },
         component: () => import('@/view/Table/Table_excel.vue')
       },
+      {
+        path: 'Table_tree',
+        name: 'Table_tree',
+        meta: {
+          title: 'tree'
+        },
+        component: () => import('@/view/Table/Table_tree.vue')
+      },
+      {
+        path: 'Table_expand',
+        name: 'Table_expand',
+        meta: {
+          title: 'expand'
+        },
+        component: () => import('@/view/Table/Table_expand.vue')
+      },
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',
