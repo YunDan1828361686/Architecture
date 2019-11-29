@@ -75,7 +75,7 @@
 </template>
 <script>
 import { Spin } from "view-design";
-import { getTable2Data } from "@/api/data";
+import { getTableData } from "@/api/data";
 import Drawer_add from "./Drawer_add.vue";
 import More_csv from "./More_csv.vue";
 export default {
@@ -283,7 +283,7 @@ export default {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
-      getTable2Data(this.table_form_1).then(res => {
+      getTableData(this.table_form_1).then(res => {
         // 总页数
         this.table_total_1 = res.data.total;
         // 当前页码

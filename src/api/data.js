@@ -1,11 +1,5 @@
 import axios from '@/libs/api.request'
 
-export const errorReq = () => {
-  return axios.request({
-    url: 'error_url',
-    method: 'post'
-  })
-}
 
 export const getOrgData = () => {
   return axios.request({
@@ -14,16 +8,9 @@ export const getOrgData = () => {
   })
 }
 
-export const getTable1Data = () => {
+export const getTableData = (res) => {
   return axios.request({
-    url: 'get_table1_data',
-    method: 'post'
-  })
-}
-
-export const getTable2Data = (res) => {
-  return axios.request({
-    url: 'get_table2_data',
+    url: 'get_table_data',
     method: 'post',
     data: res
   })
