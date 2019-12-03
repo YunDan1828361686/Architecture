@@ -15,6 +15,8 @@ import './index.less'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 import Qs from 'qs'
+import axios from '@/libs/api.request'
+
 
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
@@ -28,6 +30,7 @@ Vue.use(VOrgTree)
 Vue.use(TreeTable)
 
 Vue.prototype.$Qs = Qs
+Vue.prototype.$axios = axios
 /**
  * @description 注册admin内置插件
  */

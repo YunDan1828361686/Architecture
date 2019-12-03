@@ -1,6 +1,5 @@
-import { logout } from '@/api/user'
 import { setToken, getToken } from '@/libs/util'
-
+import axios from '@/libs/api.request'
 export default {
   state: {
     userName: '',
@@ -37,7 +36,10 @@ export default {
     // 退出登录
     handleLogOut({ state, commit }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
+        axios.request({
+          url: 'logout',
+          method: 'post'
+        }).then(() => {
           commit('setToken', '')
           commit('setAccess', [])
           resolve()

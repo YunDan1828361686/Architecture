@@ -25,7 +25,6 @@ export default new Vuex.Store({
     storage: window.sessionStorage,
     reducer(val) { // 如果只想持久化某几个模块中的数据
       return {
-        // 只储存state中的user
         app: val.app,
         user: val.user
       }

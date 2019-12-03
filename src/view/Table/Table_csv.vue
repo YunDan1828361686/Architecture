@@ -75,7 +75,6 @@
 </template>
 <script>
 import { Spin } from "view-design";
-import { getTableData } from "@/api/data";
 import Drawer_add from "./Drawer_add.vue";
 import More_csv from "./More_csv.vue";
 export default {
@@ -283,14 +282,20 @@ export default {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
-      getTableData(this.table_form_1).then(res => {
-        // 总页数
-        this.table_total_1 = res.data.total;
-        // 当前页码
-        this.table_current_1 = res.data.current;
-        // 表数据
-        this.tableData_1 = res.data.TableData;
-      });
+      this.$axios
+        .request({
+          url: "get_table_data",
+          method: "post",
+          data: this.table_form_1
+        })
+        .then(res => {
+          // 总页数
+          this.table_total_1 = res.data.total;
+          // 当前页码
+          this.table_current_1 = res.data.current;
+          // 表数据
+          this.tableData_1 = res.data.TableData;
+        });
     },
     // 切换页码
     table_Pagechange_1(index) {

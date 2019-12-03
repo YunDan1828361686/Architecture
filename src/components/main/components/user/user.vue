@@ -2,7 +2,9 @@
   <div class="user-avatar-dropdown">
     <Dropdown @on-click="handleClick">
       <Badge :dot="!!messageUnreadCount">
-        <Avatar style="background: #e8eaec;width:100px;color:#515a6e;font-weight: 800;">{{userAvatar}}</Avatar>
+        <Avatar
+          style="background: #e8eaec;width:100px;color:#515a6e;font-weight: 800;"
+        >{{userAvatar}}</Avatar>
       </Badge>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
@@ -17,14 +19,15 @@
 </template>
 
 <script>
-import './user.less'
-import { mapActions } from 'vuex'
+import "./user.less";
+import { mapActions } from "vuex";
+import { Spin } from "view-design";
 export default {
-  name: 'User',
+  name: "User",
   props: {
     userAvatar: {
       type: String,
-      default: ''
+      default: ""
     },
     messageUnreadCount: {
       type: Number,
@@ -32,29 +35,39 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['handleLogOut']),
-    logout () {
-      this.handleLogOut().then(() => {
-        this.$router.push({
-          name: 'login'
+    ...mapActions(["handleLogOut"]),
+    logout() {
+      Spin.show();
+      this.handleLogOut()
+        .then(() => {
+          this.$router.push({
+            name: "login"
+          });
+          this.$Message.success({
+            content: "退出账号成功！",
+            duration: 3
+          });
+          Spin.hide();
         })
-      })
+        .catch(() => {
+          Spin.hide();
+        });
     },
-    message () {
+    message() {
       this.$router.push({
-        name: 'message_page'
-      })
+        name: "message_page"
+      });
     },
-    handleClick (name) {
+    handleClick(name) {
       switch (name) {
-        case 'logout':
-          this.logout()
-          break
-        case 'message':
-          this.message()
-          break
+        case "logout":
+          this.logout();
+          break;
+        case "message":
+          this.message();
+          break;
       }
     }
   }
-}
+};
 </script>
