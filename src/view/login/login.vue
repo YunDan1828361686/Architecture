@@ -279,6 +279,29 @@ export default {
               name: this.$config.homeName
             });
           });
+
+          // let pA = new Promise((reslove, reject) => {
+          //   this.$axios("url", "post")
+          //     .then(res => {
+          //       reslove(res);
+          //     })
+          //     .catch(err => {
+          //       reject(err);
+          //     });
+          // });
+          // let pB = new Promise((reslove, reject) => {
+          //   this.$axios("url", "post")
+          //     .then(res => {
+          //       reslove(res);
+          //     })
+          //     .catch(err => {
+          //       reject(err);
+          //     });
+          // });
+          // Promise.all([pA, pB]).then(result => {
+          //   let pAres = result[0].data.list;
+          //   let pBres = result[1].data.list;
+          // });
         }, 1000);
       }
     }

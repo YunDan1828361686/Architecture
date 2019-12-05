@@ -169,6 +169,14 @@ export default [
         },
         component: () => import('@/view/Table/Table_expand.vue')
       },
+      {
+        path: 'Upload',
+        name: 'Upload',
+        meta: {
+          title: 'Upload'
+        },
+        component: () => import('@/view/Table/Upload.vue')
+      },
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',

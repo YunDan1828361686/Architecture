@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from '@/store'
 // import { Spin } from 'view-design'
 class HttpRequest {
   constructor (baseUrl = baseURL) {

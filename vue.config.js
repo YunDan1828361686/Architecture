@@ -35,9 +35,17 @@ module.exports = {
   // 设为false打包时不生成.map文件
   productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
-  // devServer: {
-  //   proxy: 'localhost:3000'
-  // }
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://172.22.54.20:3000',//设置你调用的接口域名和端口号 别忘了加http
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+        }
+      }
+    }
+  },
   //webpack配置
   configureWebpack: {
     //关闭 webpack 的性能提示

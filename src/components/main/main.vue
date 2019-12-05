@@ -45,6 +45,7 @@
             <keep-alive :include="cacheList">
               <router-view />
             </keep-alive>
+            <Spin size="large" fix v-if="spinShow"></Spin>
             <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
           </Content>
         </Layout>
@@ -77,6 +78,7 @@ export default {
   },
   data() {
     return {
+      spinShow: false,
       collapsed: false,
       minLogo,
       maxLogo,
@@ -166,6 +168,10 @@ export default {
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
       this.$refs.sideMenu.updateOpenName(newRoute.name);
+      this.spinShow = true;
+      setTimeout(() => {
+        this.spinShow = false;
+      }, 700);
     }
   },
   mounted() {

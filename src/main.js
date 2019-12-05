@@ -16,7 +16,7 @@ import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 import Qs from 'qs'
 import axios from '@/libs/api.request'
-
+import ajax_axios from 'axios'
 
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
@@ -31,6 +31,11 @@ Vue.use(TreeTable)
 
 Vue.prototype.$Qs = Qs
 Vue.prototype.$axios = axios
+Vue.prototype.ajax_promise = function (url, method, data) {
+  return new Promise(function (resolve, reject) {
+    ajax_axios({ "url": "/api" + url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) });
+  })
+}
 /**
  * @description 注册admin内置插件
  */
