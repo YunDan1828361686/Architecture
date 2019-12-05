@@ -15,25 +15,20 @@ import './index.less'
 import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 import Qs from 'qs'
-import axios from '@/libs/api.request'
-import ajax_axios from 'axios'
+import axios from 'axios'
 
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
 import 'default-passive-events'
-// 实际打包时应该不引入mock
-/* eslint-disable */
-if (process.env.NODE_ENV !== 'production') require('@/mock')
 
 Vue.use(iView)
 Vue.use(VOrgTree)
 Vue.use(TreeTable)
 
 Vue.prototype.$Qs = Qs
-Vue.prototype.$axios = axios
-Vue.prototype.ajax_promise = function (url, method, data) {
+Vue.prototype.$axios = function (url, method, data) {
   return new Promise(function (resolve, reject) {
-    ajax_axios({ "url": "/api" + url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) });
+    axios({ 'url': '/api' + url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
   })
 }
 /**

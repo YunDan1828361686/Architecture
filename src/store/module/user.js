@@ -1,5 +1,5 @@
 import { setToken, getToken } from '@/libs/util'
-import axios from '@/libs/api.request'
+import axios from 'axios'
 export default {
   state: {
     userName: '',
@@ -10,23 +10,23 @@ export default {
     hasGetInfo: false
   },
   mutations: {
-    setAvatar(state, avatarPath) {
+    setAvatar (state, avatarPath) {
       state.avatarImgPath = avatarPath
     },
-    setUserId(state, id) {
+    setUserId (state, id) {
       state.userId = id
     },
-    setUserName(state, name) {
+    setUserName (state, name) {
       state.userName = name
     },
-    setAccess(state, access) {
+    setAccess (state, access) {
       state.access = access
     },
-    setToken(state, token) {
+    setToken (state, token) {
       state.token = token
       setToken(token)
     },
-    setHasGetInfo(state, status) {
+    setHasGetInfo (state, status) {
       state.hasGetInfo = status
     }
   },
@@ -34,10 +34,10 @@ export default {
   },
   actions: {
     // 退出登录
-    handleLogOut({ state, commit }) {
+    handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
-        axios.request({
-          url: 'logout',
+        axios({
+          url: 'api/logout',
           method: 'post'
         }).then(() => {
           commit('setToken', '')
@@ -53,7 +53,7 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo({ state, commit }, token) {
+    getUserInfo ({ state, commit }, token) {
       const USER = {
         super_admin: {
           name: 'super_admin',
@@ -73,7 +73,7 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           try {
-            let data = USER[token];
+            let data = USER[token]
             commit('setAvatar', data.avatar)
             commit('setUserName', data.name)
             commit('setUserId', data.user_id)
