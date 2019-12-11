@@ -10,13 +10,7 @@ export default {
     return {}
   },
   mounted () {
-    this.$axios(
-      '/node/post',
-      'post',
-      this.$Qs.stringify({ aaa: 111, bbb: 222 })
-    ).then(res => {
-      console.log(res, '!!!!!!')
-    })
+    
   }
 }
 </script>

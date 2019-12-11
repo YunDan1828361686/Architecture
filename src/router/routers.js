@@ -177,6 +177,22 @@ export default [
         },
         component: () => import('@/view/Table/Upload.vue')
       },
+      {
+        path: 'Demo',
+        name: 'Demo',
+        meta: {
+          title: 'Demo'
+        },
+        component: () => import('@/view/Demo.vue')
+      },
+      {
+        path: 'Demo2',
+        name: 'Demo2',
+        meta: {
+          title: 'Demo2'
+        },
+        component: () => import('@/view/Demo2.vue')
+      },
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',
