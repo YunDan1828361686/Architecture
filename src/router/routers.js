@@ -233,6 +233,14 @@ export default [
           hideInMenu: true
         },
         component: () => import('@/view/Echarts/Double_amplification.vue')
+      },
+      {
+        path: 'Demo',
+        name: 'Demo',
+        meta: {
+          title: 'Demo'
+        },
+        component: () => import('@/view/Demo.vue')
       }
     ]
   },
