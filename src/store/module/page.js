@@ -1,13 +1,13 @@
 export default {
     state: {
-        // Demo2页面的echarts
-        Demo2: ""
+        // 通过Tab_amplification页面里的Tab跳转至Double_amplification需携带的数据
+        Double_amplification: ""
     },
     getters: {
     },
     mutations: {
-        Demo2_click(state, payload) {
-            state.Demo2 = payload;
+        Double_amplification_click(state, payload) {
+            state.Double_amplification = payload;
         },
     },
     actions: {

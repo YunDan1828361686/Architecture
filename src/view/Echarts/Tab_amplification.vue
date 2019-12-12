@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>测试2</h1>
     <Row>
       <Col span="24">
         <Card v-for="(item_1,index_1) in echarts_data" :key="index_1">
@@ -25,7 +24,7 @@ var echarts = require("echarts");
 // 引入 ECharts 主模块
 var echarts = require("echarts/lib/echarts");
 export default {
-  name: "Demo",
+  name: "Tab_amplification",
   data() {
     return {
       Tabs: "false",
@@ -35,13 +34,13 @@ export default {
   methods: {
     tab_change(index, name) {
       console.log(this.echarts_data[index].title, name);
-      this.$store.commit("Demo2_click", {
+      this.$store.commit("Double_amplification_click", {
         BBU: this.echarts_data[index].title,
         RRU: name
       });
       this.$nextTick(function() {
         this.$router.push({
-          name: "Demo2"
+          name: "Double_amplification"
         });
       });
     },
@@ -153,7 +152,7 @@ export default {
     }
   },
   created() {
-    this.$axios("/node/echarts", "post").then(res => {
+    this.$axios("/node2/echarts", "post").then(res => {
       this.echarts_data = res.data.data;
     });
   },

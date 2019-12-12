@@ -283,7 +283,7 @@ export default {
       // Spin.show();
       this.loading_1 = true
       this.$axios(
-        '/node/table',
+        '/node1/table',
         'post',
         this.$Qs.stringify(this.table_form_1)
       ).then(res => {

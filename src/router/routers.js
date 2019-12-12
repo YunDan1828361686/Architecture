@@ -141,7 +141,7 @@ export default [
         path: 'Table_csv',
         name: 'Table_csv',
         meta: {
-          title: 'csv'
+          title: 'Table_csv'
         },
         component: () => import('@/view/Table/Table_csv.vue')
       },
@@ -149,7 +149,7 @@ export default [
         path: 'Table_excel',
         name: 'Table_excel',
         meta: {
-          title: 'excel'
+          title: 'Table_excel'
         },
         component: () => import('@/view/Table/Table_excel.vue')
       },
@@ -157,7 +157,7 @@ export default [
         path: 'Table_tree',
         name: 'Table_tree',
         meta: {
-          title: 'tree'
+          title: 'Table_tree'
         },
         component: () => import('@/view/Table/Table_tree.vue')
       },
@@ -165,7 +165,7 @@ export default [
         path: 'Table_expand',
         name: 'Table_expand',
         meta: {
-          title: 'expand'
+          title: 'Table_expand'
         },
         component: () => import('@/view/Table/Table_expand.vue')
       },
@@ -176,23 +176,7 @@ export default [
           title: 'Upload'
         },
         component: () => import('@/view/Table/Upload.vue')
-      },
-      {
-        path: 'Demo',
-        name: 'Demo',
-        meta: {
-          title: 'Demo'
-        },
-        component: () => import('@/view/Demo.vue')
-      },
-      {
-        path: 'Demo2',
-        name: 'Demo2',
-        meta: {
-          title: 'Demo2'
-        },
-        component: () => import('@/view/Demo2.vue')
-      },
+      }
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',
@@ -222,6 +206,34 @@ export default [
       //   ]
       // },
 
+    ]
+  },
+  {
+    path: '/Echarts',
+    name: 'Echarts',
+    meta: {
+      icon: 'md-trending-up',
+      title: 'Echarts'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Tab_amplification',
+        name: 'Tab_amplification',
+        meta: {
+          title: 'Tab_amplification'
+        },
+        component: () => import('@/view/Echarts/Tab_amplification.vue')
+      },
+      {
+        path: 'Double_amplification',
+        name: 'Double_amplification',
+        meta: {
+          title: 'Double_amplification',
+          hideInMenu: true
+        },
+        component: () => import('@/view/Echarts/Double_amplification.vue')
+      }
     ]
   },
   {

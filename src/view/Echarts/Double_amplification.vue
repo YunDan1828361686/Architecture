@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>测试</h1>
     <Row>
       <Col span="24">
         <Card style="width:100%">
@@ -29,7 +28,7 @@ var echarts = require("echarts");
 // 引入 ECharts 主模块
 var echarts = require("echarts/lib/echarts");
 export default {
-  name: "Demo2",
+  name: "Double_amplification",
   data() {
     return {
       // 第一个
@@ -179,8 +178,6 @@ export default {
             splitLine: {
               show: true
             },
-            // interval: 6,
-            // max: 30,
             axisLabel: {
               formatter: "{value} kwh"
             }
@@ -191,8 +188,6 @@ export default {
             splitLine: {
               show: true
             },
-            // interval: 6,
-            // max: 30,
             axisLabel: {
               formatter: "{value} kwh"
             },
@@ -200,14 +195,11 @@ export default {
           },
           {
             type: "value",
-            name: "连接数",
             splitLine: {
               show: true
             },
-            // interval: 6,
-            // max: 30,
             axisLabel: {
-              formatter: "{value} 个"
+              formatter: "{value} "
             },
             gridIndex: 1
           }
@@ -318,13 +310,13 @@ export default {
   created() {},
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (!vm.$store.state.page.Demo2) {
+      if (!vm.$store.state.page.Double_amplification) {
         vm.$Message.error({
           content: "请重新选择要对比的RRU",
           duration: 3
         });
         vm.$router.push({
-          name: "Demo"
+          name: "Tab_amplification"
         });
         return;
       }

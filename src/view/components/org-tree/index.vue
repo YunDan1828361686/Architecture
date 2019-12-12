@@ -66,7 +66,7 @@ export default {
       })
     },
     getDepartmentData () {
-      this.$axios('/node/org', 'post').then(res => {
+      this.$axios('node1/org', 'post').then(res => {
         this.data = res.data
       })
     }
