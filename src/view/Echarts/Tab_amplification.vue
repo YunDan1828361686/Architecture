@@ -152,7 +152,7 @@ export default {
     }
   },
   created() {
-    this.$axios("/node2/echarts", "post").then(res => {
+    this.$axios("/node2/echarts1", "post").then(res => {
       this.echarts_data = res.data.data;
     });
   },
