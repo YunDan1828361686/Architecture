@@ -56,20 +56,22 @@ export default {
       let op_data_A = this.echarts_data[0].data[0];
       let op_data_B = this.echarts_data[1].data;
       op_data_A.yAxis.map(item => {
-        item.xAxisIndex = 0;
-        item.yAxisIndex = 0;
+        item.xAxisIndex = 1;
+        item.yAxisIndex = 1;
         return item;
       });
+      // xAxisIndex: 1
+      // yAxisIndex: 0
       let series = op_data_A.yAxis.concat(op_data_B.yAxis);
+      console.log(op_data_A, op_data_B, series);
       let echarts_option = {
         title: [
           {
-            top: "10%",
             left: "center",
             text: op_data_A.title
           },
           {
-            top: "50%",
+            top: "55%",
             left: "center",
             text: op_data_B.title
           }
@@ -109,7 +111,7 @@ export default {
           }
         },
         legend: {
-          right: "10%",
+          left: "5%",
           top: "0%",
           formatter: "{a|{name}}",
           textStyle: {
@@ -189,12 +191,10 @@ export default {
         ],
         grid: [
           {
-            top: "15%",
-            bottom: "55%"
+            bottom: "60%"
           },
           {
-            top: "55%",
-            bottom: "15%"
+            top: "60%"
           }
         ],
         series
@@ -263,6 +263,6 @@ export default {
 
 <style lang="less" scoped>
 #echarts_index {
-  height: 850px;
+  height: 600px;
 }
 </style>

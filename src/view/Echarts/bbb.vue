@@ -3,7 +3,7 @@
     <Row>
       <Col span="24">
         <Card style="width:100%">
-          <div id="echarts_index"></div>
+          <div class="echarts_index"></div>
           <div style="display:flex;margin-top:20px;justify-content: center;">
             <Radio v-model="BBU_Battery">电量</Radio>
             <RadioGroup v-model="RRU_Battery" @on-change="handleGetVertical($event)">
@@ -43,35 +43,36 @@ export default {
           "数据流量",
           "利用率/占用率"
         ]
-      },
-      echarts_data: []
+      }
     };
   },
   methods: {
     handleGetVertical(val) {
       console.log(val);
-    },
-    up_init() {
-      var myCharts = document.getElementById("echarts_index");
-      let op_data_A = this.echarts_data[0].data[0];
-      let op_data_B = this.echarts_data[1].data;
-      op_data_A.yAxis.map(item => {
-        item.xAxisIndex = 0;
-        item.yAxisIndex = 0;
-        return item;
-      });
-      let series = op_data_A.yAxis.concat(op_data_B.yAxis);
+    }
+  },
+  mounted() {
+    var myCharts = document.getElementsByClassName("echarts_index");
+    for (let i = 0; i < myCharts.length; i++) {
+      const element = myCharts[i];
+      let color = [
+        "#2d8cf0",
+        "#19be6b",
+        "#ff9900",
+        "#E46CBB",
+        "#9A66E4",
+        "#ed3f14"
+      ];
       let echarts_option = {
         title: [
           {
-            top: "10%",
             left: "center",
-            text: op_data_A.title
+            text: "BBU"
           },
           {
-            top: "50%",
+            top: "55%",
             left: "center",
-            text: op_data_B.title
+            text: "RRU"
           }
         ],
         tooltip: {
@@ -109,7 +110,7 @@ export default {
           }
         },
         legend: {
-          right: "10%",
+          left: "5%",
           top: "0%",
           formatter: "{a|{name}}",
           textStyle: {
@@ -131,10 +132,42 @@ export default {
         },
         xAxis: [
           {
-            data: op_data_A.xAxis
+            data: [
+              "测试1",
+              "测试2",
+              "测试3",
+              "测试4",
+              "测试5",
+              "测试6",
+              "测试7",
+              "测试8",
+              "测试9",
+              "测试10",
+              "测试11",
+              "测试12",
+              "测试13",
+              "测试14",
+              "测试15"
+            ]
           },
           {
-            data: op_data_B.xAxis,
+            data: [
+              "测试1",
+              "测试2",
+              "测试3",
+              "测试4",
+              "测试5",
+              "测试6",
+              "测试7",
+              "测试8",
+              "测试9",
+              "测试10",
+              "测试11",
+              "测试12",
+              "测试13",
+              "测试14",
+              "测试15"
+            ],
             gridIndex: 1
           }
         ],
@@ -189,54 +222,92 @@ export default {
         ],
         grid: [
           {
-            top: "15%",
-            bottom: "55%"
+            bottom: "60%"
           },
           {
-            top: "55%",
-            bottom: "15%"
+            top: "60%"
           }
         ],
-        series
+        series: [
+          {
+            name: "电量1",
+            type: "line",
+            color: color[0],
+            yAxisIndex: "0",
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+              (item, index) => {
+                return item + 1;
+              }
+            )
+          },
+          {
+            name: "电量2",
+            type: "line",
+            color: color[1],
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+              (item, index) => {
+                return item + 3;
+              }
+            )
+          },
+          {
+            name: "连接数1",
+            type: "line",
+            color: color[2],
+            xAxisIndex: 1,
+            yAxisIndex: 2,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+              (item, index) => {
+                return item + 5;
+              }
+            )
+          },
+          {
+            name: "连接数2",
+            type: "line",
+            color: color[3],
+            xAxisIndex: 1,
+            yAxisIndex: 2,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+              (item, index) => {
+                return item + 7;
+              }
+            )
+          },
+          {
+            name: "连接数3",
+            type: "line",
+            color: color[4],
+            xAxisIndex: 1,
+            yAxisIndex: 2,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+              (item, index) => {
+                return item + 9;
+              }
+            )
+          },
+          {
+            name: "连接数4",
+            type: "line",
+            color: color[5],
+            xAxisIndex: 1,
+            yAxisIndex: 2,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+              (item, index) => {
+                return item + 11;
+              }
+            )
+          }
+        ]
       };
       this.$nextTick(() => {
-        echarts.init(myCharts).setOption(echarts_option, true);
+        echarts.init(element).setOption(echarts_option, true);
       });
     }
   },
-  created() {
-    let pA = new Promise((resolve, reject) => {
-      this.$axios("/node2/echarts1", "post")
-        .then(res => {
-          let data = res.data;
-          resolve(data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-    let pB = new Promise((resolve, reject) => {
-      this.$axios("/node2/echarts2", "post")
-        .then(res => {
-          let data = res.data;
-          resolve(data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-    Promise.all([pA, pB]).then(result => {
-      if (result[0].code || result[1].code) {
-        this.$Message.success({
-          content: "未知异常！",
-          duration: 3
-        });
-        return;
-      }
-      this.echarts_data = result;
-    });
-  },
-  mounted() {},
+  created() {},
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (!vm.$store.state.page.Double_amplification) {
@@ -250,19 +321,12 @@ export default {
         return;
       }
     });
-  },
-  watch: {
-    echarts_data: function() {
-      this.$nextTick(() => {
-        this.up_init();
-      });
-    }
   }
 };
 </script>
 
 <style lang="less" scoped>
-#echarts_index {
-  height: 850px;
+.echarts_index {
+  height: 600px;
 }
 </style>

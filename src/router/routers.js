@@ -235,6 +235,14 @@ export default [
         component: () => import('@/view/Echarts/Double_amplification.vue')
       },
       {
+        path: 'Double_Y',
+        name: 'Double_Y',
+        meta: {
+          title: 'Double_Y'
+        },
+        component: () => import('@/view/Echarts/Double_Y.vue')
+      },
+      {
         path: 'Demo',
         name: 'Demo',
         meta: {
