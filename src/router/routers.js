@@ -129,6 +129,33 @@ export default [
     ]
   },
   {
+    path: '/skill',
+    name: 'skill',
+    meta: {
+      icon: 'ios-construct',
+      title: '技巧'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Promise',
+        name: 'Promise',
+        meta: {
+          title: 'Promise'
+        },
+        component: () => import('@/view/skill/Promise.vue')
+      },
+      {
+        path: 'Router_method',
+        name: 'Router_method',
+        meta: {
+          title: 'Router_method'
+        },
+        component: () => import('@/view/skill/Router_method.vue')
+      },
+    ]
+  },
+  {
     path: '/Table',
     name: 'Table',
     meta: {
@@ -217,23 +244,6 @@ export default [
     },
     component: Main,
     children: [
-      {
-        path: 'Tab_amplification',
-        name: 'Tab_amplification',
-        meta: {
-          title: 'Tab_amplification'
-        },
-        component: () => import('@/view/Echarts/Tab_amplification.vue')
-      },
-      {
-        path: 'Double_amplification',
-        name: 'Double_amplification',
-        meta: {
-          title: 'Double_amplification',
-          hideInMenu: true
-        },
-        component: () => import('@/view/Echarts/Double_amplification.vue')
-      },
       {
         path: 'Double_Y',
         name: 'Double_Y',

@@ -8,6 +8,9 @@ import store from './store'
 import iView from 'view-design'
 // import style
 import 'view-design/dist/styles/iview.css'
+// 报错TypeError: Cannot read property 'clickRow' of undefined
+// 找到tree-table-vue.js文件  1547行替换为
+// return _this2.handleEvent($event, 'row', { row: row, rowIndex: rowIndex }, { clickRow: true });
 import TreeTable from 'tree-table-vue'
 import config from '@/config'
 import { directive as clickOutside } from 'v-click-outside-x'
@@ -19,7 +22,7 @@ import axios from 'axios'
 
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
-// import 'default-passive-events'
+import 'default-passive-events'
 
 Vue.use(iView)
 Vue.use(VOrgTree)

@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div>
-      <div class="border-container">
-        <span class="top-left border-span"></span>
-        <span class="top-right border-span"></span>
-        <span class="bottom-left border-span"></span>
-        <span class="bottom-right border-span"></span>
-        <Card>
-          <div class="echarts_index"></div>
-        </Card>
-      </div>
+    <div class="border-container" v-for="(item_1,index_1) in echarts_data" :key="index_1">
+      <span class="top-left border-span"></span>
+      <span class="top-right border-span"></span>
+      <span class="bottom-left border-span"></span>
+      <span class="bottom-right border-span"></span>
+      <Card>
+        <div class="echarts_index"></div>
+      </Card>
     </div>
   </div>
 </template>
@@ -22,205 +20,120 @@ var echarts = require("echarts/lib/echarts");
 export default {
   name: "Double_Y",
   data() {
-    return {};
+    return {
+      echarts_data: []
+    };
   },
-  created() {},
-  mounted() {
-    this.up_init();
+  created() {
+    this.$axios("/node2/echarts1", "post").then(res => {
+      this.echarts_data = res.data.data;
+    });
+  },
+  mounted() {},
+  watch: {
+    echarts_data: function() {
+      this.$nextTick(() => {
+        this.up_init();
+      });
+    }
   },
   methods: {
     calMax(arr) {
-      for (var i = 1; i < arr.length; i++) {
-        // 求出一组数组中的最大值
-        if (arr[0] < arr[i]) {
-          arr[0] = arr[i];
-        }
-      }
-      return Math.ceil(arr[0] / 10) * 10; //向上取整 输出最大值
+      return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
     },
     up_init() {
-      let option = {
-        //1、 格式化提示信息
-        tooltip: {
-          trigger: "axis",
-          formatter: function(params) {
-            var name = params[0].name + "<br/>"; //x轴名称
-            var str = ""; //辅助变量，存储要展示的提示信息
-            // 循环存储
-            for (var i = 0; i < params.length; i++) {
-              str =
-                str +
-                params[i].marker +
-                params[i].seriesName +
-                "：" +
-                params[i].value +
-                "人<br/>";
-            }
-            // 返回结果值
-            return name + str;
-          }
-        },
-        toolbox: {
-          feature: {
-            dataView: {
-              show: true,
-              readOnly: false
-            },
-            magicType: {
-              show: true,
-              type: ["line", "bar"]
-            },
-            restore: {
-              show: true
-            },
-            saveAsImage: {
-              show: true
-            }
-          }
-        },
-        legend: {
-          data: ["注册", "活跃"]
-        },
-        grid: {
-          left: "5%",
-          right: "5%",
-          top: "15%",
-          bottom: "5%",
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: "category",
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月"
-            ],
-            axisPointer: {
-              type: "shadow"
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: "value",
-            name: "注册",
-            min: 0,
-            max: this.calMax([
-              10,
-              20,
-              30,
-              40,
-              50,
-              60,
-              70,
-              80,
-              90,
-              100,
-              110,
-              120,
-              130
-            ]),
-            splitNumber: 5,
-            interval:
-              this.calMax([
-                10,
-                20,
-                30,
-                40,
-                50,
-                60,
-                70,
-                80,
-                90,
-                100,
-                110,
-                120,
-                130
-              ]) / 5
-          },
-          {
-            type: "value",
-            name: "活跃",
-            min: 0,
-            max: this.calMax([
-              1.1,
-              2.2,
-              3.3,
-              4.4,
-              5.5,
-              6.6,
-              7.7,
-              8.8,
-              9.9,
-              10.1,
-              20.4,
-              30.5
-            ]),
-            splitNumber: 5,
-            interval:
-              this.calMax([
-                1.1,
-                2.2,
-                3.3,
-                4.4,
-                5.5,
-                6.6,
-                7.7,
-                8.8,
-                9.9,
-                10.1,
-                20.4,
-                30.5
-              ]) / 5
-          }
-        ],
-        series: [
-          {
-            name: "注册",
-            type: "line",
-            data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130]
-          },
-          {
-            name: "活跃",
-            type: "line",
-            yAxisIndex: 1,
-            data: [
-              1.1,
-              2.2,
-              3.3,
-              4.4,
-              5.5,
-              6.6,
-              7.7,
-              8.8,
-              9.9,
-              10.1,
-              20.4,
-              30.5
-            ]
-          }
-        ]
-      };
       var myCharts = document.getElementsByClassName("echarts_index");
       for (let i = 0; i < myCharts.length; i++) {
         const element = myCharts[i];
+        const element_option = this.echarts_data[i];
+        let option = {
+          //1、 格式化提示信息
+          title: {
+            left: "center",
+            text: element_option.title_text
+          },
+          tooltip: {
+            trigger: "axis",
+            formatter: function(params) {
+              var name = params[0].name + "<br/>"; //x轴名称
+              var str = ""; //辅助变量，存储要展示的提示信息
+              // 循环存储
+              for (var i = 0; i < params.length; i++) {
+                str =
+                  str +
+                  params[i].marker +
+                  params[i].seriesName +
+                  "：" +
+                  params[i].value +
+                  "人<br/>";
+              }
+              // 返回结果值
+              return name + str;
+            }
+          },
+          toolbox: {
+            feature: {
+              dataView: {
+                show: true,
+                readOnly: false
+              },
+              magicType: {
+                show: true,
+                type: ["line", "bar"]
+              },
+              restore: {
+                show: true
+              },
+              saveAsImage: {
+                show: true
+              }
+            }
+          },
+          legend: {
+            left: "10%",
+            formatter: "{a|{name}}",
+            textStyle: {
+              rich: {
+                a: {
+                  fontSize: 12
+                }
+              }
+            }
+          },
+          grid: {
+            left: "5%",
+            right: "5%",
+            top: "20%",
+            bottom: "5%",
+            containLabel: true
+          },
+          xAxis: [
+            {
+              type: "category",
+              data: element_option.xAxis_data,
+              axisPointer: {
+                type: "shadow"
+              }
+            }
+          ],
+          yAxis: element_option.yAxis_series.map(item => {
+            return {
+              type: "value",
+              name: item.name,
+              min: 0,
+              max: this.calMax(item.data),
+              splitNumber: 5,
+              interval: this.calMax(item.data) / 5
+            };
+          }),
+          series: element_option.yAxis_series
+        };
         this.$nextTick(() => {
           echarts.init(element).setOption(option, true);
         });
       }
     }
-  },
-  watch: {}
+  }
 };
 </script>
 
