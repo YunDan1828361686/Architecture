@@ -103,8 +103,8 @@ export default {
           grid: {
             left: "5%",
             right: "5%",
-            top: "20%",
-            bottom: "5%",
+            top: "15%",
+            bottom: "10%",
             containLabel: true
           },
           xAxis: [
@@ -126,6 +126,16 @@ export default {
               interval: this.calMax(item.data) / 5
             };
           }),
+          dataZoom: [
+            {
+              start: 0,
+              end: 30,
+              startValue: "0"
+            },
+            {
+              type: "inside"
+            }
+          ],
           series: element_option.yAxis_series
         };
         this.$nextTick(() => {
@@ -140,6 +150,6 @@ export default {
 <style lang="less" scoped>
 .echarts_index {
   margin-top: 20px;
-  height: 400px;
+  height: 600px;
 }
 </style>

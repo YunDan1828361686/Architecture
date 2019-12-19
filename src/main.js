@@ -22,7 +22,7 @@ import axios from 'axios'
 
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
-import 'default-passive-events'
+// import 'default-passive-events'
 
 Vue.use(iView)
 Vue.use(VOrgTree)
