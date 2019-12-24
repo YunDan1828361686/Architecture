@@ -25,7 +25,7 @@ body {
 #app {
   .size;
 }
-
+// 优化Card加边框
 .border-container {
   position: relative;
   margin-top: 15px;

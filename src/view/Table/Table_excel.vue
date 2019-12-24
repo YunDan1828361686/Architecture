@@ -73,6 +73,7 @@
   </div>
 </template>
 <script>
+// 遮罩
 import { Spin } from "view-design";
 import Drawer_add from "./Drawer_add.vue";
 import More_excel from "./More_excel.vue";
@@ -352,7 +353,7 @@ export default {
       }
       console.log(this.selectedData_2);
     },
-    // 更多操作
+    // 更多操作 与子组件相互联系
     Dropdown_change_1(index) {
       // 刷新
       if (index == 1) {

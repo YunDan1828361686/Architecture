@@ -204,6 +204,15 @@ export default [
         },
         component: () => import('@/view/Table/Upload.vue')
       }
+      ,
+      {
+        path: 'Search',
+        name: 'Search',
+        meta: {
+          title: 'Search'
+        },
+        component: () => import('@/view/Table/Search.vue')
+      }
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',

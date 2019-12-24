@@ -1,6 +1,12 @@
 <template>
   <div>
-    <div class="border-container" v-for="(item_1,index_1) in echarts_data" :key="index_1">
+    <!-- 优化Card加边框 -->
+    <div
+      style="width:50%;display: inline-block;"
+      class="border-container"
+      v-for="(item_1,index_1) in echarts_data"
+      :key="index_1"
+    >
       <span class="top-left border-span"></span>
       <span class="top-right border-span"></span>
       <span class="bottom-left border-span"></span>
@@ -25,12 +31,16 @@ export default {
     };
   },
   created() {
+    // 获取echarts_data
     this.$axios("/node2/echarts1", "post").then(res => {
       this.echarts_data = res.data.data;
+      console.log(this.echarts_data);
+      
     });
   },
   mounted() {},
   watch: {
+    // echarts_data发生变化  当数据更新了 在dom中渲染后 再去执行this.up_init
     echarts_data: function() {
       this.$nextTick(() => {
         this.up_init();
@@ -38,6 +48,7 @@ export default {
     }
   },
   methods: {
+    // 解决两个Y轴分隔线相同
     calMax(arr) {
       return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
     },
@@ -138,6 +149,7 @@ export default {
           ],
           series: element_option.yAxis_series
         };
+        // 当数据更新了 在dom中渲染后 再去渲染echarts
         this.$nextTick(() => {
           echarts.init(element).setOption(option, true);
         });
@@ -150,6 +162,6 @@ export default {
 <style lang="less" scoped>
 .echarts_index {
   margin-top: 20px;
-  height: 600px;
+  height: 400px;
 }
 </style>

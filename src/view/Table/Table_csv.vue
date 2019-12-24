@@ -4,17 +4,26 @@
       <Col span="24">
         <div style="float: left;">
           <Input @on-search="search_input_change_1" search enter-button>
-            <Select
-              v-model="table_form_1.search_select_1"
-              slot="prepend"
-              style="width: 80px"
-              @on-change="search_select_change_1"
-            >
-              <Option value="全部">全部</Option>
-              <Option value="未成年">未成年</Option>
-              <Option value="已成年">已成年</Option>
-            </Select>
-            <!-- <Button slot="append" icon="ios-search"></Button> -->
+            <div slot="prepend" style="width: 160px;display: flex;justify-content: space-around;">
+              <Select
+                v-model="table_form_1.search_select_1"
+                style="width: 80px;border-right:2px solid #e8eaec;"
+                @on-change="search_select_change_1"
+              >
+                <Option value="全部">全部</Option>
+                <Option value="未成年">未成年</Option>
+                <Option value="已成年">已成年</Option>
+              </Select>
+              <Select
+                v-model="table_form_1.search_select_2"
+                style="width:80px;"
+                @on-change="search_select_change_2"
+              >
+                <Option value="全部">全部</Option>
+                <Option value="男">男</Option>
+                <Option value="女">女</Option>
+              </Select>
+            </div>
           </Input>
         </div>
         <div style="float: right;">
@@ -74,6 +83,7 @@
   </div>
 </template>
 <script>
+// 遮罩
 import { Spin } from "view-design";
 import Drawer_add from "./Drawer_add.vue";
 import More_csv from "./More_csv.vue";
@@ -193,7 +203,8 @@ export default {
         page_size: "",
         // 检索
         age: "",
-        search_select_1: "全部"
+        search_select_1: "全部",
+        search_select_2: "全部"
       },
       // 导出数据时用的
       export_csv_1: {
@@ -351,7 +362,7 @@ export default {
       }
       console.log(this.selectedData_2);
     },
-    // 更多操作
+    // 更多操作 与子组件相互联系
     Dropdown_change_1(index) {
       // 刷新
       if (index == 1) {
@@ -413,6 +424,15 @@ export default {
     },
     // 检索选择框
     search_select_change_1(index) {
+      console.log(index);
+      // 需先重置参数如分页倒序检索条件
+      this.selectedData_1 = new Set();
+      this.selectedData_2 = new Set();
+      this.selectedSum_1 = this.selectedData_1.size;
+      this.TableData_1();
+    },
+    // 检索选择框
+    search_select_change_2(index) {
       console.log(index);
       // 需先重置参数如分页倒序检索条件
       this.selectedData_1 = new Set();
