@@ -8,20 +8,20 @@
 
 <script>
 export default {
-  name: "Refresh",
-  mounted() {},
+  name: 'Refresh',
+  mounted () {},
   methods: {
-    refresh() {
-      this.$emit("refresh_loading");
+    refresh () {
+      this.$emit('refresh_loading')
       this.$router.replace({
-        path: "/Refresh",
+        path: '/Refresh',
         query: {
           t: Date.now()
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="less">

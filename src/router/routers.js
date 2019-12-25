@@ -161,7 +161,7 @@ export default [
           title: 'Router_method'
         },
         component: () => import('@/view/skill/Router_method.vue')
-      },
+      }
     ]
   },
   {
@@ -212,8 +212,7 @@ export default [
           title: 'Upload'
         },
         component: () => import('@/view/Table/Upload.vue')
-      }
-      ,
+      },
       {
         path: 'Search',
         name: 'Search',

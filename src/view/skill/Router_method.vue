@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: "Router_method",
-  beforeRouteEnter(to, from, next) {
-    console.log("进入当前组件之前，没有this");
-    next();
+  name: 'Router_method',
+  beforeRouteEnter (to, from, next) {
+    console.log('进入当前组件之前，没有this')
+    next()
     // next(vm => {
     //   if (!vm.$store.state.page.Double_amplification) {
     //     vm.$Message.error({
@@ -23,11 +23,11 @@ export default {
     //   }
     // });
   },
-  beforeRouteLeave(to, from, next) {
-    console.log("离开当前组件之前，有this");
-    next();
+  beforeRouteLeave (to, from, next) {
+    console.log('离开当前组件之前，有this')
+    next()
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
