@@ -29,6 +29,7 @@
         <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
           <user :message-unread-count="unreadCount" :user-avatar="userAvatar" />
           <fullscreen v-model="isFullscreen" style="margin-right: 10px;" />
+          <Refresh style="margin-right: 10px;" @refresh_loading="refresh_loading" />
         </header-bar>
       </Header>
       <Content class="main-content-con">
@@ -60,6 +61,7 @@ import TagsNav from "./components/tags-nav";
 import User from "./components/user";
 import ABackTop from "./components/a-back-top";
 import Fullscreen from "./components/fullscreen";
+import Refresh from "./components/Refresh";
 import { mapMutations, mapActions } from "vuex";
 import { getNewTagList, routeEqual } from "@/libs/util";
 import routers from "@/router/routers";
@@ -72,6 +74,7 @@ export default {
     SideMenu,
     HeaderBar,
     TagsNav,
+    Refresh,
     Fullscreen,
     User,
     ABackTop
@@ -156,6 +159,12 @@ export default {
     },
     handleClick(item) {
       this.turnToPage(item);
+    },
+    refresh_loading() {
+      this.spinShow = true;
+      setTimeout(() => {
+        this.spinShow = false;
+      }, 700);
     }
   },
   watch: {
@@ -168,10 +177,7 @@ export default {
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
       this.$refs.sideMenu.updateOpenName(newRoute.name);
-      this.spinShow = true;
-      setTimeout(() => {
-        this.spinShow = false;
-      }, 700);
+      this.refresh_loading();
     }
   },
   mounted() {

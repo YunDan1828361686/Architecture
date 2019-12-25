@@ -1,5 +1,12 @@
 <template>
   <div>
+    <Row style="margin-bottom:20px">
+      <Col span="24">
+        <div style="float: left;"></div>
+        <div style="float: right;"></div>
+      </Col>
+    </Row>
+
     <!-- 优化Card加边框 -->
     <div
       style="width:50%;display: inline-block;"
@@ -23,10 +30,13 @@
 var echarts = require("echarts");
 // 引入 ECharts 主模块
 var echarts = require("echarts/lib/echarts");
+// 浏览器窗口大小发生变化
+import { on, off } from "@/libs/tools";
 export default {
   name: "Double_Y",
   data() {
     return {
+      myCharts_dom_1: [],
       echarts_data: []
     };
   },
@@ -34,8 +44,6 @@ export default {
     // 获取echarts_data
     this.$axios("/node2/echarts1", "post").then(res => {
       this.echarts_data = res.data.data;
-      console.log(this.echarts_data);
-      
     });
   },
   mounted() {},
@@ -48,6 +56,15 @@ export default {
     }
   },
   methods: {
+    resize() {
+      if (this.$route.name == "Double_Y") {
+        {
+          this.myCharts_dom_1.map(item => {
+            item.resize();
+          });
+        }
+      }
+    },
     // 解决两个Y轴分隔线相同
     calMax(arr) {
       return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
@@ -151,10 +168,18 @@ export default {
         };
         // 当数据更新了 在dom中渲染后 再去渲染echarts
         this.$nextTick(() => {
-          echarts.init(element).setOption(option, true);
+          // 存储已经init的echarts实例
+          this.myCharts_dom_1.push(echarts.init(element));
+          this.myCharts_dom_1[i].setOption(option, true);
+          // 窗口发生改变重新加载echarts
+          on(window, "resize", this.resize);
         });
       }
     }
+  },
+  beforeDestroy() {
+    console.log("销毁");
+    off(window, "resize", this.resize);
   }
 };
 </script>

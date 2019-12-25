@@ -1,7 +1,7 @@
 <template>
   <div>
     <Row :gutter="20">
-      <i-col
+      <Col
         :xs="12"
         :md="8"
         :lg="4"
@@ -13,21 +13,21 @@
           <count-to :end="infor.count" count-class="count-style" />
           <p>{{ infor.title }}</p>
         </infor-card>
-      </i-col>
+      </Col>
     </Row>
     <Row :gutter="20" style="margin-top: 10px;">
-      <i-col :md="24" :lg="8" style="margin-bottom: 20px;">
+      <Col :md="24" :lg="8" style="margin-bottom: 20px;">
         <div class="border-container">
           <span class="top-left border-span"></span>
           <span class="top-right border-span"></span>
           <span class="bottom-left border-span"></span>
           <span class="bottom-right border-span"></span>
           <Card shadow>
-            <chart-pie style="height: 300px;" :value="pieData" text="用户访问来源"></chart-pie>
+            <chart-pie style="height: 300px;" :value="pieData" text="用户访问来源" subtext="小标题"></chart-pie>
           </Card>
         </div>
-      </i-col>
-      <i-col :md="24" :lg="16" style="margin-bottom: 20px;">
+      </Col>
+      <Col :md="24" :lg="16" style="margin-bottom: 20px;">
         <div class="border-container">
           <span class="top-left border-span"></span>
           <span class="top-right border-span"></span>
@@ -37,7 +37,7 @@
             <chart-bar style="height: 300px;" :value="barData" text="每周用户活跃量" />
           </Card>
         </div>
-      </i-col>
+      </Col>
     </Row>
     <Row>
       <div class="border-container">

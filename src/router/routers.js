@@ -47,6 +47,15 @@ export default [
           icon: 'md-home'
         },
         component: () => import('@/view/single-page/home')
+      },
+      {
+        path: '/Refresh',
+        name: 'Refresh',
+        meta: {
+          title: '刷新中~',
+          hideInMenu: true
+        },
+        component: () => import('@/view/error-page/Refresh.vue')
       }
     ]
   },
