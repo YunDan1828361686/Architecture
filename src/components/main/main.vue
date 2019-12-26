@@ -164,7 +164,7 @@ export default {
       this.spinShow = true
       setTimeout(() => {
         this.spinShow = false
-      }, 700)
+      }, 500)
     }
   },
   watch: {

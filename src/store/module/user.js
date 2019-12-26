@@ -83,7 +83,7 @@ export default {
           } catch (error) {
             reject(error)
           }
-        }, 2000)
+        }, 500)
       })
     }
   }

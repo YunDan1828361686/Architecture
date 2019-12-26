@@ -29,9 +29,10 @@
 // 哪个组件用  在哪引入echarts
 // 浏览器窗口大小发生变化
 import { on, off } from '@/libs/tools'
-var echarts = require('echarts')
-// 引入 ECharts 主模块
-var echarts = require('echarts/lib/echarts')
+import echarts from 'echarts'
+import tdTheme from '@/libs/echarts_them.json'
+echarts.registerTheme('tdTheme', tdTheme)
+
 export default {
   name: 'Double_Y',
   data () {
@@ -117,17 +118,7 @@ export default {
               }
             }
           },
-          legend: {
-            left: '10%',
-            formatter: '{a|{name}}',
-            textStyle: {
-              rich: {
-                a: {
-                  fontSize: 12
-                }
-              }
-            }
-          },
+          legend: {},
           grid: {
             left: '5%',
             right: '5%',
@@ -169,7 +160,7 @@ export default {
         // 当数据更新了 在dom中渲染后 再去渲染echarts
         this.$nextTick(() => {
           // 存储已经init的echarts实例
-          this.myCharts_dom_1.push(echarts.init(element))
+          this.myCharts_dom_1.push(echarts.init(element, 'tdTheme'))
           this.myCharts_dom_1[i].setOption(option, true)
           // 窗口发生改变重新加载echarts
           on(window, 'resize', this.resize)

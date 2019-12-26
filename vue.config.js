@@ -38,31 +38,31 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://172.22.22.69:3000',//设置你调用的接口域名和端口号 别忘了加http
+        target: 'http://172.22.54.185:3000', // 设置你调用的接口域名和端口号 别忘了加http
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+          '^/api': ''// 这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
         }
       }
     }
   },
-  //webpack配置
+  // webpack配置
   configureWebpack: {
-    //关闭 webpack 的性能提示
+    // 关闭 webpack 的性能提示
     performance: {
       hints: false
     },
-    //或者
-    //警告 webpack 的性能提示
+    // 或者
+    // 警告 webpack 的性能提示
     performance: {
       hints: 'warning',
-      //入口起点的最大体积
+      // 入口起点的最大体积
       maxEntrypointSize: 50000000,
-      //生成文件的最大体积
+      // 生成文件的最大体积
       maxAssetSize: 30000000,
-      //只给出 js 文件的性能提示
+      // 只给出 js 文件的性能提示
       assetFilter: function (assetFilename) {
-        return assetFilename.endsWith('.js');
+        return assetFilename.endsWith('.js')
       }
     }
   }
