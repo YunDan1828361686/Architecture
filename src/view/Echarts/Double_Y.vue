@@ -6,7 +6,6 @@
         <div style="float: right;"></div>
       </Col>
     </Row>
-
     <!-- 优化Card加边框 -->
     <div
       style="width:50%;display: inline-block;"
@@ -43,7 +42,7 @@ export default {
   },
   created () {
     // 获取echarts_data
-    this.$axios('/node2/echarts1', 'post').then(res => {
+    this.$axios('/node2/echarts3', 'post').then(res => {
       this.echarts_data = res.data.data
     })
   },

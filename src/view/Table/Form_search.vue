@@ -4,27 +4,28 @@
       <Col span="24">
         <!-- ref="form_search_1"绑定Form -->
         <Form
+          inline
+          :label-width="80"
           ref="form_search_1"
+          :rules="form_rules_1"
           :model="form_search_1"
           label-position="right"
-          :label-width="70"
-          inline
         >
           <!-- prop的值要与v-model的值相同便于重置 -->
-          <FormItem label="用户名称" prop="input1">
+          <FormItem label="用户名" prop="input1">
             <Input v-model="form_search_1.input1" placeholder="请输入用户名" style="width:200px"></Input>
           </FormItem>
-          <FormItem label="部门" prop="input2">
-            <Input v-model="form_search_1.input2" placeholder="请输入部门" style="width:200px"></Input>
+          <FormItem label="年龄" prop="input2">
+            <Input v-model="form_search_1.input2" placeholder="请输入年龄" style="width:200px" number></Input>
           </FormItem>
           <!-- 仅设置mode="out-in即可但样式与fade有一点点不同 -->
           <transition name="fade" mode="out-in">
             <span v-if="search_span_1">
-              <FormItem label="手机号" prop="input3">
-                <Input v-model="form_search_1.input3" placeholder="请输入手机号" style="width:200px"></Input>
+              <FormItem label="邮箱" prop="input3">
+                <Input v-model="form_search_1.input3" placeholder="请输入邮箱" style="width:200px"></Input>
               </FormItem>
-              <FormItem label="邮箱" prop="input4">
-                <Input v-model="form_search_1.input4" placeholder="请输入邮箱" style="width:200px"></Input>
+              <FormItem label="手机号" prop="input4">
+                <Input v-model="form_search_1.input4" placeholder="请输入手机号" style="width:200px"></Input>
               </FormItem>
               <FormItem label="性别" prop="input5">
                 <Input v-model="form_search_1.input5" placeholder="请输入性别" style="width:200px"></Input>
@@ -41,7 +42,13 @@
             </span>
           </transition>
           <FormItem>
-            <Button style="margin-left:-40px" type="primary" shape="circle" icon="ios-search">Search</Button>
+            <Button
+              type="primary"
+              shape="circle"
+              icon="ios-search"
+              style="margin-left:-40px"
+              @click="handleSubmit('form_search_1')"
+            >搜索</Button>
             <Button @click="handleReset('form_search_1')" style="margin-left: 8px">重置</Button>
             <Button type="text" shape="circle" @click="myclick">
               {{search_val_1.span}}
@@ -56,7 +63,7 @@
 
 <script>
 export default {
-  name: "Search",
+  name: "Form_search",
   data() {
     return {
       search_span_1: false,
@@ -73,6 +80,45 @@ export default {
         input6: "",
         input7: "",
         input8: ""
+      },
+      form_rules_1: {
+        input1: [
+          {
+            required: true,
+            message: "请输入用户名!",
+            trigger: "blur"
+          }
+        ],
+        input2: [
+          {
+            required: true,
+            // blur失去焦点时触发  change数据发生改变时触发
+            trigger: "blur",
+            validator: (rule, value, callback) => {
+              if (!value) {
+                return callback(new Error("请输入年龄！"));
+              }
+              if (!Number.isInteger(value)) {
+                console.log(typeof value);
+                callback(new Error("必须输入整数！"));
+              } else {
+                if (value < 18) {
+                  callback(new Error("必须大于18岁！"));
+                } else {
+                  callback();
+                }
+              }
+            }
+          }
+        ],
+        input3: [
+          {
+            required: true,
+            message: "请输入邮箱！",
+            trigger: "blur"
+          },
+          { type: "email", message: "邮箱格式错误！", trigger: "blur" }
+        ]
       }
     };
   },
@@ -88,6 +134,15 @@ export default {
         this.$set(this.search_val_1, "span", "展开");
         this.$set(this.search_val_1, "icon", "ios-arrow-down");
       }
+    },
+    handleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$Message.success("表单验证通过!");
+        } else {
+          this.$Message.error("表单验证失败!");
+        }
+      });
     },
     handleReset(name) {
       // 重置$refs为form_search_1的表单数据

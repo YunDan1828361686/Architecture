@@ -78,6 +78,12 @@ body {
   padding-right: 0;
   padding-top: 20px;
 }
+#app >>> .Card_demo > .ivu-card-body {
+  height: 100%;
+}
+#app >>> .ivu-tabs {
+  overflow: visible;
+}
 </style>
 /***
  *                    _ooOoo_

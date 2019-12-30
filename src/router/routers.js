@@ -212,14 +212,15 @@ export default [
           title: 'Upload'
         },
         component: () => import('@/view/Table/Upload.vue')
-      },
+      },
+
       {
-        path: 'Search',
-        name: 'Search',
+        path: 'Form_search',
+        name: 'Form_search',
         meta: {
-          title: 'Search'
+          title: 'Form_search'
         },
-        component: () => import('@/view/Table/Search.vue')
+        component: () => import('@/view/Table/Form_search.vue')
       }
       // {
       //   path: 'level_2_2',
