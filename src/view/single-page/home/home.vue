@@ -92,49 +92,49 @@
 </template>
 
 <script>
-import InforCard from '_c/info-card'
-import CountTo from '_c/count-to'
-import { mapActions } from 'vuex'
+import InforCard from "_c/info-card";
+import CountTo from "_c/count-to";
+import { mapActions } from "vuex";
 // 哪个组件用  在哪引入echarts
 // 浏览器窗口大小发生变化
-import { on, off } from '@/libs/tools'
-import echarts from 'echarts'
-import tdTheme from '@/libs/echarts_them.json'
-echarts.registerTheme('tdTheme', tdTheme)
+import { on, off } from "@/libs/tools";
+import echarts from "echarts";
+import tdTheme from "@/libs/echarts_them.json";
+echarts.registerTheme("tdTheme", tdTheme);
 export default {
-  name: 'home',
+  name: "home",
   components: {
     InforCard,
     CountTo
   },
-  data () {
+  data() {
     return {
       inforCardData: [
         {
-          title: '新增用户',
-          icon: 'md-person-add',
+          title: "新增用户",
+          icon: "md-person-add",
           count: 803,
-          color: '#2d8cf0'
+          color: "#2d8cf0"
         },
-        { title: '累计点击', icon: 'md-locate', count: 232, color: '#19be6b' },
+        { title: "累计点击", icon: "md-locate", count: 232, color: "#19be6b" },
         {
-          title: '新增问答',
-          icon: 'md-help-circle',
+          title: "新增问答",
+          icon: "md-help-circle",
           count: 142,
-          color: '#ff9900'
+          color: "#ff9900"
         },
-        { title: '分享统计', icon: 'md-share', count: 657, color: '#ed3f14' },
+        { title: "分享统计", icon: "md-share", count: 657, color: "#ed3f14" },
         {
-          title: '新增互动',
-          icon: 'md-chatbubbles',
+          title: "新增互动",
+          icon: "md-chatbubbles",
           count: 12,
-          color: '#E46CBB'
+          color: "#E46CBB"
         },
-        { title: '新增页面', icon: 'md-map', count: 14, color: '#9A66E4' }
+        { title: "新增页面", icon: "md-map", count: 14, color: "#9A66E4" }
       ],
       // tab页的label名称
-      tab_label_1: '',
-      tab_label_2: '',
+      tab_label_1: "",
+      tab_label_2: "",
       // tab页的loading
       spinShow_1: false,
       spinShow_2: false,
@@ -145,17 +145,17 @@ export default {
       echarts_option_1: [
         {
           title: {
-            text: '同名数量统计',
-            subtext: '纯属虚构',
-            x: 'center'
+            text: "同名数量统计",
+            subtext: "纯属虚构",
+            x: "center"
           },
           tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
           },
           legend: {
-            type: 'scroll',
-            orient: 'vertical',
+            type: "scroll",
+            orient: "vertical",
             right: 10,
             top: 70,
             bottom: 20,
@@ -166,16 +166,16 @@ export default {
           },
           series: [
             {
-              name: '姓名',
-              type: 'pie',
-              radius: '55%',
-              center: ['30%', '55%'],
+              name: "姓名",
+              type: "pie",
+              radius: "55%",
+              center: ["30%", "55%"],
               // data: data.seriesData,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,
                   shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  shadowColor: "rgba(0, 0, 0, 0.5)"
                 }
               }
             }
@@ -184,26 +184,26 @@ export default {
         {
           // 1、 格式化提示信息
           title: {
-            left: 'center'
+            left: "center"
             // text: element_option.title_text
           },
           tooltip: {
-            trigger: 'axis',
-            formatter: function (params) {
-              var name = params[0].name + '<br/>' // x轴名称
-              var str = '' // 辅助变量，存储要展示的提示信息
+            trigger: "axis",
+            formatter: function(params) {
+              var name = params[0].name + "<br/>"; // x轴名称
+              var str = ""; // 辅助变量，存储要展示的提示信息
               // 循环存储
               for (var i = 0; i < params.length; i++) {
                 str =
                   str +
                   params[i].marker +
                   params[i].seriesName +
-                  '：' +
+                  "：" +
                   params[i].value +
-                  '人<br/>'
+                  "人<br/>";
               }
               // 返回结果值
-              return name + str
+              return name + str;
             }
           },
           toolbox: {
@@ -214,7 +214,7 @@ export default {
               },
               magicType: {
                 show: true,
-                type: ['line', 'bar']
+                type: ["line", "bar"]
               },
               restore: {
                 show: true
@@ -226,18 +226,18 @@ export default {
           },
           legend: {},
           grid: {
-            left: '5%',
-            right: '5%',
-            top: '15%',
-            bottom: '10%',
+            left: "5%",
+            right: "5%",
+            top: "15%",
+            bottom: "10%",
             containLabel: true
           },
           xAxis: [
             {
-              type: 'category',
+              type: "category",
               // data: element_option.xAxis_data,
               axisPointer: {
-                type: 'shadow'
+                type: "shadow"
               }
             }
           ],
@@ -255,151 +255,151 @@ export default {
             {
               start: 0,
               end: 30,
-              startValue: '0'
+              startValue: "0"
             },
             {
-              type: 'inside'
+              type: "inside"
             }
           ]
           // series: element_option.yAxis_series
         }
       ]
-    }
+    };
   },
   methods: {
-    ...mapActions(['getCurrentDate']),
+    ...mapActions(["getCurrentDate"]),
     // 时间切换
-    DatePicker_change_1 (index) {
+    DatePicker_change_1(index) {
       // console.log("弹框出现");
-      this.spinShow_1 = true
-      this.tab_label_1 = index
+      this.spinShow_1 = true;
+      this.tab_label_1 = index;
     },
-    DatePicker_change_2 (index) {
+    DatePicker_change_2(index) {
       // console.log("弹框出现");
-      this.spinShow_2 = true
-      this.tab_label_2 = index
+      this.spinShow_2 = true;
+      this.tab_label_2 = index;
     },
-    resize () {
-      if (this.$route.name == 'home') {
+    resize() {
+      if (this.$route.name == "home") {
         {
           this.myCharts_dom_1.map(item => {
-            item.resize()
-          })
+            item.resize();
+          });
         }
       }
     },
     // 解决两个Y轴分隔线相同
-    calMax (arr) {
-      return Math.ceil(Math.max(...arr) / 10) * 10 // 找到最大值 除10 向上取整 乘10 输出最大值
+    calMax(arr) {
+      return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
     },
-    up_init () {
-      const myCharts = document.getElementsByClassName('echarts_1')
-      const myCharts_option = this.echarts_data_1.map(_ => _.data)
+    up_init() {
+      const myCharts = document.getElementsByClassName("echarts_1");
+      const myCharts_option = this.echarts_data_1.map(_ => _.data);
       for (let i = 0; i < myCharts.length; i++) {
-        const element = myCharts[i]
-        const ele_option = this.echarts_option_1[i]
-        const element_option = myCharts_option[i]
+        const element = myCharts[i];
+        const ele_option = this.echarts_option_1[i];
+        const element_option = myCharts_option[i];
         if (!i) {
-          ele_option.legend.selected = element_option.selected
-          ele_option.series[0].data = element_option.seriesData
+          ele_option.legend.selected = element_option.selected;
+          ele_option.series[0].data = element_option.seriesData;
         } else if (i == 1) {
-          ele_option.title.text = element_option.title_text
-          ele_option.xAxis[0].data = element_option.xAxis_data
+          ele_option.title.text = element_option.title_text;
+          ele_option.xAxis[0].data = element_option.xAxis_data;
           ele_option.yAxis = element_option.yAxis_series.map(item => {
             return {
-              type: 'value',
+              type: "value",
               name: item.name,
               min: 0,
               max: this.calMax(item.data),
               splitNumber: 5,
               interval: this.calMax(item.data) / 5
-            }
-          })
-          ele_option.series = element_option.yAxis_series
+            };
+          });
+          ele_option.series = element_option.yAxis_series;
         }
         this.$nextTick(() => {
           // 存储已经init的echarts实例
-          this.myCharts_dom_1.push(echarts.init(element, 'tdTheme'))
-          this.myCharts_dom_1[i].setOption(ele_option, true)
+          this.myCharts_dom_1.push(echarts.init(element, "tdTheme"));
+          this.myCharts_dom_1[i].setOption(ele_option, true);
           if (!i) {
-            this.spinShow_1 = false
+            this.spinShow_1 = false;
           } else {
-            this.spinShow_2 = false
+            this.spinShow_2 = false;
           }
           // 窗口发生改变重新加载echarts
-          on(window, 'resize', this.resize)
-        })
+          on(window, "resize", this.resize);
+        });
       }
     }
   },
-  mounted () {
+  mounted() {
     //
   },
-  created () {
+  created() {
     // 获取当前时间
     this.getCurrentDate(1).then(res => {
       // console.log("弹框出现");
-      this.spinShow_1 = true
-      this.spinShow_2 = true
-      this.tab_label_1 = res
-      this.tab_label_2 = res
+      this.spinShow_1 = true;
+      this.spinShow_2 = true;
+      this.tab_label_1 = res;
+      this.tab_label_2 = res;
       let pA = new Promise((resolve, reject) => {
-        this.$axios('/node2/echarts1', 'post')
+        this.$axios("/node2/echarts1", "post")
           .then(res => {
-            resolve(res.data)
+            resolve(res.data);
           })
           .catch(err => {
-            reject(err)
-          })
-      })
+            reject(err);
+          });
+      });
       let pB = new Promise((resolve, reject) => {
-        this.$axios('/node2/echarts2', 'post')
+        this.$axios("/node2/echarts2", "post")
           .then(res => {
-            resolve(res.data)
+            resolve(res.data);
           })
           .catch(err => {
-            reject(err)
-          })
-      })
+            reject(err);
+          });
+      });
       Promise.all([pA, pB]).then(result => {
-        this.echarts_data_1 = result
-      })
-    })
+        this.echarts_data_1 = result;
+      });
+    });
   },
   watch: {
     // 监听时间的切换
-    tab_label_1: function (newval, oldval) {
+    tab_label_1: function(newval, oldval) {
       if (!oldval) {
-        return
+        return;
       }
-      console.log('11111111', newval, oldval)
-      this.$axios('/node2/echarts1', 'post').then(res => {
-        this.$set(this.echarts_data_1, '0', res.data)
-      })
+      console.log("11111111", newval, oldval);
+      this.$axios("/node2/echarts1", "post").then(res => {
+        this.$set(this.echarts_data_1, "0", res.data);
+      });
     },
     // 监听时间的切换
-    tab_label_2: function (newval, oldval) {
+    tab_label_2: function(newval, oldval) {
       if (!oldval) {
-        return
+        return;
       }
-      console.log('22222222', newval, oldval)
-      this.$axios('/node2/echarts2', 'post').then(res => {
-        this.$set(this.echarts_data_1, '1', res.data)
-      })
+      console.log("22222222", newval, oldval);
+      this.$axios("/node2/echarts2", "post").then(res => {
+        this.$set(this.echarts_data_1, "1", res.data);
+      });
     },
     // echarts_data_1发生变化  当数据更新了 在dom中渲染后 再去执行this.up_init
-    echarts_data_1: function (newval, oldval) {
-      console.log('33333333', newval, oldval)
+    echarts_data_1: function(newval, oldval) {
+      console.log("33333333", newval, oldval);
       this.$nextTick(() => {
-        this.up_init()
-      })
+        this.up_init();
+      });
     }
   },
-  beforeDestroy () {
-    off(window, 'resize', this.resize)
-    console.log('销毁', window)
+  beforeDestroy() {
+    off(window, "resize", this.resize);
+    console.log("销毁", window);
   }
-}
+};
 </script>
 
 <style lang="less">

@@ -59,6 +59,7 @@ export default {
     resize () {
       if (this.$route.name == 'Double_Y') {
         {
+          console.log("重新渲染了");
           this.myCharts_dom_1.map(item => {
             item.resize()
           })

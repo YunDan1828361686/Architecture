@@ -32,13 +32,13 @@ export default {
     menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
   },
   mutations: {
-    setBreadCrumb (state, route) {
+    setBreadCrumb(state, route) {
       state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
     },
-    setHomeRoute (state, routes) {
+    setHomeRoute(state, routes) {
       state.homeRoute = getHomeRoute(routes, homeName)
     },
-    setTagNavList (state, list) {
+    setTagNavList(state, list) {
       let tagList = []
       if (list) {
         tagList = [...list]
@@ -52,13 +52,13 @@ export default {
       state.tagNavList = tagList
       setTagNavListInLocalstorage([...tagList])
     },
-    closeTag (state, route) {
+    closeTag(state, route) {
       let tag = state.tagNavList.filter(item => routeEqual(item, route))
       route = tag[0] ? tag[0] : null
       if (!route) return
       closePage(state, route)
     },
-    addTag (state, { route, type = 'unshift' }) {
+    addTag(state, { route, type = 'unshift' }) {
       let router = getRouteTitleHandled(route)
       if (!routeHasExist(state.tagNavList, router)) {
         if (type === 'push') state.tagNavList.push(router)
@@ -71,42 +71,8 @@ export default {
     }
   },
   actions: {
-    // 获取用户相关信息
-    getUserInfo ({ state, commit }, token) {
-      const USER = {
-        super_admin: {
-          name: 'super_admin',
-          user_id: '1',
-          access: ['super_admin', 'admin'],
-          token: 'super_admin',
-          avatar: 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png'
-        },
-        admin: {
-          name: 'admin',
-          user_id: '2',
-          access: ['admin'],
-          token: 'admin',
-          avatar: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
-        }
-      }
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          try {
-            let data = USER[token]
-            commit('setAvatar', data.avatar)
-            commit('setUserName', data.name)
-            commit('setUserId', data.user_id)
-            commit('setAccess', data.access)
-            commit('setHasGetInfo', true)
-            resolve(data)
-          } catch (error) {
-            reject(error)
-          }
-        }, 500)
-      })
-    },
     // 获取当前时间
-    getCurrentDate ({ state, commit }, index) {
+    getCurrentDate({ state, commit }, index) {
       return new Promise((resolve, reject) => {
         try {
           var timeStr = '-'
