@@ -276,12 +276,10 @@ export default {
     ...mapActions(["getCurrentDate"]),
     // 时间切换
     DatePicker_change_1(index) {
-      // console.log("弹框出现");
       this.spinShow_1 = true;
       this.tab_label_1 = index;
     },
     DatePicker_change_2(index) {
-      // console.log("弹框出现");
       this.spinShow_2 = true;
       this.tab_label_2 = index;
     },
@@ -348,7 +346,6 @@ export default {
   created() {
     // 获取当前时间
     this.getCurrentDate(1).then(res => {
-      // console.log("弹框出现");
       this.spinShow_1 = true;
       this.spinShow_2 = true;
       this.tab_label_1 = res;
@@ -382,7 +379,6 @@ export default {
       if (!oldval) {
         return;
       }
-      console.log("11111111", newval, oldval);
       this.$axios("/node2/echarts1", "post").then(res => {
         this.$set(this.echarts_data_1, "0", res.data);
       });
@@ -392,14 +388,12 @@ export default {
       if (!oldval) {
         return;
       }
-      console.log("22222222", newval, oldval);
       this.$axios("/node2/echarts2", "post").then(res => {
         this.$set(this.echarts_data_1, "1", res.data);
       });
     },
     // echarts_data_1发生变化  当数据更新了 在dom中渲染后 再去执行this.up_init
     echarts_data_1(newval, oldval) {
-      console.log("33333333", newval, oldval);
       this.$nextTick(() => {
         this.up_init();
       });
@@ -412,11 +406,9 @@ export default {
   },
   beforeDestroy() {
     off(window, "resize", this.resize);
-    console.log("销毁", window);
   }
 };
 </script>
-
 <style lang="less">
 .count-style {
   font-size: 50px;
