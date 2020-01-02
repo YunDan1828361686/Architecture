@@ -101,6 +101,7 @@ import { on, off } from "@/libs/tools";
 import echarts from "echarts";
 import tdTheme from "@/libs/echarts_them.json";
 echarts.registerTheme("tdTheme", tdTheme);
+import { _debounce } from "@/libs/Perform_optimization.js";
 export default {
   name: "home",
   components: {
@@ -266,6 +267,11 @@ export default {
       ]
     };
   },
+  computed: {
+    collapsed_() {
+      return this.$store.state.app.collapsed_;
+    }
+  },
   methods: {
     ...mapActions(["getCurrentDate"]),
     // 时间切换
@@ -279,15 +285,19 @@ export default {
       this.spinShow_2 = true;
       this.tab_label_2 = index;
     },
-    resize() {
-      if (this.$route.name == "home") {
-        {
-          this.myCharts_dom_1.map(item => {
-            item.resize();
-          });
+    resize: _debounce(function() {
+      setTimeout(() => {
+        //  高频事件触发，在n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间
+        if (this.$route.name == "home") {
+          {
+            console.log("重新渲染了");
+            this.myCharts_dom_1.map(item => {
+              item.resize();
+            });
+          }
         }
-      }
-    },
+      }, 500);
+    }, 500),
     // 解决两个Y轴分隔线相同
     calMax(arr) {
       return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
@@ -368,7 +378,7 @@ export default {
   },
   watch: {
     // 监听时间的切换
-    tab_label_1: function(newval, oldval) {
+    tab_label_1(newval, oldval) {
       if (!oldval) {
         return;
       }
@@ -378,7 +388,7 @@ export default {
       });
     },
     // 监听时间的切换
-    tab_label_2: function(newval, oldval) {
+    tab_label_2(newval, oldval) {
       if (!oldval) {
         return;
       }
@@ -388,11 +398,16 @@ export default {
       });
     },
     // echarts_data_1发生变化  当数据更新了 在dom中渲染后 再去执行this.up_init
-    echarts_data_1: function(newval, oldval) {
+    echarts_data_1(newval, oldval) {
       console.log("33333333", newval, oldval);
       this.$nextTick(() => {
         this.up_init();
       });
+    },
+    collapsed_() {
+      setTimeout(() => {
+        this.resize();
+      }, 300);
     }
   },
   beforeDestroy() {

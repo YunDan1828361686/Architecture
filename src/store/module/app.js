@@ -26,7 +26,8 @@ export default {
   state: {
     breadCrumbList: [],
     tagNavList: [],
-    homeRoute: {}
+    homeRoute: {},
+    collapsed_: String
   },
   getters: {
     menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
@@ -68,6 +69,9 @@ export default {
         }
         setTagNavListInLocalstorage([...state.tagNavList])
       }
+    },
+    setCollapsed_(state, payload) {
+      state.collapsed_ = payload
     }
   },
   actions: {

@@ -161,6 +161,14 @@ export default [
           title: 'Router_method'
         },
         component: () => import('@/view/skill/Router_method.vue')
+      },
+      {
+        path: 'Perform_optimization',
+        name: 'Perform_optimization',
+        meta: {
+          title: 'Perform_optimization'
+        },
+        component: () => import('@/view/skill/Perform_optimization.vue')
       }
     ]
   },

@@ -1,6 +1,7 @@
 <template>
   <Layout style="height: 100%" class="main">
     <Sider
+      breakpoint="xl"
       hide-trigger
       collapsible
       :width="256"
@@ -30,7 +31,7 @@
           <user
             :message-unread-count="unreadCount"
             :user-avatar="userAvatar"
-            :user-Name="userName"
+            :user-name="userName"
           />
           <fullscreen v-model="isFullscreen" style="margin-right: 10px;" />
           <Refresh style="margin-right: 10px;" @refresh_loading="refresh_loading" />
@@ -121,6 +122,9 @@ export default {
     },
     unreadCount() {
       return this.$store.state.user.unreadCount;
+    },
+    collapsed_() {
+      return this.$store.state.app.collapsed_;
     }
   },
   methods: {
@@ -129,7 +133,8 @@ export default {
       "setTagNavList",
       "addTag",
       "setHomeRoute",
-      "closeTag"
+      "closeTag",
+      "setCollapsed_"
     ]),
     turnToPage(route) {
       let { name, params, query } = {};
@@ -171,7 +176,7 @@ export default {
       this.spinShow = true;
       setTimeout(() => {
         this.spinShow = false;
-      }, 500);
+      }, 800);
     }
   },
   watch: {
@@ -184,6 +189,10 @@ export default {
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
       this.$refs.sideMenu.updateOpenName(newRoute.name);
+      this.refresh_loading();
+    },
+    collapsed() {
+      this.setCollapsed_(new Date());
       this.refresh_loading();
     }
   },
