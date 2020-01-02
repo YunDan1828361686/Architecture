@@ -15,16 +15,13 @@ export function _debounce(func, wait, immediate = true) {
 }
 //  函数节流
 //  高频事件触发，在n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则不会再次执行
-export function _throttle(fn, t) {
+export function _throttle(fn, interval) {
     let last;
-    // let timer;
-    let interval = t || 500;
     return function () {
-        let args = arguments;
         let now = +new Date();
         if (last && now - last < interval) { } else {
             last = now;
-            fn.apply(this, args);
+            fn.apply(this, arguments);
         }
     }
 }
