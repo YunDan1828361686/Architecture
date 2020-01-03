@@ -6,21 +6,26 @@
         <div style="float: right;"></div>
       </Col>
     </Row>
-    <!-- 优化Card加边框 -->
-    <div
-      style="width:50%;display: inline-block;"
-      class="border-container"
-      v-for="(item_1,index_1) in echarts_data"
-      :key="index_1"
-    >
-      <span class="top-left border-span"></span>
-      <span class="top-right border-span"></span>
-      <span class="bottom-left border-span"></span>
-      <span class="bottom-right border-span"></span>
-      <Card>
-        <div class="echarts_index"></div>
-      </Card>
-    </div>
+    <Row :gutter="20" style="margin-top: 10px;">
+      <Col
+        :md="24"
+        :lg="12"
+        style="margin-bottom: 20px;"
+        v-for="(item_1,index_1) in echarts_data"
+        :key="index_1"
+      >
+        <!-- 优化Card加边框 -->
+        <div class="border-container">
+          <span class="top-left border-span"></span>
+          <span class="top-right border-span"></span>
+          <span class="bottom-left border-span"></span>
+          <span class="bottom-right border-span"></span>
+          <Card>
+            <div class="echarts_index"></div>
+          </Card>
+        </div>
+      </Col>
+    </Row>
   </div>
 </template>
 
@@ -68,15 +73,15 @@ export default {
   },
   methods: {
     resize: _debounce(function() {
-        //  高频事件触发，在n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间
-        if (this.$route.name == "Double_Y") {
-          {
-            console.log("重新渲染了");
-            this.myCharts_dom_1.map(item => {
-              item.resize();
-            });
-          }
+      //  高频事件触发，在n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间
+      if (this.$route.name == "Double_Y") {
+        {
+          console.log("重新渲染了");
+          this.myCharts_dom_1.map(item => {
+            item.resize();
+          });
         }
+      }
     }, 300),
     // 解决两个Y轴分隔线相同
     calMax(arr) {

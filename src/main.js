@@ -34,6 +34,11 @@ Vue.prototype.$axios = function (url, method, data) {
     axios({ 'url': '/api' + url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
   })
 }
+// Vue.prototype.$axios = function (url, method, data) {
+//   return new Promise(function (resolve, reject) {
+//     axios({ url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
+//   })
+// }
 /**
  * @description 注册admin内置插件
  */
