@@ -59,6 +59,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { Spin } from "view-design";
 import $ from "jquery";
 export default {
   data() {
@@ -223,6 +224,7 @@ export default {
     ...mapActions(["getUserInfo"]),
     login_btn() {
       this.login_spin = true;
+      Spin.show()
       this.$Message.loading({
         content: "正在验证信息...",
         duration: 0
@@ -236,6 +238,7 @@ export default {
         // this.$Loading.error();
         this.$Message.warning("账号或密码未输入！");
         this.login_spin = false;
+        Spin.hide()
       }
       // else if (
       //   $("#verVal")
@@ -285,6 +288,7 @@ export default {
               this.login_spin = false;
             })
             .catch(res => {
+              Spin.hide()
               this.login_spin = false;
             });
           // let pA = new Promise((reslove, reject) => {

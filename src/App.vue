@@ -6,9 +6,9 @@
 
 <script>
 export default {
-  name: 'App',
-  mounted () {}
-}
+  name: "App",
+  mounted() {}
+};
 </script>
 
 <style lang="less">
@@ -24,6 +24,7 @@ body {
   padding: 0;
 }
 #app {
+  overflow: overlay;
   .size;
 }
 // 优化Card加边框

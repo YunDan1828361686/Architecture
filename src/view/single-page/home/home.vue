@@ -102,6 +102,7 @@ import echarts from "echarts";
 import tdTheme from "@/libs/echarts_them.json";
 echarts.registerTheme("tdTheme", tdTheme);
 import { _debounce } from "@/libs/Perform_optimization.js";
+import { Spin } from "view-design";
 export default {
   name: "home",
   components: {
@@ -339,6 +340,7 @@ export default {
     }
   },
   mounted() {
+    Spin.hide();
     //
   },
   created() {
