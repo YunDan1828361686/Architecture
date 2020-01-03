@@ -7,21 +7,22 @@
 </template>
 
 <script>
+import { _throttle } from "@/libs/Perform_optimization.js";
 export default {
-  name: 'Refresh',
-  mounted () {},
+  name: "Refresh",
+  mounted() {},
   methods: {
-    refresh () {
-      this.$emit('refresh_loading')
+    refresh: _throttle(function() {
+      this.$emit("refresh_loading");
       this.$router.replace({
-        path: '/Refresh',
+        path: "/Refresh",
         query: {
           t: Date.now()
         }
-      })
-    }
+      });
+    }, 1000)
   }
-}
+};
 </script>
 
 <style lang="less">

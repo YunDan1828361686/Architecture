@@ -51,7 +51,9 @@
             <keep-alive :include="cacheList">
               <router-view />
             </keep-alive>
-            <Spin size="large" fix v-if="spinShow"></Spin>
+            <Spin size="large" fix v-if="spinShow">
+              <img :src="maxLogo" alt />
+            </Spin>
             <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
           </Content>
         </Layout>

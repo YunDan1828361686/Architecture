@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     resize: _debounce(function() {
-      setTimeout(() => {
         //  高频事件触发，在n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间
         if (this.$route.name == "Double_Y") {
           {
@@ -78,8 +77,7 @@ export default {
             });
           }
         }
-      }, 500);
-    }, 500),
+    }, 300),
     // 解决两个Y轴分隔线相同
     calMax(arr) {
       return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
