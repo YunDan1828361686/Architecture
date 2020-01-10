@@ -284,7 +284,34 @@ export default [
         meta: {
           title: 'Demo'
         },
-        component: () => import('@/view/Demo.vue')
+        component: () => import('@/view/Echarts/Demo.vue')
+      }
+    ]
+  },
+  {
+    path: '/Three',
+    name: 'Three',
+    meta: {
+      icon: 'md-trending-up',
+      title: 'Three'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Demo1',
+        name: 'Demo1',
+        meta: {
+          title: 'Demo1'
+        },
+        component: () => import('@/view/Three/Demo1.vue')
+      },
+      {
+        path: 'Demo2',
+        name: 'Demo2',
+        meta: {
+          title: 'Demo2'
+        },
+        component: () => import('@/view/Three/Demo2.vue')
       }
     ]
   },
