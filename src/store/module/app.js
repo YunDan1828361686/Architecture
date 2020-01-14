@@ -27,7 +27,8 @@ export default {
     breadCrumbList: [],
     tagNavList: [],
     homeRoute: {},
-    collapsed_: String
+    collapsed_: String,
+    spinShow_: false
   },
   getters: {
     menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
@@ -72,7 +73,17 @@ export default {
     },
     setCollapsed_(state, payload) {
       state.collapsed_ = payload
-    }
+    },
+    setspinShow_(state, payload) {
+      // 因跳转速度过快  延迟半秒钟关闭遮罩
+      if (!payload) {
+        setTimeout(() => {
+          state.spinShow_ = payload
+        }, 500);
+      } else {
+        state.spinShow_ = payload
+      }
+    },
   },
   actions: {
     // 获取当前时间

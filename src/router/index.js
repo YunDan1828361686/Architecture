@@ -27,6 +27,8 @@ const turnTo = (to, access, next) => {
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
+  // 路由跳转修改vuex为true，监听并打开遮罩
+  store.commit("setspinShow_", true)
   const token = getToken()
   if (!token && to.name !== LOGIN_PAGE_NAME) {
     // 未登录且要跳转的页面不是登录页
@@ -59,6 +61,8 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(to => {
+  // 路由跳转修改vuex为false，监听并关闭遮罩
+  store.commit("setspinShow_", false)
   setTitle(to, router.app)
   iView.LoadingBar.finish()
   window.scrollTo(0, 0)

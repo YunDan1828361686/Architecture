@@ -49,7 +49,7 @@
           </div>
           <Content class="content-wrapper">
             <keep-alive :include="cacheList">
-              <router-view />
+              <router-view :key="$route.fullPath" />
             </keep-alive>
             <Spin size="large" fix v-if="spinShow">
               <img :src="maxLogo" alt />
@@ -127,6 +127,9 @@ export default {
     },
     collapsed_() {
       return this.$store.state.app.collapsed_;
+    },
+    spinShow_() {
+      return this.$store.state.app.spinShow_;
     }
   },
   methods: {
@@ -191,11 +194,15 @@ export default {
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
       this.$refs.sideMenu.updateOpenName(newRoute.name);
-      this.refresh_loading();
     },
     collapsed() {
+      // 更改侧栏状态时，记录时间，启动遮罩loading，如若时间发生变化，记录时间，启动遮罩loading
       this.setCollapsed_(new Date());
       this.refresh_loading();
+    },
+    spinShow_(newVal) {
+      // 监听vuex内  更新遮罩状态
+      this.spinShow = newVal;
     }
   },
   mounted() {
