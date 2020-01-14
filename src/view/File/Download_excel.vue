@@ -16,7 +16,7 @@
 <script>
 import excel from "@/libs/excel";
 export default {
-  name: "export-excel",
+  name: "Download_excel",
   data() {
     return {
       exportLoading: false,

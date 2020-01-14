@@ -89,35 +89,6 @@ export default [
     ]
   },
   {
-    path: '/excel',
-    name: 'excel',
-    meta: {
-      icon: 'ios-stats',
-      title: 'EXCEL导入导出'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'upload-excel',
-        name: 'upload-excel',
-        meta: {
-          icon: 'md-add',
-          title: '导入EXCEL'
-        },
-        component: () => import('@/view/excel/upload-excel.vue')
-      },
-      {
-        path: 'export-excel',
-        name: 'export-excel',
-        meta: {
-          icon: 'md-download',
-          title: '导出EXCEL'
-        },
-        component: () => import('@/view/excel/export-excel.vue')
-      }
-    ]
-  },
-  {
     path: '/tools_methods',
     name: 'tools_methods',
     meta: {
@@ -214,15 +185,6 @@ export default [
         component: () => import('@/view/Table/Table_expand.vue')
       },
       {
-        path: 'Upload',
-        name: 'Upload',
-        meta: {
-          title: 'Upload'
-        },
-        component: () => import('@/view/Table/Upload.vue')
-      },
-
-      {
         path: 'Form_search',
         name: 'Form_search',
         meta: {
@@ -259,6 +221,57 @@ export default [
       //   ]
       // },
 
+    ]
+  },
+  {
+    path: '/File',
+    name: 'File',
+    meta: {
+      icon: 'md-paper',
+      title: 'File'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Upload_img',
+        name: 'Upload_img',
+        meta: {
+          title: 'Upload_img'
+        },
+        component: () => import('@/view/File/Upload_img.vue')
+      },
+      {
+        path: 'Upload_zip',
+        name: 'Upload_zip',
+        meta: {
+          title: 'Upload_zip'
+        },
+        component: () => import('@/view/File/Upload_zip.vue')
+      },
+      {
+        path: 'Download',
+        name: 'Download',
+        meta: {
+          title: 'Download'
+        },
+        component: () => import('@/view/File/Download.vue')
+      },
+      {
+        path: 'Upload_excel',
+        name: 'Upload_excel',
+        meta: {
+          title: 'Upload_excel'
+        },
+        component: () => import('@/view/File/Upload_excel.vue')
+      },
+      {
+        path: 'Download_excel',
+        name: 'Download_excel',
+        meta: {
+          title: 'Download_excel'
+        },
+        component: () => import('@/view/File/Download_excel.vue')
+      }
     ]
   },
   {

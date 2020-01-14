@@ -44,7 +44,7 @@
 <script>
 import excel from "@/libs/excel";
 export default {
-  name: "upload-excel",
+  name: "Upload_excel",
   data() {
     return {
       uploadLoading: false,
