@@ -49,7 +49,8 @@
           </div>
           <Content class="content-wrapper">
             <keep-alive :include="cacheList">
-              <router-view :key="$route.fullPath" />
+              <!-- <router-view :key="$route.fullPath" /> -->
+              <router-view/>
             </keep-alive>
             <Spin size="large" fix v-if="spinShow">
               <img :src="maxLogo" alt />

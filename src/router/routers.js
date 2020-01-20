@@ -302,11 +302,11 @@ export default [
     ]
   },
   {
-    path: '/Three',
-    name: 'Three',
+    path: '/Map',
+    name: 'Map',
     meta: {
       icon: 'md-trending-up',
-      title: 'Three'
+      title: 'Map'
     },
     component: Main,
     children: [
@@ -316,7 +316,7 @@ export default [
         meta: {
           title: 'Demo1'
         },
-        component: () => import('@/view/Three/Demo1.vue')
+        component: () => import('@/view/Map/Demo1.vue')
       },
       {
         path: 'Demo2',
@@ -324,7 +324,7 @@ export default [
         meta: {
           title: 'Demo2'
         },
-        component: () => import('@/view/Three/Demo2.vue')
+        component: () => import('@/view/Map/Demo2.vue')
       }
     ]
   },
