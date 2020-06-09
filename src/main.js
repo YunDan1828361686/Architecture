@@ -11,6 +11,8 @@ import 'view-design/dist/styles/iview.css'
 // 报错TypeError: Cannot read property 'clickRow' of undefined
 // 找到tree-table-vue.js文件  1547行替换为
 // return _this2.handleEvent($event, 'row', { row: row, rowIndex: rowIndex }, { clickRow: true });
+// 多选三级联动
+import cascaderMulti from 'cascader-multi'
 import TreeTable from 'tree-table-vue'
 import config from '@/config'
 import { directive as clickOutside } from 'v-click-outside-x'
@@ -27,6 +29,7 @@ import axios from 'axios'
 Vue.use(iView)
 Vue.use(VOrgTree)
 Vue.use(TreeTable)
+Vue.use(cascaderMulti)
 
 Vue.prototype.$Qs = Qs
 Vue.prototype.$axios = function (url, method, data) {

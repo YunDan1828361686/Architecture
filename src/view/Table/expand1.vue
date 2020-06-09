@@ -2,6 +2,7 @@
 .expand-row {
   margin-bottom: 20px;
 }
+
 .expand-value {
   text-align: center;
 }
@@ -20,7 +21,7 @@
     </Modal>
     <Row
       class="expand-row"
-      v-for="(item,index) in row.children"
+      v-for="(item,index) in row.children_row"
       :key="index"
       type="flex"
       justify="space-around"
@@ -45,30 +46,33 @@ export default {
   props: {
     row: Object
   },
-  data() {
+  data () {
     return {
       modal1: false,
       form_1: {
-        input_id: "",
-        input1: "",
-        input2: ""
+        input_id: '',
+        input1: '',
+        input2: ''
       }
-    };
+    }
+  },
+  mounted () {
+    console.log(this.row, 2222)
   },
   methods: {
-    update(index) {
-      this.form_1.input_id = this.row.children[index].id;
-      this.form_1.input1 = this.row.children[index].job;
-      this.form_1.input2 = this.row.children[index].birthday;
-      this.modal1 = true;
+    update (index) {
+      this.form_1.input_id = this.row.children_row[index].id
+      this.form_1.input1 = this.row.children_row[index].job
+      this.form_1.input2 = this.row.children_row[index].birthday
+      this.modal1 = true
     },
-    modal1_ok() {
-      console.log("子页面确定了");
-      this.$emit("updatemsg");
+    modal1_ok () {
+      console.log('子页面确定了')
+      this.$emit('updatemsg')
     },
-    modal1_cancel() {
-      console.log("取消");
+    modal1_cancel () {
+      console.log('取消')
     }
   }
-};
+}
 </script>

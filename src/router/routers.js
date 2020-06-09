@@ -140,6 +140,14 @@ export default [
           title: 'Perform_optimization'
         },
         component: () => import('@/view/skill/Perform_optimization.vue')
+      },
+      {
+        path: 'Vue_websocket ',
+        name: 'Vue_websocket',
+        meta: {
+          title: 'Vue_websocket'
+        },
+        component: () => import('@/view/skill/Vue_websocket.vue')
       }
     ]
   },
@@ -191,6 +199,14 @@ export default [
           title: 'Form_search'
         },
         component: () => import('@/view/Table/Form_search.vue')
+      },
+      {
+        path: 'More_seach',
+        name: 'More_seach',
+        meta: {
+          title: 'More_seach'
+        },
+        component: () => import('@/view/Table/More_seach.vue')
       }
       // {
       //   path: 'level_2_2',
@@ -305,7 +321,7 @@ export default [
     path: '/Map',
     name: 'Map',
     meta: {
-      icon: 'md-trending-up',
+      icon: 'md-map',
       title: 'Map'
     },
     component: Main,

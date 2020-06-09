@@ -77,3 +77,35 @@ export const objEqual = (obj1, obj2) => {
   /* eslint-disable-next-line */
   else return !keysArr1.some(key => obj1[key] != obj2[key])
 }
+
+// 获取两个时间之间的距离
+export const Range_value = (start, end) => {
+  var regTime = /(\d{4})-(\d{1,2})-(\d{1,2})( \d{1,2}:\d{1,2})/g
+  var interval =
+    Math.abs(
+      Date.parse(start.replace(regTime, '$2-$3-$1$4')) -
+      Date.parse(end.replace(regTime, '$2-$3-$1$4'))
+    ) / 1000
+  var h = Math.floor(interval / 3600)
+  var m = Math.floor((interval % 3600) / 60)
+  return h
+  // alert(start + "距离" + end + "有" + h + " 小时 " + m + " 分");
+}
+
+// 获取几天前的时间可传入两个参数
+export const fun_date = (num1, num2) => {
+  var nowdate = new Date()
+  var before = new Date(nowdate - 1000 * 60 * 60 * 24 * num1)
+  var after = new Date(nowdate - 1000 * 60 * 60 * 24 * num2)
+  // 第一个参数的时间
+  var beforyear = before.getFullYear()
+  var beformonth = before.getMonth() + 1
+  var beforday = before.getDate()
+  var beforeDate = beforyear + '-' + (beformonth < 10 ? '0' + beformonth : beformonth) + '-' + (beforday < 10 ? '0' + beforday : beforday)
+  // 第二个参数的时间
+  var afteryear = after.getFullYear()
+  var aftermonth = after.getMonth() + 1
+  var afterday = after.getDate()
+  var afterDate = afteryear + '-' + (aftermonth < 10 ? '0' + aftermonth : aftermonth) + '-' + (afterday < 10 ? '0' + afterday : afterday)
+  return [beforeDate, afterDate]
+}

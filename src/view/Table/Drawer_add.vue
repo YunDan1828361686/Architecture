@@ -8,11 +8,7 @@
       @on-close="Drawer_close_1"
       :mask-closable="false"
     >
-      <Form
-        ref="formCustom_1"
-        :model="formCustom_1"
-        :rules="ruleValidate_1"
-      >
+      <Form ref="formCustom_1" :model="formCustom_1" :rules="ruleValidate_1">
         <Row :gutter="32">
           <Col span="12">
             <FormItem label="姓名" label-position="top" prop="name">

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "cascader-multi": "^2.0.3",
     "countup": "^1.8.2",
     "default-passive-events": "^1.0.10",
     "echarts": "^4.0.4",

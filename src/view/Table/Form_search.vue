@@ -58,54 +58,110 @@
         </Form>
       </Col>
     </Row>
+    <!-- JS 控制不能输入特殊字符
+    <input
+      type="text"
+      class="domain"
+      onkeyup="this.value=this.value.replace(/[^u4e00-u9fa5w]/g,'')"
+      ；this.value="this.value.replace(/[^u4e00-u9fa5w]/g,'')"
+      &#x26;#x26;#x26;#x26;#x26;#x26;#x26;#x26;#x26;#x26;#x26;#x26;#x3C;br
+    />
+    JS 控制文本框只能输入数字
+    <input
+      onkeyup="value=value.replace(/[^0-9]/g,'')"
+      onpaste="value=value.replace(/[^0-9]/g,'')"
+      oncontextmenu="value=value.replace(/[^0-9]/g,'')"
+    />
+    JS 控制文本框只能输入数字、小数点
+    <input
+      onkeyup="value=value.replace(/[^\0-9\.]/g,'')"
+      onpaste="value=value.replace(/[^\0-9\.]/g,'')"
+      oncontextmenu="value=value.replace(/[^\0-9\.]/g,'')"
+    />
+    JS 控制文本框只能输入英文
+    <input
+      onkeyup="value=value.replace(/[^\a-\z\A-\Z]/g,'')"
+      onpaste="value=value.replace(/[^\a-\z\A-\Z]/g,'')"
+      oncontextmenu="value=value.replace(/[^\a-\z\A-\Z]/g,'')"
+    />
+    JS 控制文本框只能输入英文、数字
+    <input
+      onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+      onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+      oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+    />
+    JS 控制文本框只能输入中文
+    <input
+      onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
+      onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
+      oncontextmenu="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
+    />
+    JS 控制文本框只能输入中文、英文、数字
+    <input
+      onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
+      onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
+      oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5]/g,'')"
+    />
+    JS 控制文本框只能输入中文、英文、数字、空格
+    <input
+      onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\ ]/g,'')"
+      onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\ ]/g,'')"
+      oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\ ]/g,'')"
+    />
+    JS 控制文本框只能输入中文、英文、数字、小数点
+    <input
+      onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+      onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+      oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+    />-->
   </div>
 </template>
 
 <script>
 export default {
-  name: "Form_search",
-  data() {
+  name: 'Form_search',
+  data () {
     return {
       search_span_1: false,
       search_val_1: {
-        span: "展开",
-        icon: "ios-arrow-down"
+        span: '展开',
+        icon: 'ios-arrow-down'
       },
       form_search_1: {
-        input1: "",
-        input2: "",
-        input3: "",
-        input4: "",
-        input5: "",
-        input6: "",
-        input7: "",
-        input8: ""
+        input1: '',
+        input2: '',
+        input3: '',
+        input4: '',
+        input5: '',
+        input6: '',
+        input7: '',
+        input8: ''
       },
       form_rules_1: {
         input1: [
           {
             required: true,
-            message: "请输入用户名!",
-            trigger: "blur"
+            message: '请输入用户名!',
+            trigger: 'blur'
           }
         ],
         input2: [
           {
             required: true,
             // blur失去焦点时触发  change数据发生改变时触发
-            trigger: "blur",
+            trigger: 'blur',
             validator: (rule, value, callback) => {
               if (!value) {
-                return callback(new Error("请输入年龄！"));
+                return callback(new Error('请输入年龄！'))
               }
               if (!Number.isInteger(value)) {
-                console.log(typeof value);
-                callback(new Error("必须输入整数！"));
+                console.log(typeof value)
+                callback(new Error('必须输入整数！'))
               } else {
                 if (value < 18) {
-                  callback(new Error("必须大于18岁！"));
+                  callback(new Error('必须大于18岁！'))
                 } else {
-                  callback();
+                  callback()
                 }
               }
             }
@@ -114,42 +170,42 @@ export default {
         input3: [
           {
             required: true,
-            message: "请输入邮箱！",
-            trigger: "blur"
+            message: '请输入邮箱！',
+            trigger: 'blur'
           },
-          { type: "email", message: "邮箱格式错误！", trigger: "blur" }
+          { type: 'email', message: '邮箱格式错误！', trigger: 'blur' }
         ]
       }
-    };
+    }
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    myclick() {
-      this.search_span_1 = !this.search_span_1;
+    myclick () {
+      this.search_span_1 = !this.search_span_1
       if (this.search_span_1) {
         // 修改data内对象的标准方法
-        this.$set(this.search_val_1, "span", "收起");
-        this.$set(this.search_val_1, "icon", "ios-arrow-up");
+        this.$set(this.search_val_1, 'span', '收起')
+        this.$set(this.search_val_1, 'icon', 'ios-arrow-up')
       } else {
-        this.$set(this.search_val_1, "span", "展开");
-        this.$set(this.search_val_1, "icon", "ios-arrow-down");
+        this.$set(this.search_val_1, 'span', '展开')
+        this.$set(this.search_val_1, 'icon', 'ios-arrow-down')
       }
     },
-    handleSubmit(name) {
+    handleSubmit (name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("表单验证通过!");
+          this.$Message.success('表单验证通过!')
         } else {
-          this.$Message.error("表单验证失败!");
+          this.$Message.error('表单验证失败!')
         }
-      });
+      })
     },
-    handleReset(name) {
+    handleReset (name) {
       // 重置$refs为form_search_1的表单数据
-      this.$refs[name].resetFields();
+      this.$refs[name].resetFields()
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
