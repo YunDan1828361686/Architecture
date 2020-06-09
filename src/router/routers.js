@@ -148,6 +148,14 @@ export default [
           title: 'Vue_websocket'
         },
         component: () => import('@/view/skill/Vue_websocket.vue')
+      },
+      {
+        path: 'Api ',
+        name: 'Api',
+        meta: {
+          title: 'Api'
+        },
+        component: () => import('@/view/skill/Api.vue')
       }
     ]
   },
@@ -327,20 +335,20 @@ export default [
     component: Main,
     children: [
       {
-        path: 'Demo1',
-        name: 'Demo1',
+        path: 'Map1',
+        name: 'Map1',
         meta: {
-          title: 'Demo1'
+          title: 'Map1'
         },
-        component: () => import('@/view/Map/Demo1.vue')
+        component: () => import('@/view/Map/Map1.vue')
       },
       {
-        path: 'Demo2',
-        name: 'Demo2',
+        path: 'Map2',
+        name: 'Map2',
         meta: {
-          title: 'Demo2'
+          title: 'Map2'
         },
-        component: () => import('@/view/Map/Demo2.vue')
+        component: () => import('@/view/Map/Map2.vue')
       }
     ]
   },

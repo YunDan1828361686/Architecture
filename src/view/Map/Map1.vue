@@ -35,7 +35,7 @@
   import Base_station from "@/assets/images/Base_station.jpg"
   import AMap from "AMap";
   export default {
-    name: "Demo1",
+    name: "Map1",
     data() {
       return {
         map: "",
