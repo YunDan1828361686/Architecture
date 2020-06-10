@@ -142,7 +142,7 @@ export default [
         component: () => import('@/view/skill/Perform_optimization.vue')
       },
       {
-        path: 'Vue_websocket ',
+        path: 'Vue_websocket',
         name: 'Vue_websocket',
         meta: {
           title: 'Vue_websocket'
@@ -150,7 +150,7 @@ export default [
         component: () => import('@/view/skill/Vue_websocket.vue')
       },
       {
-        path: 'Api ',
+        path: 'Api',
         name: 'Api',
         meta: {
           title: 'Api'

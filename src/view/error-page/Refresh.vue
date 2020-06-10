@@ -5,34 +5,37 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 export default {
-  name: 'Refresh',
-  data () {
+  name: "Refresh",
+  data() {
     return {
       from: null
-    }
+    };
   },
   methods: {
-    ...mapMutations(['closeTag'])
+    ...mapMutations(["closeTag"])
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.from = from
-      vm.$nextTick(function () {
+      vm.from = from;
+      vm.$nextTick(function() {
+        this.closeTag({
+          name: this.from.name
+        });
         setTimeout(() => {
           this.closeTag({
-            name: 'Refresh',
-            query: {
-              t: this.$route.query.t
-            }
-          })
-          this.$router.replace(this.from)
-        }, 500)
-      })
-    })
+            name: "Refresh"
+            // query: {
+            //   t: this.$route.query.t
+            // }
+          });
+          this.$router.replace(this.from);
+        }, 500);
+      });
+    });
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

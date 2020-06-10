@@ -15,10 +15,10 @@ export default {
     refresh: _throttle(function() {
       this.$emit("refresh_loading");
       this.$router.replace({
-        path: "/Refresh",
-        query: {
-          t: Date.now()
-        }
+        path: "/Refresh"
+        // query: {
+        //   t: Date.now()
+        // }
       });
     }, 1000)
   }

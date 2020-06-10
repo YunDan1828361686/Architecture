@@ -12,11 +12,11 @@
     >
       <Option value="-1" key=" " :disabled="disabled_1">全选</Option>
       <Option
-        v-for="(item, index) in Select_Cascader"
-        :value="item.region_code"
-        :key="item.region_code"
+        v-for="(item, index) in Select_province"
+        :value="item.value"
+        :key="item.value"
         :disabled="disabled_2"
-      >{{item.region_name}}</Option>
+      >{{item.label}}</Option>
     </Select>
     <cascaderMulti
       seach
@@ -32,16 +32,16 @@
 </template>
 
 <script>
-import { Spin } from 'view-design'
-import city_data from '@/libs/city'
+import { Spin } from "view-design";
+import city_data from "@/libs/city";
 export default {
-  name: 'More_seach',
-  data () {
+  name: "More_seach",
+  data() {
     return {
       // 判断省份多选是否发生变化
       before_data: [],
       // 判断省份多选框是否展开
-      select_open_if: '',
+      select_open_if: "",
       disabled_1: false,
       disabled_2: true,
       // 判断级联是否可以使用
@@ -53,166 +53,161 @@ export default {
         // 分页的粒度
         limit: 10,
         // 检索
-        model1: 'RRU',
-        model2: ['-1'],
-        model3: '',
-        model4: '待选择数据',
-        model5: '小时粒度',
-        startTime: '',
-        stopTime: ''
+        model1: "RRU",
+        model2: ["-1"],
+        model3: "",
+        model4: "待选择数据",
+        model5: "小时粒度",
+        startTime: "",
+        stopTime: ""
       },
       // 三级联动多选
       cascaderMulti_data: [
         {
-          value: '第一级',
-          label: '第一级',
+          value: "第一级",
+          label: "第一级",
           children: [
             {
-              value: '第一级子1',
-              label: '第一级子1',
+              value: "第一级子1",
+              label: "第一级子1",
               children: [
                 {
-                  value: '第一级子1-1',
-                  label: '第一级子1-1'
+                  value: "第一级子1-1",
+                  label: "第一级子1-1"
                 }
               ]
             },
             {
-              value: '第一级子2',
-              label: '第一级子2'
+              value: "第一级子2",
+              label: "第一级子2"
             },
             {
-              value: '第一级子3',
-              label: '第一级子3'
+              value: "第一级子3",
+              label: "第一级子3"
             }
           ]
         },
         {
-          value: '第二级',
-          label: '第二级',
+          value: "第二级",
+          label: "第二级",
           children: [
             {
-              value: '第二级子1',
-              label: '第二级子1',
+              value: "第二级子1",
+              label: "第二级子1",
               children: [
                 {
-                  value: '第二级子1-2',
-                  label: '第二级子1-2'
+                  value: "第二级子1-2",
+                  label: "第二级子1-2"
                 }
               ]
             },
             {
-              value: '第二级子2',
-              label: '第二级子2',
+              value: "第二级子2",
+              label: "第二级子2",
               children: [
                 {
-                  value: '第二级子2-1',
-                  label: '第二级子2-1'
+                  value: "第二级子2-1",
+                  label: "第二级子2-1"
                 },
                 {
-                  value: '第二级子2-2',
-                  label: '第二级子2-2'
+                  value: "第二级子2-2",
+                  label: "第二级子2-2"
                 }
               ]
             }
           ]
         }
       ]
-    }
+    };
   },
   methods: {
     // 省份多选筛选
-    select_open_change (index) {
-      this.select_open_if = index
+    select_open_change(index) {
+      this.select_open_if = index;
       if (!index) {
-        let alter_data = JSON.parse(JSON.stringify(this.table_form_1.model2))
-        if (alter_data != '') {
+        let alter_data = JSON.parse(JSON.stringify(this.table_form_1.model2));
+        if (alter_data != "") {
           if (!this.before_data) {
           } else {
             if (
               this.before_data.sort().toString() != alter_data.sort().toString()
             ) {
-            } else return
+            } else return;
           }
-          this.get_cascaderMulti_data()
-          return
+          this.get_cascaderMulti_data();
+          return;
         }
-        this.table_form_1.model3 = ''
-        this.cascaderMulti_if_ = false
+        this.table_form_1.model3 = "";
+        this.cascaderMulti_if_ = false;
         this.$nextTick(() => {
-          this.cascaderMulti_if_ = true
-        })
-        this.cascaderMulti_if = true
+          this.cascaderMulti_if_ = true;
+        });
+        this.cascaderMulti_if = true;
       } else {
-        this.before_data = JSON.parse(JSON.stringify(this.table_form_1.model2))
+        this.before_data = JSON.parse(JSON.stringify(this.table_form_1.model2));
       }
     },
     // 省份删除
-    select_change () {
-      var this_ = this
+    select_change() {
+      var this_ = this;
       if (!this.select_open_if) {
         if (!this.table_form_1.model2.length) {
-          this.table_form_1.model3 = ''
-          this.cascaderMulti_if_ = false
+          this.table_form_1.model3 = "";
+          this.cascaderMulti_if_ = false;
           this.$nextTick(() => {
-            this.cascaderMulti_if_ = true
-          })
-          this.cascaderMulti_if = true
-          this.disabled_1 = false
-          this.disabled_2 = false
-          return
+            this.cascaderMulti_if_ = true;
+          });
+          this.cascaderMulti_if = true;
+          this.disabled_1 = false;
+          this.disabled_2 = false;
+          return;
         }
-        this.get_cascaderMulti_data()
+        this.get_cascaderMulti_data();
       } else {
         if (!this.table_form_1.model2.length) {
-          this.disabled_1 = false
-          this.disabled_2 = false
+          this.disabled_1 = false;
+          this.disabled_2 = false;
         } else {
           for (let i = 0; i < this.table_form_1.model2.length; i++) {
-            const element = this.table_form_1.model2[i]
-            if (element == '-1') {
-              this_.disabled_1 = false
-              this_.disabled_2 = true
+            const element = this.table_form_1.model2[i];
+            if (element == "-1") {
+              this_.disabled_1 = false;
+              this_.disabled_2 = true;
             } else {
-              this_.disabled_1 = true
-              this_.disabled_2 = false
+              this_.disabled_1 = true;
+              this_.disabled_2 = false;
             }
           }
         }
       }
     },
     // 三级联动多选
-    cascaderMulti_onchange (data) {
-      this.table_form_1.model3 = data
-      console.log(data)
+    cascaderMulti_onchange(data) {
+      this.table_form_1.model3 = data;
+      console.log(data);
     },
     // 加载三级联动数据
-    get_cascaderMulti_data () {
-      Spin.show()
+    get_cascaderMulti_data() {
+      Spin.show();
       this.$Message.loading({
-        content: '正在加载三级联动的数据，请稍后~',
+        content: "正在加载三级联动的数据，请稍后~",
         duration: 3
-      })
-      Spin.hide()
-      this.cascaderMulti_if = false
+      });
+      Spin.hide();
+      this.cascaderMulti_if = false;
     }
   },
   computed: {
-    Select_Cascader () {
-      let data = JSON.parse(JSON.stringify(city_data.city))
-      return data
-        .filter(item => {
-          return item.parent_code === 0
-        })
-        .map(item => {
-          return Object.assign(item, {
-            value: item.region_code.toString(),
-            label: item.region_name
-          })
-        })
+    Select_province() {
+      let data = JSON.parse(JSON.stringify(city_data.city));
+      return data.map(item => {
+        return Object.assign(item, {
+          children: ""
+        });
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

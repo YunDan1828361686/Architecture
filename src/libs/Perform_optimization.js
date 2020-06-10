@@ -9,7 +9,6 @@ export function _debounce(func, wait, immediate) {
         timeout = setTimeout(function () {
             func.apply(context, args)
         }, wait)
-
     }
 }
 //  函数节流
