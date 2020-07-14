@@ -156,6 +156,14 @@ export default [
           title: 'Api'
         },
         component: () => import('@/view/skill/Api.vue')
+      },
+      {
+        path: 'Safety',
+        name: 'Safety',
+        meta: {
+          title: 'Safety'
+        },
+        component: () => import('@/view/skill/Safety.vue')
       }
     ]
   },

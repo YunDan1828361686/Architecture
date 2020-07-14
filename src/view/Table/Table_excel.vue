@@ -110,7 +110,7 @@ export default {
           title: '姓名',
           key: 'name',
           align: 'center',
-          minwidth: 200,
+          minWidth: 200,
           render: (h, params) => {
             return h('div', [
               h('Icon', {
@@ -126,7 +126,7 @@ export default {
           title: '年龄',
           key: 'age',
           align: 'center',
-          minwidth: 200
+          minWidth: 200
         },
         {
           title: '地址',
@@ -134,7 +134,7 @@ export default {
           align: 'center',
           ellipsis: true,
           tooltip: true,
-          minwidth: 200
+          minWidth: 200
         },
         {
           title: '操作',

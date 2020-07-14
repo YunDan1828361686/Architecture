@@ -41,13 +41,13 @@ export default {
           title: 'Name',
           key: 'name',
           align: 'center',
-          minwidth: 200
+          minWidth: 200
         },
         {
           title: '年龄',
           key: 'age',
           align: 'center',
-          minwidth: 200
+          minWidth: 200
         },
         {
           title: '地址',
@@ -55,13 +55,13 @@ export default {
           align: 'center',
           ellipsis: true,
           tooltip: true,
-          minwidth: 200
+          minWidth: 200
         },
         {
           title: '电影',
           key: 'movie',
           align: 'center',
-          minwidth: 200
+          minWidth: 200
         }
       ],
       // 表格数据
