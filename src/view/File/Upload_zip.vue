@@ -17,34 +17,34 @@
 </template>
 
 <script>
-import { Spin } from "iview";
+import { Spin } from 'view-design'
 export default {
-  name: "Upload_zip",
-  data() {
-    return {};
+  name: 'Upload_zip',
+  data () {
+    return {}
   },
   methods: {
-    handleUpload(file) {
-      Spin.show();
+    handleUpload (file) {
+      Spin.show()
     },
-    upload_success(res, file) {
+    upload_success (res, file) {
       setTimeout(() => {
-        if (res.code == "200") {
-          Spin.hide();
-          this.$Message.success("文件上传成功！");
+        if (res.code == '200') {
+          Spin.hide()
+          this.$Message.success('文件上传成功！')
         } else {
-          Spin.hide();
-          this.$Message.error("文件上传失败！");
+          Spin.hide()
+          this.$Message.error('文件上传失败！')
         }
-      }, 500);
+      }, 500)
     },
-    upload_error(error, file) {
-      Spin.hide();
-      this.$Message.error("文件上传失败！");
+    upload_error (error, file) {
+      Spin.hide()
+      this.$Message.error('文件上传失败！')
     }
   },
-  mounted() {}
-};
+  mounted () {}
+}
 </script>
 
 <style lang="less" scoped>
