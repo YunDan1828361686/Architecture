@@ -37,8 +37,8 @@
             />
             <label alt="请输入密码" placeholder="密码"></label>
           </div>
-          <div style="display:flex;">
-            <div style="margin-right:30px;">
+          <div style="display: flex">
+            <div style="margin-right: 30px">
               <input id="verVal" class="input_lab" required type="text" />
               <label alt="请输入验证码" placeholder="验证码"></label>
             </div>
@@ -47,9 +47,16 @@
               <img id="code_img" />
             </div>
           </div>
-          <div style="display:flex;justify-content: space-around;">
+          <div style="display: flex; justify-content: space-around">
             <!--  -->
-            <Button type="success" long ref="click1" @click="login_btn" :loading="login_spin">登录</Button>
+            <Button
+              type="success"
+              long
+              ref="click1"
+              @click="login_btn"
+              :loading="login_spin"
+              >登录</Button
+            >
           </div>
         </form>
       </div>
@@ -68,7 +75,7 @@ export default {
       // 生成验证码的函数
       verificationCode: "",
       // 验证码
-      verVal: ""
+      verVal: "",
     };
   },
   components: {},
@@ -139,7 +146,7 @@ export default {
           "w",
           "x",
           "y",
-          "z"
+          "z",
         ];
         var str = "";
         that.verVal = drawCode();
@@ -205,7 +212,7 @@ export default {
           return image;
         }
         // 点击图片刷新
-        document.getElementById("code_img").onclick = function() {
+        document.getElementById("code_img").onclick = function () {
           resetCode();
         };
         function resetCode() {
@@ -215,7 +222,7 @@ export default {
           );
           that.verVal = drawCode();
         }
-      }
+      },
     };
     this.verificationCode.init();
     // console.log("vue已经被挂载出来了");
@@ -224,10 +231,10 @@ export default {
     ...mapActions(["getUserInfo"]),
     login_btn() {
       this.login_spin = true;
-      Spin.show()
+      Spin.show();
       this.$Message.loading({
         content: "正在验证信息...",
-        duration: 0
+        duration: 0,
       });
       if (
         document.querySelector("#user_name").value == "" ||
@@ -235,10 +242,9 @@ export default {
       ) {
         // 账号密码未输入
         this.$Message.destroy();
-        // this.$Loading.error();
         this.$Message.warning("账号或密码未输入！");
         this.login_spin = false;
-        Spin.hide()
+        Spin.hide();
       }
       // else if (
       //   $("#verVal")
@@ -253,69 +259,28 @@ export default {
       //   this.login_spin = false;
       // }
       else {
-        let userName = $("#user_name")
-          .val()
-          .trim();
+        let userName = $("#user_name").val().trim();
         let password = $("#user_password").val();
         // 模拟接口延迟
-        setTimeout(() => {
-          const USER = {
-            super_admin: {
-              name: "super_admin",
-              user_id: "1",
-              access: ["super_admin", "admin"],
-              token: "super_admin",
-              avatar:
-                "https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png"
-            },
-            admin: {
-              name: "admin",
-              user_id: "2",
-              access: ["admin"],
-              token: "admin",
-              avatar:
-                "https://avatars0.githubusercontent.com/u/20942571?s=460&v=4"
-            }
-          };
-          // 本地保存Token   Vuex保存Token
-          this.$store.commit("setToken", USER[userName].token);
-          this.getUserInfo(this.$store.state.user.token)
-            .then(res => {
-              this.$Message.destroy();
-              this.$router.push({
-                name: this.$config.homeName
-              });
-              this.login_spin = false;
-            })
-            .catch(res => {
-              Spin.hide()
-              this.login_spin = false;
+        this.getUserInfo({ userName, password })
+          .then((res) => {
+            this.$Message.destroy();
+            this.$Message.success({
+              content: "登录成功！",
+              background: true,
+              duration: 3,
             });
-          // let pA = new Promise((reslove, reject) => {
-          //   this.$axios("url", "post")
-          //     .then(res => {
-          //       reslove(res);
-          //     })
-          //     .catch(err => {
-          //       reject(err);
-          //     });
-          // });
-          // let pB = new Promise((reslove, reject) => {
-          //   this.$axios("url", "post")
-          //     .then(res => {
-          //       reslove(res);
-          //     })
-          //     .catch(err => {
-          //       reject(err);
-          //     });
-          // });
-          // Promise.all([pA, pB]).then(result => {
-          //   let pAres = result[0].data.list;
-          //   let pBres = result[1].data.list;
-          // });
-        }, 500);
+            this.$router.push({
+              name: this.$config.homeName,
+            });
+            this.login_spin = false;
+          })
+          .catch((res) => {
+            Spin.hide();
+            this.login_spin = false;
+          });
       }
-    }
-  }
+    },
+  },
 };
 </script>

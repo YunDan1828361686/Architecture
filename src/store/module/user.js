@@ -53,37 +53,24 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo({ state, commit }, token) {
-      const USER = {
-        super_admin: {
-          name: 'super_admin',
-          user_id: '1',
-          access: ['super_admin', 'admin'],
-          token: 'super_admin',
-          avatar: 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png'
-        },
-        admin: {
-          name: 'admin',
-          user_id: '2',
-          access: ['admin'],
-          token: 'admin',
-          avatar: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4'
-        }
-      }
+    getUserInfo({ state, commit }, val) {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          try {
-            let data = USER[token]
-            commit('setAvatar', data.avatar)
-            commit('setUserName', data.name)
-            commit('setUserId', data.user_id)
-            commit('setAccess', data.access)
-            commit('setHasGetInfo', true)
-            resolve(data)
-          } catch (error) {
-            reject(error)
-          }
-        }, 500)
+        axios({
+          url: 'api/login',
+          method: 'post',
+          data: val
+        }).then(res => {
+          // 判断状态码后再加入缓存
+          commit('setAvatar', res.data.avatar)
+          commit('setUserId', res.data.user_id)
+          commit('setUserName', res.data.name)
+          commit('setAccess', res.data.access)
+          commit('setToken', res.data.token)
+          commit('setHasGetInfo', true)
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
       })
     }
   }

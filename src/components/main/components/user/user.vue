@@ -48,6 +48,7 @@ export default {
             name: "login"
           });
           this.$Message.success({
+            background: true,
             content: "退出账号成功！",
             duration: 3
           });

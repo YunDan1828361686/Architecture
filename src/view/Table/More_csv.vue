@@ -84,6 +84,7 @@ export default {
       if (this.export_csv_1.Columns.length == 0) {
         this.$Message.warning({
           content: "请先勾选自定义导出列！",
+          background: true,
           duration: 3
         });
         return;
@@ -120,6 +121,7 @@ export default {
       if (this.export_csv_1.Columns.length == 0) {
         this.$Message.warning({
           content: "请先勾选自定义导出列！",
+          background: true,
           duration: 3
         });
         return;

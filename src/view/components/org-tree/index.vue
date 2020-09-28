@@ -62,6 +62,7 @@ export default {
     handleMenuClick ({ data, key }) {
       this.$Message.success({
         duration: 5,
+        background: true,
         content: `点击了《${data.label}》节点的'${menuDic[key]}'菜单`
       })
     },

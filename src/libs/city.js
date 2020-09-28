@@ -19474,4 +19474,5 @@ let city = [
         ]
     }
 ]
+
 export default { city }

@@ -10,6 +10,7 @@ const { homeName } = config
 Vue.use(Router)
 // 左键点击tab报错
 // cnpm i vue-router@3.0 -S
+// 此方法也行但是首页还是会存在些许问题
 // const originalPush = Router.prototype.push
 // Router.prototype.push = function push (location) {
 //   return originalPush.call(this, location).catch(err => err)
