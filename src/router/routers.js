@@ -158,13 +158,21 @@ export default [
         component: () => import('@/view/skill/Api.vue')
       },
       {
-        path: 'Safety',
-        name: 'Safety',
+        path: 'filter',
+        name: 'filter',
         meta: {
-          title: 'Safety'
+          title: 'filter'
         },
-        component: () => import('@/view/skill/Safety.vue')
-      }
+        component: () => import('@/view/skill/filter.vue')
+      },
+      {
+        path: 'specification',
+        name: 'specification',
+        meta: {
+          title: 'specification'
+        },
+        component: () => import('@/view/skill/specification.vue')
+      },
     ]
   },
   {
