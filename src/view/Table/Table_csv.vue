@@ -157,9 +157,29 @@ export default {
           title: "地址",
           key: "address",
           align: "center",
-          ellipsis: true,
-          tooltip: true,
+          // ellipsis: true,
+          // tooltip: true,
           minWidth: 200,
+          render: (h, params) => {
+            return h("div", [
+              h(
+                "span",
+                {
+                  style: {
+                    display: "inline-block",
+                    width: "100%",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  },
+                  domProps: {
+                    title: params.row.address,
+                  },
+                },
+                params.row.address
+              ),
+            ]);
+          },
         },
         {
           title: "操作",

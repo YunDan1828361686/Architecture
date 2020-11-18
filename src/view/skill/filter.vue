@@ -51,6 +51,35 @@ export default {
       return item.name.indexOf("明") !== -1;
     });
     console.log(arr_1_filte);
+
+    // // 设备厂家
+    // // 设备型号
+    // // 额定功率（W）
+    // let vender_if = [];
+    // let equipType_if = [];
+    // let ratedPower_if = [];
+    // let if_length;
+    // for (let i = 0; i < this.selectionData.length; i++) {
+    //   const element = this.selectionData[i];
+    //   vender_if.push(element.vender);
+    //   equipType_if.push(element.equipType);
+    //   ratedPower_if.push(element.ratedPower);
+    // }
+    // vender_if = [...new Set(vender_if)];
+    // equipType_if = [...new Set(equipType_if)];
+    // ratedPower_if = [...new Set(ratedPower_if)];
+    // if_length = vender_if.length + equipType_if.length + ratedPower_if.length;
+    // if (if_length > 3) {
+    //   this.$Message.warning({
+    //     content: "所勾选的数据不满足同型号展示的条件，请重新勾选",
+    //     duration: 3,
+    //   });
+    // } else {
+    //   this.$Message.warning({
+    //     content: "设备厂家，设备型号，额定功率（W）完全相同",
+    //     duration: 3,
+    //   });
+    // }
   },
 };
 </script>
