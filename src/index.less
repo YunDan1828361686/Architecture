@@ -1,8 +1,32 @@
-@import '~view-design/src/styles/index.less';
+@import "~view-design/src/styles/index.less";
 
 @menu-dark-title: #001529;
 @menu-dark-active-bg: #000c17;
 @layout-sider-background: #001529;
-.ivu-message{
-    z-index: 9999 !important;
+.ivu-message {
+  z-index: 9999 !important;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+  -webkit-border-radius: 0;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+  border: 2px solid #fff;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px;
 }

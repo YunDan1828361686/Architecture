@@ -60,15 +60,12 @@
           </div>
           <Content class="content-wrapper">
             <!-- <router-view :key="$route.fullPath" /> -->
-            <div
-              style="
-                position: relative;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-              "
-            >
-              <transition name="fade-transform" mode="out-in">
+            <div id="router_box">
+              <transition
+                name="fade-transform"
+                mode="out-in"
+                v-on:enter="enter"
+              >
                 <keep-alive :include="cacheList">
                   <router-view />
                 </keep-alive>
@@ -104,6 +101,8 @@ import { getNewTagList, routeEqual } from "@/libs/util";
 import routers from "@/router/routers";
 import minLogo from "@/assets/images/logo-min.jpg";
 import maxLogo from "@/assets/images/logo.jpg";
+import { on, off } from "@/libs/tools";
+import { _debounce } from "@/libs/Perform_optimization.js";
 import "./main.less";
 export default {
   name: "Main",
@@ -213,6 +212,30 @@ export default {
         this.spinShow = false;
       }, 800);
     },
+    style_padding_Y() {
+      if (
+        document.getElementById("router_box").scrollHeight >
+        document.getElementById("router_box").clientHeight
+      ) {
+        document.getElementById("router_box").style.padding =
+          " 20px 0px 20px 10px";
+      } else {
+        document.getElementById("router_box").style.padding =
+          " 20px 10px 20px 10px";
+      }
+    },
+    enter: function (el, done) {
+      if (
+        document.getElementById("router_box").childNodes[0].offsetHeight >
+        document.getElementById("router_box").clientHeight
+      ) {
+        document.getElementById("router_box").style.padding =
+          " 20px 0px 20px 10px";
+      } else {
+        document.getElementById("router_box").style.padding =
+          " 20px 10px 20px 10px";
+      }
+    },
   },
   watch: {
     $route(newRoute) {
@@ -236,6 +259,19 @@ export default {
     },
   },
   mounted() {
+    this.$nextTick(() => {
+      if (
+        document.getElementById("router_box").childNodes[0].offsetHeight >
+        document.getElementById("router_box").clientHeight
+      ) {
+        document.getElementById("router_box").style.padding =
+          " 20px 0px 20px 10px";
+      } else {
+        document.getElementById("router_box").style.padding =
+          " 20px 10px 20px 10px";
+      }
+      on(window, "resize", this.style_padding_Y);
+    });
     /**
      * @description 初始化设置面包屑导航和标签导航
      */
@@ -256,6 +292,16 @@ export default {
 };
 </script>
 <style  lang="less" scoped>
+#router_box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  padding: 20px 10px 20px 10px;
+}
+#Spin_router {
+  // left: 10px;
+}
 /* fade-transform */
 .fade-transform-leave-active,
 .fade-transform-enter-active {
@@ -263,11 +309,11 @@ export default {
 }
 .fade-transform-enter {
   opacity: 0;
-  transform: translateX(-30px);
+  transform: translate(100px);
 }
 .fade-transform-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateX(-100px);
 }
 /* 可以设置不同的进入和离开动画 */
 /* 设置持续时间和动画函数 */
@@ -275,11 +321,11 @@ export default {
   transition: all 0.2s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.1s cubic-bezier(0.1, 0.5, 1, 1);
+  transition: all 0.1s;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateX(-100px);
+  transform: translateX(100px);
   opacity: 0;
 }
 </style>

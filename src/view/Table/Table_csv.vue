@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 1000px">
     <Row style="margin-bottom: 20px">
       <Col span="24">
         <div style="float: left">
@@ -59,7 +59,7 @@
       border
       stripe
       ref="table1"
-      height="522"
+      height="562"
       highlight-row
       :data="tableData_1"
       :loading="loading_1"
