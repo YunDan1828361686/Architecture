@@ -111,7 +111,7 @@ export default {
   data() {
     return {
       // 表格的loading
-      loading_1: false,
+      loading_1: true,
       // 总页数
       table_total_1: 1,
       // 当前页码
@@ -347,14 +347,14 @@ export default {
     }, 200),
     // 切换页码
     table_Pagechange_1(index) {
-      this.loading_1 = true;
       this.table_form_1.page_current = index;
+      this.loading_1 = true;
       this.TableData_1();
     },
     // 切换每页显示数量
     table_PageSizechange_1(index) {
-      this.loading_1 = true;
       this.table_form_1.page_size = index;
+      this.loading_1 = true;
       this.TableData_1();
     },
     // 排序
@@ -438,6 +438,7 @@ export default {
         this.selectedData_1 = new Set();
         this.selectedData_2 = new Set();
         this.selectedSum_1 = this.selectedData_1.size;
+        this.loading_1 = true;
         this.TableData_1();
       }
       // 导出全部数据
@@ -489,6 +490,7 @@ export default {
       this.selectedData_2 = new Set();
       this.selectedSum_1 = this.selectedData_1.size;
       this.table_form_1.age = index;
+      this.loading_1 = true;
       this.TableData_1();
     },
     // 检索选择框
@@ -498,6 +500,7 @@ export default {
       this.selectedData_1 = new Set();
       this.selectedData_2 = new Set();
       this.selectedSum_1 = this.selectedData_1.size;
+      this.loading_1 = true;
       this.TableData_1();
     },
     // 检索选择框
@@ -507,6 +510,7 @@ export default {
       this.selectedData_1 = new Set();
       this.selectedData_2 = new Set();
       this.selectedSum_1 = this.selectedData_1.size;
+      this.loading_1 = true;
       this.TableData_1();
     },
   },
@@ -522,6 +526,7 @@ export default {
   },
   mounted() {
     // 获取表格数据
+    this.loading_1 = true;
     this.TableData_1();
   },
 };

@@ -126,12 +126,36 @@ export default [
         component: () => import('@/view/skill/Promise.vue')
       },
       {
+        path: 'Watch',
+        name: 'Watch',
+        meta: {
+          title: 'Watch'
+        },
+        component: () => import('@/view/skill/Watch.vue')
+      },
+      {
+        path: 'Vuex',
+        name: 'Vuex',
+        meta: {
+          title: 'Vuex'
+        },
+        component: () => import('@/view/skill/Vuex.vue')
+      },
+      {
         path: 'Router_method',
         name: 'Router_method',
         meta: {
           title: 'Router_method'
         },
         component: () => import('@/view/skill/Router_method.vue')
+      },
+      {
+        path: 'filter',
+        name: 'filter',
+        meta: {
+          title: 'filter'
+        },
+        component: () => import('@/view/skill/filter.vue')
       },
       {
         path: 'Perform_optimization',
@@ -156,14 +180,6 @@ export default [
           title: 'Api'
         },
         component: () => import('@/view/skill/Api.vue')
-      },
-      {
-        path: 'filter',
-        name: 'filter',
-        meta: {
-          title: 'filter'
-        },
-        component: () => import('@/view/skill/filter.vue')
       },
       {
         path: 'specification',

@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.row, 2222)
+    // console.log(this.row, 2222)
   },
   methods: {
     update (index) {

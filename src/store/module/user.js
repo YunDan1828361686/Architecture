@@ -7,7 +7,8 @@ export default {
     avatarImgPath: '',
     token: getToken(),
     access: '',
-    hasGetInfo: false
+    hasGetInfo: false,
+    Vuex_test1: 'Vuex数据'
   },
   mutations: {
     setAvatar(state, avatarPath) {
@@ -28,9 +29,15 @@ export default {
     },
     setHasGetInfo(state, status) {
       state.hasGetInfo = status
-    }
+    },
+    updated_Vuex_test1(state, name) {
+      state.Vuex_test1 = name
+    },
   },
   getters: {
+    Vuex_test2(state, getters) {
+      return "getters+" + state.Vuex_test1
+    }
   },
   actions: {
     // 退出登录

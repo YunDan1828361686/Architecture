@@ -5,29 +5,38 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
-  name: 'Router_method',
-  beforeRouteEnter (to, from, next) {
-    console.log('进入当前组件之前，没有this')
-    next()
-    // next(vm => {
-    //   if (!vm.$store.state.page.Double_amplification) {
-    //     vm.$Message.error({
-    //       content: "请重新选择要对比的RRU",
-    //       duration: 3
-    //     });
-    //     vm.$router.push({
-    //       name: "Tab_amplification"
-    //     });
-    //     return;
-    //   }
-    // });
+  name: "Router_method",
+  methods: {
+    ...mapMutations(["closeTag"]),
   },
-  beforeRouteLeave (to, from, next) {
-    console.log('离开当前组件之前，有this')
-    next()
-  }
-}
+  beforeRouteEnter(to, from, next) {
+    console.log("进入当前组件之前，没有this");
+    // next();
+    next((vm) => {
+      if (!vm.$store.state.page.Double_amplification) {
+        vm.$Message.error({
+          content: "不达成前置条件",
+          duration: 3,
+        });
+        vm.$router.push({
+          name: "Perform_optimization",
+        });
+        vm.closeTag({
+          name: "Router_method",
+        });
+        return;
+        // 因为不达成前置条件所以return，此时下面代码不执行
+      }
+      console.log("达成条件");
+    });
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log("离开当前组件之前，有this");
+    next();
+  },
+};
 </script>
 
 <style lang="less" scoped>

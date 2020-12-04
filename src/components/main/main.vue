@@ -8,7 +8,7 @@
       :collapsed-width="64"
       v-model="collapsed"
       class="left-sider"
-      :style="{overflow: 'hidden'}"
+      :style="{ overflow: 'hidden' }"
     >
       <side-menu
         accordion
@@ -21,20 +21,31 @@
         <!-- 需要放在菜单上面的内容，如Logo，写在side-menu标签内部，如下 -->
         <div class="logo-con">
           <img v-show="!collapsed" :src="maxLogo" key="max-logo" />
-          <img v-show="collapsed" :src="minLogo" key="min-logo" style="height: 60%;" />
+          <img
+            v-show="collapsed"
+            :src="minLogo"
+            key="min-logo"
+            style="height: 60%"
+          />
         </div>
       </side-menu>
     </Sider>
     <Layout>
       <Header class="header-con">
-        <header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
+        <header-bar
+          :collapsed="collapsed"
+          @on-coll-change="handleCollapsedChange"
+        >
           <user
             :message-unread-count="unreadCount"
             :user-avatar="userAvatar"
             :user-name="userName"
           />
-          <fullscreen v-model="isFullscreen" style="margin-right: 10px;" />
-          <Refresh style="margin-right: 10px;" @refresh_loading="refresh_loading" />
+          <fullscreen v-model="isFullscreen" style="margin-right: 10px" />
+          <Refresh
+            style="margin-right: 10px"
+            @refresh_loading="refresh_loading"
+          />
         </header-bar>
       </Header>
       <Content class="main-content-con">
@@ -48,14 +59,32 @@
             />
           </div>
           <Content class="content-wrapper">
-            <keep-alive :include="cacheList">
-              <!-- <router-view :key="$route.fullPath" /> -->
-              <router-view/>
-            </keep-alive>
-            <Spin size="large" fix v-if="spinShow">
-              <img :src="maxLogo" alt />
-            </Spin>
-            <ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>
+            <!-- <router-view :key="$route.fullPath" /> -->
+            <div
+              style="
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+              "
+            >
+              <transition name="fade-transform" mode="out-in">
+                <keep-alive :include="cacheList">
+                  <router-view />
+                </keep-alive>
+              </transition>
+              <transition name="slide-fade">
+                <Spin id="Spin_router" size="large" fix v-if="spinShow">
+                  <img :src="maxLogo" alt />
+                </Spin>
+              </transition>
+            </div>
+            <ABackTop
+              :height="100"
+              :bottom="80"
+              :right="50"
+              container=".content-wrapper"
+            ></ABackTop>
           </Content>
         </Layout>
       </Content>
@@ -85,7 +114,7 @@ export default {
     Refresh,
     Fullscreen,
     User,
-    ABackTop
+    ABackTop,
   },
   data() {
     return {
@@ -93,7 +122,7 @@ export default {
       collapsed: false,
       minLogo,
       maxLogo,
-      isFullscreen: false
+      isFullscreen: false,
     };
   },
   computed: {
@@ -114,9 +143,9 @@ export default {
         "ParentView",
         ...(this.tagNavList.length
           ? this.tagNavList
-              .filter(item => !(item.meta && item.meta.notCache))
-              .map(item => item.name)
-          : [])
+              .filter((item) => !(item.meta && item.meta.notCache))
+              .map((item) => item.name)
+          : []),
       ];
       return list;
     },
@@ -131,7 +160,7 @@ export default {
     },
     spinShow_() {
       return this.$store.state.app.spinShow_;
-    }
+    },
   },
   methods: {
     ...mapMutations([
@@ -140,7 +169,7 @@ export default {
       "addTag",
       "setHomeRoute",
       "closeTag",
-      "setCollapsed_"
+      "setCollapsed_",
     ]),
     turnToPage(route) {
       let { name, params, query } = {};
@@ -157,7 +186,7 @@ export default {
       this.$router.push({
         name,
         params,
-        query
+        query,
       });
     },
     handleCollapsedChange(state) {
@@ -183,14 +212,14 @@ export default {
       setTimeout(() => {
         this.spinShow = false;
       }, 800);
-    }
+    },
   },
   watch: {
     $route(newRoute) {
       const { name, query, params, meta } = newRoute;
       this.addTag({
         route: { name, query, params, meta },
-        type: "push"
+        type: "push",
       });
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
@@ -204,7 +233,7 @@ export default {
     spinShow_(newVal) {
       // 监听vuex内  更新遮罩状态
       this.spinShow = newVal;
-    }
+    },
   },
   mounted() {
     /**
@@ -214,15 +243,43 @@ export default {
     this.setHomeRoute(routers);
     const { name, params, query, meta } = this.$route;
     this.addTag({
-      route: { name, params, query, meta }
+      route: { name, params, query, meta },
     });
     this.setBreadCrumb(this.$route);
     // 如果当前打开页面不在标签栏中，跳到homeName页
-    if (!this.tagNavList.find(item => item.name === this.$route.name)) {
+    if (!this.tagNavList.find((item) => item.name === this.$route.name)) {
       this.$router.push({
-        name: this.$config.homeName
+        name: this.$config.homeName,
       });
     }
-  }
+  },
 };
 </script>
+<style  lang="less" scoped>
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.2s;
+}
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all 0.2s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(0.1, 0.5, 1, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+</style>

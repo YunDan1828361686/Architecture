@@ -102,6 +102,9 @@ export default {
             curDay = '0' + curDay
           }
           var curWeekDay = curDate.getDay() // 获取当前星期X(0-6,0代表星期天)
+          if (curWeekDay == 0) {
+            curWeekDay = '7'
+          }
           var curHour = curDate.getHours() // 获取当前小时数(0-23)
           if (curHour < 10) {
             curHour = '0' + curHour
