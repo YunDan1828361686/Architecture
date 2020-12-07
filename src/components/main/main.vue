@@ -224,7 +224,7 @@ export default {
           " 20px 10px 20px 10px";
       }
     },
-    enter: function (el, done) {
+    enter(el, done) {
       if (
         document.getElementById("router_box").childNodes[0].offsetHeight >
         document.getElementById("router_box").clientHeight
