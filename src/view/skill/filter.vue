@@ -9,7 +9,7 @@
 // 遮罩
 import { Spin } from "view-design";
 export default {
-  name: "Equipment_power_measurement_5",
+  name: "filter",
   data() {
     return {
       arr_1: [
