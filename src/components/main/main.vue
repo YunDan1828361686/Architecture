@@ -122,6 +122,7 @@ export default {
       minLogo,
       maxLogo,
       isFullscreen: false,
+      now_padding: "",
     };
   },
   computed: {
@@ -217,11 +218,17 @@ export default {
         document.getElementById("router_box").scrollHeight >
         document.getElementById("router_box").clientHeight
       ) {
+        // 有滚动条
+        if (this.now_padding == "20px 0px 20px 10px") return;
         document.getElementById("router_box").style.padding =
           " 20px 0px 20px 10px";
+        this.now_padding = "20px 0px 20px 10px";
       } else {
+        // 没滚动条
+        if (this.now_padding != "20px 0px 20px 10px") return;
         document.getElementById("router_box").style.padding =
           " 20px 10px 20px 10px";
+        this.now_padding = "20px 10px 20px 10px";
       }
     },
     enter(el, done) {
