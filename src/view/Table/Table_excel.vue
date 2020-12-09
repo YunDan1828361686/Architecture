@@ -142,14 +142,73 @@ export default {
           key: "age",
           align: "center",
           minWidth: 200,
+          ellipsis: true,
+          tooltip: true,
         },
         {
           title: "地址",
           key: "address",
           align: "center",
-          ellipsis: true,
-          tooltip: true,
+          // ellipsis: true,
+          // tooltip: true,
           minWidth: 200,
+          render: (h, params) => {
+            // //使用H5自带的title属性
+            // return h("div", [
+            //   h(
+            //     "span",
+            //     {
+            //       style: {
+            //         display: "inline-block",
+            //         width: "100%",
+            //         overflow: "hidden",
+            //         textOverflow: "ellipsis",
+            //         whiteSpace: "nowrap",
+            //       },
+            //       domProps: {
+            //         title: params.row.address,
+            //       },
+            //     },
+            //     params.row.address
+            //   ),
+            // ]);
+            return h("div", [
+              h(
+                "Tooltip",
+                {
+                  props: {
+                    // 设置属性--但是placement不定义，则为自动
+                    // placement: "bottom",
+                  },
+                },
+                [
+                  h(
+                    "span",
+                    {
+                      style: {
+                        display: "inline-block",
+                        width: params.column._width * 0.9 + "px",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      },
+                    },
+                    params.row.address
+                  ), // 表格显示文字
+                  h(
+                    "div",
+                    {
+                      slot: "content",
+                      style: {
+                        whiteSpace: "normal",
+                      },
+                    },
+                    params.row.address // 气泡内的文字
+                  ),
+                ]
+              ),
+            ]);
+          },
         },
         {
           title: "操作",

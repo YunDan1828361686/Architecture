@@ -59,7 +59,6 @@
       border
       stripe
       ref="table1"
-      height="562"
       highlight-row
       :data="tableData_1"
       :loading="loading_1"
@@ -152,6 +151,8 @@ export default {
           key: "age",
           align: "center",
           minWidth: 200,
+          ellipsis: true,
+          tooltip: true,
         },
         {
           title: "地址",
@@ -161,22 +162,59 @@ export default {
           // tooltip: true,
           minWidth: 200,
           render: (h, params) => {
+            // //使用H5自带的title属性
+            // return h("div", [
+            //   h(
+            //     "span",
+            //     {
+            //       style: {
+            //         display: "inline-block",
+            //         width: "100%",
+            //         overflow: "hidden",
+            //         textOverflow: "ellipsis",
+            //         whiteSpace: "nowrap",
+            //       },
+            //       domProps: {
+            //         title: params.row.address,
+            //       },
+            //     },
+            //     params.row.address
+            //   ),
+            // ]);
             return h("div", [
               h(
-                "span",
+                "Tooltip",
                 {
-                  style: {
-                    display: "inline-block",
-                    width: "100%",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  },
-                  domProps: {
-                    title: params.row.address,
+                  props: {
+                    // 设置属性--但是placement不定义，则为自动
+                    // placement: "bottom",
                   },
                 },
-                params.row.address
+                [
+                  h(
+                    "span",
+                    {
+                      style: {
+                        display: "inline-block",
+                        width: params.column._width * 0.9 + "px",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      },
+                    },
+                    params.row.address
+                  ), // 表格显示文字
+                  h(
+                    "div",
+                    {
+                      slot: "content",
+                      style: {
+                        whiteSpace: "normal",
+                      },
+                    },
+                    params.row.address // 气泡内的文字
+                  ),
+                ]
               ),
             ]);
           },
