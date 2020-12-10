@@ -21,9 +21,9 @@
           <Input v-model="export_excel_1.name"></Input>
         </FormItem>
         <FormItem label="自定义导出列">
-          <Checkbox-group v-model="export_excel_1.Columns">
+          <Checkbox-group v-model="export_excel_1.Columns_if">
             <Checkbox
-              v-for="(item,index) in this.export_excel_1.Columns_if"
+              v-for="(item,index) in this.export_excel_1.Columns"
               :key="index"
               :label="index"
             >{{item.title}}</Checkbox>
@@ -44,9 +44,9 @@
           <Input v-model="export_excel_1.name"></Input>
         </FormItem>
         <FormItem label="自定义导出列">
-          <Checkbox-group v-model="export_excel_1.Columns">
+          <Checkbox-group v-model="export_excel_1.Columns_if">
             <Checkbox
-              v-for="(item,index) in this.export_excel_1.Columns_if"
+              v-for="(item,index) in this.export_excel_1.Columns"
               :key="index"
               :label="index"
             >{{item.title}}</Checkbox>
@@ -83,7 +83,7 @@ export default {
       // 表头
       let title = [];
       let key = [];
-      if (this.export_excel_1.Columns.length == 0) {
+      if (this.export_excel_1.Columns_if.length == 0) {
         this.$Message.warning({
           content: "请先勾选自定义导出列！",
           background: true,
@@ -92,7 +92,7 @@ export default {
         return;
       }
       // 获取选取的表头按原本的顺序排
-      this.export_excel_1.Columns.sort(function(a, b) {
+      this.export_excel_1.Columns_if.sort(function(a, b) {
         return a - b;
       });
       // 根据表数据里的num_id排序
@@ -100,10 +100,10 @@ export default {
         return a.num_id - b.num_id;
       });
       // title,key为排序后取出来对应索引的表头
-      for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
-        const element = this.export_excel_1.Columns[i];
-        title.push(this.export_excel_1.Columns_if[element].title);
-        key.push(this.export_excel_1.Columns_if[element].key);
+      for (let i = 0; i < this.export_excel_1.Columns_if.length; i++) {
+        const element = this.export_excel_1.Columns_if[i];
+        title.push(this.export_excel_1.Columns[element].title);
+        key.push(this.export_excel_1.Columns[element].key);
       }
       // 导出excel文件
       excel.export_array_to_excel({
@@ -124,7 +124,7 @@ export default {
       // 表头
       let title = [];
       let key = [];
-      if (this.export_excel_1.Columns.length == 0) {
+      if (this.export_excel_1.Columns_if.length == 0) {
         this.$Message.warning({
           content: "请先勾选自定义导出列！",
           background: true,
@@ -133,7 +133,7 @@ export default {
         return;
       }
       // 获取选取的表头按原本的顺序排
-      this.export_excel_1.Columns.sort(function(a, b) {
+      this.export_excel_1.Columns_if.sort(function(a, b) {
         return a - b;
       });
       // 根据表数据里的num_id排序
@@ -141,10 +141,10 @@ export default {
         return a.num_id - b.num_id;
       });
       // title,key为排序后取出来对应索引的表头
-      for (let i = 0; i < this.export_excel_1.Columns.length; i++) {
-        const element = this.export_excel_1.Columns[i];
-        title.push(this.export_excel_1.Columns_if[element].title);
-        key.push(this.export_excel_1.Columns_if[element].key);
+      for (let i = 0; i < this.export_excel_1.Columns_if.length; i++) {
+        const element = this.export_excel_1.Columns_if[i];
+        title.push(this.export_excel_1.Columns[element].title);
+        key.push(this.export_excel_1.Columns[element].key);
       }
       // 导出excel文件
       excel.export_array_to_excel({

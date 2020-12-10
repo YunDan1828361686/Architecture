@@ -286,7 +286,7 @@ export default {
       export_csv_1: {
         name: "用户数据",
         // 默认可下载的表头
-        Columns_if: [
+        Columns: [
           {
             title: "序号",
             key: "num_id",
@@ -304,7 +304,7 @@ export default {
             key: "address",
           },
         ],
-        Columns: [],
+        Columns_if: [],
         Data: [],
       },
     };
