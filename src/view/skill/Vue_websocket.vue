@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Vue_websocket</h1>
+    <h1>Vue_websocket---没写呢</h1>
   </div>
 </template>
 

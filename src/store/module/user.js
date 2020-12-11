@@ -44,7 +44,8 @@ export default {
     handleLogOut({ state, commit }) {
       return new Promise((resolve, reject) => {
         axios({
-          url: 'api/logout',
+          // url: '/logout',
+          url: '/api/logout',
           method: 'post'
         }).then(() => {
           commit('setToken', '')
@@ -63,7 +64,8 @@ export default {
     getUserInfo({ state, commit }, val) {
       return new Promise((resolve, reject) => {
         axios({
-          url: 'api/login',
+          // url: '/login',
+          url: '/api/login',
           method: 'post',
           data: val
         }).then(res => {

@@ -4,19 +4,30 @@
       <template v-if="item.status === 'finished'">
         <img :src="item.url" />
         <div class="demo-upload-list-cover">
-          <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-          <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+          <Icon
+            type="ios-eye-outline"
+            @click.native="handleView(item.name)"
+          ></Icon>
+          <Icon
+            type="ios-trash-outline"
+            @click.native="handleRemove(item)"
+          ></Icon>
         </div>
       </template>
       <template v-else>
-        <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+        <Progress
+          v-if="item.showProgress"
+          :percent="item.percentage"
+          hide-info
+        ></Progress>
       </template>
     </div>
+    <!-- action="/api/node1/Upload" -->
     <Upload
       ref="upload"
       :show-upload-list="false"
       :on-success="handleSuccess"
-      :format="['jpg','jpeg','png']"
+      :format="['jpg', 'jpeg', 'png']"
       :max-size="2048"
       :on-format-error="handleFormatError"
       :on-exceeded-size="handleMaxSize"
@@ -24,9 +35,9 @@
       multiple
       type="drag"
       action="/api/node1/Upload"
-      style="display: inline-block;width:58px;"
+      style="display: inline-block; width: 58px"
     >
-      <div style="width: 58px;height:58px;line-height: 58px;">
+      <div style="width: 58px; height: 58px; line-height: 58px">
         <Icon type="ios-camera" size="20"></Icon>
       </div>
     </Upload>
@@ -44,7 +55,7 @@ export default {
       imgName: "",
       visible: false,
       imgurl: String,
-      uploadList: []
+      uploadList: [],
     };
   },
   methods: {
@@ -69,28 +80,28 @@ export default {
     handleFormatError(file) {
       this.$Notice.warning({
         title: "文件格式不正确",
-        desc: "文件格式 " + file.name + " 错误，请选择jpg或png。"
+        desc: "文件格式 " + file.name + " 错误，请选择jpg或png。",
       });
     },
     handleMaxSize(file) {
       this.$Notice.warning({
         title: "超出文件大小限制",
-        desc: "文件  " + file.name + " 太大，不超过2M。"
+        desc: "文件  " + file.name + " 太大，不超过2M。",
       });
     },
     handleBeforeUpload() {
       const check = this.uploadList.length < 5;
       if (!check) {
         this.$Notice.warning({
-          title: "最多可以上传五张照片。"
+          title: "最多可以上传五张照片。",
         });
       }
       return check;
-    }
+    },
   },
   mounted() {
     this.uploadList = this.$refs.upload.fileList;
-  }
+  },
 };
 </script>
 

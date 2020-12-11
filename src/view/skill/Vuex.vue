@@ -9,6 +9,7 @@
       <!-- 直接引用 -->
       <Col span="24">{{ $store.state.user.Vuex_test1 }}</Col>
       <Col span="24">{{ $store.getters.Vuex_test2 }}</Col>
+      <p>vuex已持久化，你F5刷新，已改变的vuex数据还是已改变后的状态</p>
     </Row>
   </div>
 </template>

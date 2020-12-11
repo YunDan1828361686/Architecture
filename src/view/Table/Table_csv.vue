@@ -488,19 +488,19 @@ export default {
             name: "John Brown",
             age: 18,
             address:
-              "New York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1 Lake ParkNew York No. 1",
+              "写死的测试用的",
           },
           {
             num_id: "8",
             name: "Jim Green",
             age: 24,
-            address: "London No. 1 Lake Park",
+            address: "写死的测试用的",
           },
           {
             num_id: "10",
             name: "Joe Black",
             age: 30,
-            address: "Sydney No. 1 Lake Park",
+            address: "写死的测试用的",
           },
         ];
         // 然后弹出模态框

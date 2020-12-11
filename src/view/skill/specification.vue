@@ -1,7 +1,7 @@
 <template>
   <div>
     <Row style="margin-bottom: 20px">
-      <Col span="24"> </Col>
+      <Col span="24">新建页面直接来这粘书写规范，然后再开发</Col>
     </Row>
   </div>
 </template>
