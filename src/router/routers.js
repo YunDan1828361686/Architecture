@@ -150,12 +150,12 @@ export default [
         component: () => import('@/view/skill/Router_method.vue')
       },
       {
-        path: 'filter',
-        name: 'filter',
+        path: 'filter_obj',
+        name: 'filter_obj',
         meta: {
-          title: 'filter'
+          title: 'filter_obj'
         },
-        component: () => import('@/view/skill/filter.vue')
+        component: () => import('@/view/skill/filter_obj.vue')
       },
       {
         path: 'Perform_optimization',

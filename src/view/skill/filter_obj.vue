@@ -9,7 +9,7 @@
 // 遮罩
 import { Spin } from "view-design";
 export default {
-  name: "filter",
+  name: "filter_obj",
   data() {
     return {
       arr_1: [
@@ -50,8 +50,14 @@ export default {
       // return item.age == "18";
       return item.name.indexOf("明") !== -1;
     });
-    console.log(arr_1_filte);
-
+    // 等于return item.name.indexOf("明") == -1;
+    for (let i = 0; i < this.arr_1.length; i++) {
+      let element = this.arr_1[i];
+      if (element == "apple") {
+        this.arr_1.splice(i, 1);
+        i--;
+      }
+    }
     // // 设备厂家
     // // 设备型号
     // // 额定功率（W）
