@@ -48,11 +48,25 @@ export default {
           url: '/api/logout',
           method: 'post'
         }).then(() => {
+          commit("setspinShow_", true)
+          localStorage.removeItem("tagNaveList");
           commit('setToken', '')
           commit('setAccess', [])
+          commit('setAvatar', '')
+          commit('setUserId', '')
+          commit('setUserName', '')
+          commit('setHasGetInfo', true)
           resolve()
         }).catch(err => {
-          reject(err)
+          commit("setspinShow_", true)
+          localStorage.removeItem("tagNaveList");
+          commit('setToken', '')
+          commit('setAccess', [])
+          commit('setAvatar', '')
+          commit('setUserId', '')
+          commit('setUserName', '')
+          commit('setHasGetInfo', true)
+          reject()
         })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
         // commit('setToken', '')
@@ -76,6 +90,20 @@ export default {
           commit('setAccess', res.data.access)
           commit('setToken', res.data.token)
           commit('setHasGetInfo', true)
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    // 服务器是否在线
+    getifInline({ state, commit }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          // url: '/ifInline',
+          url: '/api/ifInline',
+          method: 'post',
+        }).then(res => {
           resolve(res)
         }).catch(err => {
           reject(err)

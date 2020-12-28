@@ -70,12 +70,12 @@
                   <router-view />
                 </keep-alive>
               </transition>
-              <transition name="slide-fade">
-                <Spin id="Spin_router" size="large" fix v-if="spinShow">
-                  <img :src="maxLogo" alt />
-                </Spin>
-              </transition>
             </div>
+            <transition name="slide-fade">
+              <Spin id="Spin_router" size="large" fix v-if="spinShow">
+                <img :src="maxLogo" alt />
+              </Spin>
+            </transition>
             <ABackTop
               :height="100"
               :bottom="80"
@@ -214,6 +214,7 @@ export default {
       }, 800);
     },
     style_padding_Y() {
+      if (this.$route.name == "login") return;
       if (
         document.getElementById("router_box").scrollHeight >
         document.getElementById("router_box").clientHeight
@@ -262,6 +263,7 @@ export default {
     },
     spinShow_(newVal) {
       // 监听vuex内  更新遮罩状态
+      // this.spinShow = true;
       this.spinShow = newVal;
     },
   },
@@ -306,21 +308,17 @@ export default {
   overflow-x: hidden;
   padding: 20px 10px 20px 10px;
 }
-#Spin_router {
-  // left: 10px;
-}
 /* fade-transform */
-.fade-transform-leave-active,
 .fade-transform-enter-active {
-  transition: all 0.2s;
+  transition: all 0.6s ease;
 }
-.fade-transform-enter {
-  opacity: 0;
-  transform: translate(100px);
+.fade-transform-leave-active {
+  transition: all 0.2s cubic-bezier(0.1, 0.5, 1, 1);
 }
+.fade-transform-enter,
 .fade-transform-leave-to {
   opacity: 0;
-  transform: translateX(-100px);
+  transform: translateX(100px);
 }
 /* 可以设置不同的进入和离开动画 */
 /* 设置持续时间和动画函数 */
@@ -328,11 +326,11 @@ export default {
   transition: all 0.2s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.1s;
+  // opacity: 0.5;
+  transition: all 0.2s ease;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateX(100px);
   opacity: 0;
 }
 </style>

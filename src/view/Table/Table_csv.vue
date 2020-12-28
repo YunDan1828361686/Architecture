@@ -59,6 +59,7 @@
       border
       stripe
       ref="table1"
+      height="522"
       highlight-row
       :data="tableData_1"
       :loading="loading_1"
@@ -487,8 +488,7 @@ export default {
             num_id: "6",
             name: "John Brown",
             age: 18,
-            address:
-              "写死的测试用的",
+            address: "写死的测试用的",
           },
           {
             num_id: "8",

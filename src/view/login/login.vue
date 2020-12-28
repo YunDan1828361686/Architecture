@@ -14,7 +14,7 @@
         <div class="login_name">
           <p>会员登录</p>
         </div>
-        <form id="form_login">
+        <form id="form_login" autocomplete="off" @submit.prevent="onSubmit">
           <div>
             <input
               id="user_name"
@@ -48,7 +48,18 @@
             </div>
           </div>
           <div style="display: flex; justify-content: space-around">
-            <!--  -->
+            <input
+              type="submit"
+              style="
+                display: block;
+                overflow: hidden;
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                bottom: 0;
+                opacity: 0;
+              "
+            />
             <Button
               type="success"
               long
@@ -229,6 +240,9 @@ export default {
   },
   methods: {
     ...mapActions(["getUserInfo"]),
+    onSubmit() {
+      this.login_btn();
+    },
     login_btn() {
       this.login_spin = true;
       Spin.show();
@@ -276,8 +290,14 @@ export default {
             this.login_spin = false;
           })
           .catch((res) => {
+            this.$Message.destroy();
             Spin.hide();
             this.login_spin = false;
+            this.$Message["error"]({
+              background: true,
+              content: "登录超时，请联系管理员！",
+              duration: 3,
+            });
           });
       }
     },

@@ -27,40 +27,29 @@ export default {
   props: {
     userAvatar: {
       type: String,
-      default: ""
+      default: "",
     },
     userName: {
       type: String,
-      default: ""
+      default: "",
     },
     messageUnreadCount: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   methods: {
     ...mapActions(["handleLogOut"]),
     logout() {
-      Spin.show();
-      this.handleLogOut()
-        .then(() => {
-          this.$router.push({
-            name: "login"
-          });
-          this.$Message.success({
-            background: true,
-            content: "退出账号成功！",
-            duration: 3
-          });
-          Spin.hide();
-        })
-        .catch(() => {
-          Spin.hide();
-        });
+      this.handleLogOut().then(() => {
+        setTimeout(() => {
+          location.reload();
+        }, 500);
+      });
     },
     message() {
       this.$router.push({
-        name: "message_page"
+        name: "message_page",
       });
     },
     handleClick(name) {
@@ -72,7 +61,7 @@ export default {
           this.message();
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
