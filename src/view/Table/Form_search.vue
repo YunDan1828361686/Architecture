@@ -188,6 +188,7 @@ export default {
             // blur失去焦点时触发  change数据发生改变时触发
             trigger: "blur",
             validator: (rule, value, callback) => {
+              value = value.replace(/(^\s*)|(\s*$)/g, ""); //去除空格;
               if (!value) {
                 return callback(new Error("请输入年龄！"));
               }

@@ -1,17 +1,15 @@
 <template>
   <div>
+    <!-- 优化Card加边框 -->
     <div class="border-container">
-      <!-- 优化Card加边框 -->
-      <div class="border-container">
-        <span class="top-left border-span"></span>
-        <span class="top-right border-span"></span>
-        <span class="bottom-left border-span"></span>
-        <span class="bottom-right border-span"></span>
-        <Card>
-          <div id="echarts_index_1"></div>
-          <Spin size="large" fix v-if="spinShow_1"></Spin>
-        </Card>
-      </div>
+      <span class="top-left border-span"></span>
+      <span class="top-right border-span"></span>
+      <span class="bottom-left border-span"></span>
+      <span class="bottom-right border-span"></span>
+      <Card>
+        <div id="echarts_index_1"></div>
+        <Spin size="large" fix v-if="spinShow_1"></Spin>
+      </Card>
     </div>
   </div>
 </template>
