@@ -113,7 +113,7 @@ export const fun_date = (num1, num2) => {
 export const flatten = (
   data,
   childKey,
-  level,
+  level
 ) => {
   let arr = []
   data.forEach(item => {
@@ -125,7 +125,7 @@ export const flatten = (
         ...flatten(
           item[childKey],
           childKey,
-          level + 1,
+          level + 1
         )
       )
     }

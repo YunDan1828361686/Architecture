@@ -26,7 +26,7 @@ export default new Vuex.Store({
   },
   plugins: [createPersistedState({
     storage: window.localStorage,
-    reducer(val) { // 如果只想持久化某几个模块中的数据
+    reducer (val) { // 如果只想持久化某几个模块中的数据
       return {
         app: val.app,
         user: val.user,
