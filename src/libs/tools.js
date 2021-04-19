@@ -109,3 +109,26 @@ export const fun_date = (num1, num2) => {
   var afterDate = afteryear + '-' + (aftermonth < 10 ? '0' + aftermonth : aftermonth) + '-' + (afterday < 10 ? '0' + afterday : afterday)
   return [beforeDate, afterDate]
 }
+// 递归树形结构取值
+export const flatten = (
+  data,
+  childKey,
+  level,
+) => {
+  let arr = []
+  data.forEach(item => {
+    item.level = level
+    item.routerName = item.modulePath.substr(1)
+    arr.push(item)
+    if (item[childKey]) {
+      arr.push(
+        ...flatten(
+          item[childKey],
+          childKey,
+          level + 1,
+        )
+      )
+    }
+  })
+  return arr
+}
