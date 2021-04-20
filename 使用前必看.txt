@@ -1,4 +1,4 @@
-百度搜索node.js
+﻿百度搜索node.js
 打开node.js中文网
 下载-windows安装包
 下载完成后打开Node.js command prompt
@@ -8,3 +8,4 @@
 输入命令cd然后空格把vue项目拉进去  回车
 看vue项目内有没有node_modules  有就不用管了  没有的话就cnpm install回车
 启动项目则用npm run dev回车
+Test
