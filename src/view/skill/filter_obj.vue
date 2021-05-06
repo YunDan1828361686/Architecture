@@ -21,7 +21,7 @@ export default {
         "apple",
         "orange",
         "orange",
-        "strawberry",
+        "strawberry"
       ],
       arr_2: ["A", "", "B", null, undefined, "C", "  "],
       arr_3: [
@@ -29,8 +29,8 @@ export default {
         { name: "小红", age: "18" },
         { name: "小刚", age: "16" },
         { name: "小美", age: "17" },
-        { name: "明美", age: "19" },
-      ],
+        { name: "明美", age: "19" }
+      ]
     };
   },
   methods: {},
@@ -44,10 +44,10 @@ export default {
     // 去重，仅保留第一次出现的元素V2   .sort()给数组排序
     let arr_1_filte_v2 = [...new Set(this.arr_1)];
     // 删掉空字符串
-    let arr_2_filte = this.arr_2.filter((item) => item && item.trim());
+    let arr_2_filte = this.arr_2.filter(item => item && item.trim());
     // 筛选出数组对象age=="18"的对象
     // 筛选出数组对象name包含"明"的对象
-    let arr_3_filte = this.arr_3.filter((item) => {
+    let arr_3_filte = this.arr_3.filter(item => {
       // return item.age == "18";
       return item.name.indexOf("明") !== -1;
     });
@@ -59,6 +59,13 @@ export default {
         i--;
       }
     }
+    let test =
+      '<p align="center"><img align="absmiddle"  width="750"  height="584"  src="/DSJPIC/MHSGBG_20210315/MHSGBG20003_25_1.jpg"/></p >';
+    test = test.replace(
+      /src=\"/g,
+      `src="http://10.3.2.20/api/user/avatar?uid=200/xxxxxxxxxxxxxxxx`
+    );
+    console.log(test);
     // // 设备厂家
     // // 设备型号
     // // 额定功率（W）
@@ -87,7 +94,7 @@ export default {
     //     duration: 3,
     //   });
     // }
-  },
+  }
 };
 </script>
 <style lang="less" scoped>
