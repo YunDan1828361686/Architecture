@@ -2,24 +2,11 @@
 管理系统组件实例Plus
 </h1>
 <h5>
- * For the brave souls who get this far: You are the chosen ones,
-<br>
- * the valiant knights of programming who toil away, without rest,
-<br>
- * fixing our most awful code. To you, true saviors, kings of men,
-<br>
- * I say this: never gonna give you up, never gonna let you down,
-<br>
- * never gonna run around and desert you. Never gonna make you cry,
-<br>
- * never gonna say goodbye. Never gonna tell a lie and hurt you.
-</h5>
-<h5>
- * 致终于来到这里的勇敢的人：
-<br>
- * 你是被上帝选中的人，是英勇的、不敌辛苦的、不眠不休的来修改我们这最棘手的代码的编程骑士。
-<br>
- * 你，我们的救世主，人中之龙，我要对你说：永远不要放弃，永远不要对自己失望，永远不要逃走，辜负了自己，
-<br>
- * 永远不要哭啼，永远不要说再见，永远不要说谎来伤害自己。
+本人前端工作主要是管理系统，数据可视化，目前整合了一下工作中学到的东西，删删东西，添油加醋拼凑一个这个项目。
+花费了挺多的心血的，代码完成度挺高的，相信我，如果你要做管理系统项目，拉下来，启动它，你会收获很多！
+本架构用了Vue全家桶（2.0+）+vuex数据持久化+Iview4.5+Echarts+高德地图，主要内容为数据可视化类型，例如表格或Echarts或信息流展示。非常感谢这些插件的开源，才有了这个项目。
+启动步骤为，找到本人另一个作品为Node.js，启动它（node serve.js），如果启动报错就删掉他的模块包，重新下载（默认有模块包）。
+然后拉取本项目。按win+r，输入cdm，输入ipconfig查看本机ip（ipv4地址）。把本项目和node.js项目拖到编译器。找到本项目的vue.config.js，修改第41行的ip地址。然后下载模块包。npm run dev启动项目。
+此时node.js和本项目都已经启动，node.js的地址为本机ip:3000，本项目为本机ip:8080，然后本项目访问node.js项目里的写死的接口来启动项目。
+如果项目有Bug，你可以复制报错信息，在项目中搜索，有相应的解决方案。
 </h5>
