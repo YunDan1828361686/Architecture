@@ -33,7 +33,20 @@ export default {
       ]
     };
   },
-  methods: {},
+  methods: {
+    findNearestNumber(arr, target) {
+      // 我们假设最近接的就是数组第第一个数字
+      let result = arr[0].top;
+      let result_id;
+      for (let i = 1, len = arr.length; i < len; i++) {
+        if (Math.abs(arr[i].top - target) < Math.abs(result - target)) {
+          result = arr[i].top;
+          result_id = arr[i].id;
+        }
+      }
+      return result_id;
+    }
+  },
   watch: {},
   computed: {},
   mounted() {

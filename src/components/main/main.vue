@@ -313,7 +313,7 @@ export default {
   transition: all 0.6s ease;
 }
 .fade-transform-leave-active {
-  transition: all 0.2s cubic-bezier(0.1, 0.5, 1, 1);
+  transition: all 0.2s ease-out;
 }
 .fade-transform-enter,
 .fade-transform-leave-to {
@@ -327,7 +327,7 @@ export default {
 }
 .slide-fade-leave-active {
   // opacity: 0.5;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease-out;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
