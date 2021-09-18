@@ -1,10 +1,8 @@
 <template>
   <Layout style="height: 100%" class="main">
     <Sider
-      breakpoint="xl"
-      hide-trigger
       collapsible
-      :width="256"
+      :width="200"
       :collapsed-width="64"
       v-model="collapsed"
       class="left-sider"
@@ -20,7 +18,12 @@
       >
         <!-- 需要放在菜单上面的内容，如Logo，写在side-menu标签内部，如下 -->
         <div class="logo-con">
-          <img v-show="!collapsed" :src="maxLogo" key="max-logo" />
+          <img
+            v-show="!collapsed"
+            :src="maxLogo"
+            key="max-logo"
+            style="height: 80%"
+          />
           <img
             v-show="collapsed"
             :src="minLogo"
@@ -113,7 +116,7 @@ export default {
     Refresh,
     Fullscreen,
     User,
-    ABackTop,
+    ABackTop
   },
   data() {
     return {
@@ -122,7 +125,7 @@ export default {
       minLogo,
       maxLogo,
       isFullscreen: false,
-      now_padding: "",
+      now_padding: ""
     };
   },
   computed: {
@@ -143,9 +146,9 @@ export default {
         "ParentView",
         ...(this.tagNavList.length
           ? this.tagNavList
-              .filter((item) => !(item.meta && item.meta.notCache))
-              .map((item) => item.name)
-          : []),
+              .filter(item => !(item.meta && item.meta.notCache))
+              .map(item => item.name)
+          : [])
       ];
       return list;
     },
@@ -160,7 +163,7 @@ export default {
     },
     spinShow_() {
       return this.$store.state.app.spinShow_;
-    },
+    }
   },
   methods: {
     ...mapMutations([
@@ -169,7 +172,7 @@ export default {
       "addTag",
       "setHomeRoute",
       "closeTag",
-      "setCollapsed_",
+      "setCollapsed_"
     ]),
     turnToPage(route) {
       let { name, params, query } = {};
@@ -186,7 +189,7 @@ export default {
       this.$router.push({
         name,
         params,
-        query,
+        query
       });
     },
     handleCollapsedChange(state) {
@@ -208,12 +211,18 @@ export default {
       this.turnToPage(item);
     },
     refresh_loading() {
+      // 点击刷新修改全局logo遮罩的状态
       this.spinShow = true;
       setTimeout(() => {
         this.spinShow = false;
       }, 800);
     },
     style_padding_Y() {
+      if (document.getElementById("app").clientWidth < 1400) {
+        this.collapsed = true;
+      } else {
+        this.collapsed = false;
+      }
       if (this.$route.name == "login") return;
       if (
         document.getElementById("router_box").scrollHeight >
@@ -243,29 +252,29 @@ export default {
         document.getElementById("router_box").style.padding =
           " 20px 10px 20px 10px";
       }
-    },
+    }
   },
   watch: {
     $route(newRoute) {
       const { name, query, params, meta } = newRoute;
       this.addTag({
         route: { name, query, params, meta },
-        type: "push",
+        type: "push"
       });
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
       this.$refs.sideMenu.updateOpenName(newRoute.name);
     },
     collapsed() {
-      // 更改侧栏状态时，记录时间，启动遮罩loading，如若时间发生变化，记录时间，启动遮罩loading
+      // 更改侧栏状态时，记录时间，启动全局logo遮罩，如若时间发生变化，记录时间，启动全局logo遮罩
       this.setCollapsed_(new Date());
-      this.refresh_loading();
+      // this.refresh_loading();
     },
     spinShow_(newVal) {
       // 监听vuex内  更新遮罩状态
       // this.spinShow = true;
       this.spinShow = newVal;
-    },
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -288,25 +297,24 @@ export default {
     this.setHomeRoute(routers);
     const { name, params, query, meta } = this.$route;
     this.addTag({
-      route: { name, params, query, meta },
+      route: { name, params, query, meta }
     });
     this.setBreadCrumb(this.$route);
     // 如果当前打开页面不在标签栏中，跳到homeName页
-    if (!this.tagNavList.find((item) => item.name === this.$route.name)) {
+    if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
-        name: this.$config.homeName,
+        name: this.$config.homeName
       });
     }
-  },
+  }
 };
 </script>
-<style  lang="less" scoped>
+<style lang="less" scoped>
 #router_box {
   position: relative;
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  padding: 20px 10px 20px 10px;
+  overflow: hidden;
+  padding: 10px 10px 10px 10px !important;
 }
 /* fade-transform */
 .fade-transform-enter-active {
@@ -318,7 +326,7 @@ export default {
 .fade-transform-enter,
 .fade-transform-leave-to {
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateX(50px);
 }
 /* 可以设置不同的进入和离开动画 */
 /* 设置持续时间和动画函数 */
@@ -326,12 +334,12 @@ export default {
   transition: all 0.2s ease;
 }
 .slide-fade-leave-active {
-  // opacity: 0.5;
+  opacity: 0.5;
   transition: all 0.2s ease-out;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateY(-200px);
+  transform: translateY(-100px);
   opacity: 0;
 }
 </style>

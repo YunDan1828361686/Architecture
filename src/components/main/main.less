@@ -17,11 +17,12 @@
   }
   .main-layout-con {
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
   }
   .main-content-con {
-    height: ~"calc(100% - 60px)";
-    overflow: hidden;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
   .tag-nav-wrapper {
     padding: 0;
@@ -33,19 +34,22 @@
     // position: relative;
     height: ~"calc(100% - 80px)";
     overflow: auto;
+    overflow-x: hidden;
   }
   .left-sider {
     .ivu-layout-sider-children {
-      overflow-y: scroll;
-      margin-right: -18px;
+      // overflow-y: scroll;
+      // margin-right: -18px;
     }
   }
 }
-.ivu-menu-item > i {
-  margin-right: 12px !important;
+.ivu-menu-item {
+  display: flex !important;
+  align-items: center;
 }
-.ivu-menu-submenu > .ivu-menu > .ivu-menu-item > i {
-  margin-right: 8px !important;
+.ivu-menu-submenu-title {
+  display: flex !important;
+  align-items: center;
 }
 .collased-menu-dropdown {
   width: 100%;

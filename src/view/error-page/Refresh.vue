@@ -18,21 +18,33 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.from = from;
-      vm.$nextTick(function() {
-        this.closeTag({
-          name: this.from.name
-        });
-        setTimeout(() => {
+      if (from.name == "home") {
+        vm.$nextTick(function() {
           this.closeTag({
             name: "Refresh"
-            // query: {
-            //   t: this.$route.query.t
-            // }
           });
-          this.$router.replace(this.from);
-        }, 500);
-      });
+          this.$router.push({ name: from.name });
+        });
+        // 自动刷新的页面（无页面缓存）
+      } else {
+        vm.$nextTick(function() {
+          this.closeTag({
+            name: from.name,
+            query: from.query,
+            params: from.params
+          });
+          setTimeout(() => {
+            this.closeTag({
+              name: "Refresh"
+            });
+            this.$router.push({
+              name: from.name,
+              query: from.query,
+              params: from.params
+            });
+          }, 20);
+        });
+      }
     });
   }
 };

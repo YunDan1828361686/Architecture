@@ -2,6 +2,7 @@
   <div>
     <!-- <Button @click="Drawer_1 = true" type="primary">Create</Button> -->
     <Drawer
+      id="Drawer_info"
       width="600"
       title="新增"
       v-model="Drawer_1"
@@ -313,6 +314,9 @@ export default {
 }
 </script>
 <style scoped  lang="less">
+#Drawer_info /deep/ .ivu-drawer-body {
+  position: static;
+}
 .drawer_footer {
   width: 100%;
   position: absolute;
