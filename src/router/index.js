@@ -33,26 +33,26 @@ router.beforeEach((to, from, next) => {
   const token = getToken()
   if (!token && to.name !== LOGIN_PAGE_NAME) {
     // 未登录且要跳转的页面不是登录页
-    store.dispatch("handleLogOut").then(() => {
+    store.dispatch('handleLogOut').then(() => {
       setTimeout(() => {
         next({
           name: LOGIN_PAGE_NAME // 跳转到登录页
         })
-      }, 300);
-      iView.Message["warning"]({
+      }, 300)
+      iView.Message['warning']({
         background: true,
-        content: "当前登录状态已失效！",
-        duration: 3,
-      });
+        content: '当前登录状态已失效！',
+        duration: 3
+      })
     }).catch(() => {
       next({
         name: LOGIN_PAGE_NAME // 跳转到登录页
       })
-      iView.Message["warning"]({
+      iView.Message['warning']({
         background: true,
-        content: "服务器连接超时，请联系管理员！！",
-        duration: 3,
-      });
+        content: '服务器连接超时，请联系管理员！！',
+        duration: 3
+      })
     })
   } else if (!token && to.name === LOGIN_PAGE_NAME) {
     // 未登录且要跳转的页面是登录页
@@ -64,16 +64,16 @@ router.beforeEach((to, from, next) => {
     })
   } else {
     // 判断服务器上此token是否处于登录状态
-    store.dispatch("getifInline").then((res) => {
+    store.dispatch('getifInline').then((res) => {
       // 判断是否拥有页面权限
       turnTo(to, store.state.user.access, next)
     }).catch(() => {
-      iView.Message["warning"]({
+      iView.Message['warning']({
         background: true,
-        content: "当前登录状态已失效！",
-        duration: 3,
-      });
-      localStorage.removeItem("tagNaveList");
+        content: '当前登录状态已失效！',
+        duration: 3
+      })
+      localStorage.removeItem('tagNaveList')
       store.commit('setToken', '')
       store.commit('setAccess', [])
       store.commit('setAvatar', '')
@@ -81,8 +81,8 @@ router.beforeEach((to, from, next) => {
       store.commit('setUserName', '')
       store.commit('setHasGetInfo', true)
       setTimeout(() => {
-        location.reload();
-      }, 300);
+        location.reload()
+      }, 300)
     })
   }
 })

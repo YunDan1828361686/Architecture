@@ -86,13 +86,13 @@
   </div>
 </template>
 <script>
-import SideMenuItem from "./side-menu-item.vue";
-import CollapsedMenu from "./collapsed-menu.vue";
-import { getUnion } from "@/libs/tools";
-import mixin from "./mixin";
+import SideMenuItem from './side-menu-item.vue'
+import CollapsedMenu from './collapsed-menu.vue'
+import { getUnion } from '@/libs/tools'
+import mixin from './mixin'
 
 export default {
-  name: "SideMenu",
+  name: 'SideMenu',
   mixins: [mixin],
   components: {
     SideMenuItem,
@@ -101,8 +101,8 @@ export default {
   props: {
     menuList: {
       type: Array,
-      default() {
-        return [];
+      default () {
+        return []
       }
     },
     collapsed: {
@@ -110,7 +110,7 @@ export default {
     },
     theme: {
       type: String,
-      default: "light"
+      default: 'light'
     },
     rootIconSize: {
       type: Number,
@@ -123,63 +123,62 @@ export default {
     accordion: Boolean,
     activeName: {
       type: String,
-      default: ""
+      default: ''
     },
     openNames: {
       type: Array,
       default: () => []
     }
   },
-  data() {
+  data () {
     return {
       openedNames: []
-    };
+    }
   },
   methods: {
-    handleSelect(name) {
-      this.$emit("on-select", name);
+    handleSelect (name) {
+      this.$emit('on-select', name)
     },
-    getOpenedNamesByActiveName(name) {
+    getOpenedNamesByActiveName (name) {
       return this.$route.matched
         .map(item => item.name)
-        .filter(item => item !== name);
+        .filter(item => item !== name)
     },
-    updateOpenName(name) {
-      if (name === this.$config.homeName) this.openedNames = [];
-      else this.openedNames = this.getOpenedNamesByActiveName(name);
+    updateOpenName (name) {
+      if (name === this.$config.homeName) this.openedNames = []
+      else this.openedNames = this.getOpenedNamesByActiveName(name)
     }
   },
   computed: {
-    textColor() {
-      return this.theme === "dark" ? "#fff" : "#495060";
+    textColor () {
+      return this.theme === 'dark' ? '#fff' : '#495060'
     }
   },
   watch: {
-    activeName(name) {
-      if (this.accordion)
-        this.openedNames = this.getOpenedNamesByActiveName(name);
-      else
+    activeName (name) {
+      if (this.accordion) { this.openedNames = this.getOpenedNamesByActiveName(name) } else {
         this.openedNames = getUnion(
           this.openedNames,
           this.getOpenedNamesByActiveName(name)
-        );
+        )
+      }
     },
-    openNames(newNames) {
-      this.openedNames = newNames;
+    openNames (newNames) {
+      this.openedNames = newNames
     },
-    openedNames() {
+    openedNames () {
       this.$nextTick(() => {
-        this.$refs.menu.updateOpened();
-      });
+        this.$refs.menu.updateOpened()
+      })
     }
   },
-  mounted() {
+  mounted () {
     this.openedNames = getUnion(
       this.openedNames,
       this.getOpenedNamesByActiveName(name)
-    );
+    )
   }
-};
+}
 </script>
 <style lang="less">
 @import "./side-menu.less";

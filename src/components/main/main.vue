@@ -92,23 +92,23 @@
   </Layout>
 </template>
 <script>
-import SideMenu from "./components/side-menu";
-import HeaderBar from "./components/header-bar";
-import TagsNav from "./components/tags-nav";
-import User from "./components/user";
-import ABackTop from "./components/a-back-top";
-import Fullscreen from "./components/fullscreen";
-import Refresh from "./components/Refresh";
-import { mapMutations, mapActions } from "vuex";
-import { getNewTagList, routeEqual } from "@/libs/util";
-import routers from "@/router/routers";
-import minLogo from "@/assets/images/logo-min.jpg";
-import maxLogo from "@/assets/images/logo.jpg";
-import { on, off } from "@/libs/tools";
-import { _debounce } from "@/libs/Perform_optimization.js";
-import "./main.less";
+import SideMenu from './components/side-menu'
+import HeaderBar from './components/header-bar'
+import TagsNav from './components/tags-nav'
+import User from './components/user'
+import ABackTop from './components/a-back-top'
+import Fullscreen from './components/fullscreen'
+import Refresh from './components/Refresh'
+import { mapMutations, mapActions } from 'vuex'
+import { getNewTagList, routeEqual } from '@/libs/util'
+import routers from '@/router/routers'
+import minLogo from '@/assets/images/logo-min.jpg'
+import maxLogo from '@/assets/images/logo.jpg'
+import { on, off } from '@/libs/tools'
+import { _debounce } from '@/libs/Perform_optimization.js'
+import './main.less'
 export default {
-  name: "Main",
+  name: 'Main',
   components: {
     SideMenu,
     HeaderBar,
@@ -118,196 +118,196 @@ export default {
     User,
     ABackTop
   },
-  data() {
+  data () {
     return {
       spinShow: false,
       collapsed: false,
       minLogo,
       maxLogo,
       isFullscreen: false,
-      now_padding: ""
-    };
+      now_padding: ''
+    }
   },
   computed: {
-    tagNavList() {
-      return this.$store.state.app.tagNavList;
+    tagNavList () {
+      return this.$store.state.app.tagNavList
     },
-    tagRouter() {
-      return this.$store.state.app.tagRouter;
+    tagRouter () {
+      return this.$store.state.app.tagRouter
     },
-    userAvatar() {
-      return this.$store.state.user.avatarImgPath;
+    userAvatar () {
+      return this.$store.state.user.avatarImgPath
     },
-    userName() {
-      return this.$store.state.user.userName;
+    userName () {
+      return this.$store.state.user.userName
     },
-    cacheList() {
+    cacheList () {
       const list = [
-        "ParentView",
+        'ParentView',
         ...(this.tagNavList.length
           ? this.tagNavList
-              .filter(item => !(item.meta && item.meta.notCache))
-              .map(item => item.name)
+            .filter(item => !(item.meta && item.meta.notCache))
+            .map(item => item.name)
           : [])
-      ];
-      return list;
+      ]
+      return list
     },
-    menuList() {
-      return this.$store.getters.menuList;
+    menuList () {
+      return this.$store.getters.menuList
     },
-    unreadCount() {
-      return this.$store.state.user.unreadCount;
+    unreadCount () {
+      return this.$store.state.user.unreadCount
     },
-    collapsed_() {
-      return this.$store.state.app.collapsed_;
+    collapsed_ () {
+      return this.$store.state.app.collapsed_
     },
-    spinShow_() {
-      return this.$store.state.app.spinShow_;
+    spinShow_ () {
+      return this.$store.state.app.spinShow_
     }
   },
   methods: {
     ...mapMutations([
-      "setBreadCrumb",
-      "setTagNavList",
-      "addTag",
-      "setHomeRoute",
-      "closeTag",
-      "setCollapsed_"
+      'setBreadCrumb',
+      'setTagNavList',
+      'addTag',
+      'setHomeRoute',
+      'closeTag',
+      'setCollapsed_'
     ]),
-    turnToPage(route) {
-      let { name, params, query } = {};
-      if (typeof route === "string") name = route;
+    turnToPage (route) {
+      let { name, params, query } = {}
+      if (typeof route === 'string') name = route
       else {
-        name = route.name;
-        params = route.params;
-        query = route.query;
+        name = route.name
+        params = route.params
+        query = route.query
       }
-      if (name.indexOf("isTurnByHref_") > -1) {
-        window.open(name.split("_")[1]);
-        return;
+      if (name.indexOf('isTurnByHref_') > -1) {
+        window.open(name.split('_')[1])
+        return
       }
       this.$router.push({
         name,
         params,
         query
-      });
+      })
     },
-    handleCollapsedChange(state) {
-      this.collapsed = state;
+    handleCollapsedChange (state) {
+      this.collapsed = state
     },
-    handleCloseTag(res, type, route) {
-      if (type !== "others") {
-        if (type === "all") {
-          this.turnToPage(this.$config.homeName);
+    handleCloseTag (res, type, route) {
+      if (type !== 'others') {
+        if (type === 'all') {
+          this.turnToPage(this.$config.homeName)
         } else {
           if (routeEqual(this.$route, route)) {
-            this.closeTag(route);
+            this.closeTag(route)
           }
         }
       }
-      this.setTagNavList(res);
+      this.setTagNavList(res)
     },
-    handleClick(item) {
-      this.turnToPage(item);
+    handleClick (item) {
+      this.turnToPage(item)
     },
-    refresh_loading() {
+    refresh_loading () {
       // 点击刷新修改全局logo遮罩的状态
-      this.spinShow = true;
+      this.spinShow = true
       setTimeout(() => {
-        this.spinShow = false;
-      }, 800);
+        this.spinShow = false
+      }, 800)
     },
-    style_padding_Y() {
-      if (document.getElementById("app").clientWidth < 1400) {
-        this.collapsed = true;
+    style_padding_Y () {
+      if (document.getElementById('app').clientWidth < 1400) {
+        this.collapsed = true
       } else {
-        this.collapsed = false;
+        this.collapsed = false
       }
-      if (this.$route.name == "login") return;
+      if (this.$route.name == 'login') return
       if (
-        document.getElementById("router_box").scrollHeight >
-        document.getElementById("router_box").clientHeight
+        document.getElementById('router_box').scrollHeight >
+        document.getElementById('router_box').clientHeight
       ) {
         // 有滚动条
-        if (this.now_padding == "20px 0px 20px 10px") return;
-        document.getElementById("router_box").style.padding =
-          " 20px 0px 20px 10px";
-        this.now_padding = "20px 0px 20px 10px";
+        if (this.now_padding == '20px 0px 20px 10px') return
+        document.getElementById('router_box').style.padding =
+          ' 20px 0px 20px 10px'
+        this.now_padding = '20px 0px 20px 10px'
       } else {
         // 没滚动条
-        if (this.now_padding != "20px 0px 20px 10px") return;
-        document.getElementById("router_box").style.padding =
-          " 20px 10px 20px 10px";
-        this.now_padding = "20px 10px 20px 10px";
+        if (this.now_padding != '20px 0px 20px 10px') return
+        document.getElementById('router_box').style.padding =
+          ' 20px 10px 20px 10px'
+        this.now_padding = '20px 10px 20px 10px'
       }
     },
-    enter(el, done) {
+    enter (el, done) {
       if (
-        document.getElementById("router_box").childNodes[0].offsetHeight >
-        document.getElementById("router_box").clientHeight
+        document.getElementById('router_box').childNodes[0].offsetHeight >
+        document.getElementById('router_box').clientHeight
       ) {
-        document.getElementById("router_box").style.padding =
-          " 20px 0px 20px 10px";
+        document.getElementById('router_box').style.padding =
+          ' 20px 0px 20px 10px'
       } else {
-        document.getElementById("router_box").style.padding =
-          " 20px 10px 20px 10px";
+        document.getElementById('router_box').style.padding =
+          ' 20px 10px 20px 10px'
       }
     }
   },
   watch: {
-    $route(newRoute) {
-      const { name, query, params, meta } = newRoute;
+    $route (newRoute) {
+      const { name, query, params, meta } = newRoute
       this.addTag({
         route: { name, query, params, meta },
-        type: "push"
-      });
-      this.setBreadCrumb(newRoute);
-      this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
-      this.$refs.sideMenu.updateOpenName(newRoute.name);
+        type: 'push'
+      })
+      this.setBreadCrumb(newRoute)
+      this.setTagNavList(getNewTagList(this.tagNavList, newRoute))
+      this.$refs.sideMenu.updateOpenName(newRoute.name)
     },
-    collapsed() {
+    collapsed () {
       // 更改侧栏状态时，记录时间，启动全局logo遮罩，如若时间发生变化，记录时间，启动全局logo遮罩
-      this.setCollapsed_(new Date());
+      this.setCollapsed_(new Date())
       // this.refresh_loading();
     },
-    spinShow_(newVal) {
+    spinShow_ (newVal) {
       // 监听vuex内  更新遮罩状态
       // this.spinShow = true;
-      this.spinShow = newVal;
+      this.spinShow = newVal
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       if (
-        document.getElementById("router_box").childNodes[0].offsetHeight >
-        document.getElementById("router_box").clientHeight
+        document.getElementById('router_box').childNodes[0].offsetHeight >
+        document.getElementById('router_box').clientHeight
       ) {
-        document.getElementById("router_box").style.padding =
-          " 20px 0px 20px 10px";
+        document.getElementById('router_box').style.padding =
+          ' 20px 0px 20px 10px'
       } else {
-        document.getElementById("router_box").style.padding =
-          " 20px 10px 20px 10px";
+        document.getElementById('router_box').style.padding =
+          ' 20px 10px 20px 10px'
       }
-      on(window, "resize", this.style_padding_Y);
-    });
+      on(window, 'resize', this.style_padding_Y)
+    })
     /**
      * @description 初始化设置面包屑导航和标签导航
      */
-    this.setTagNavList();
-    this.setHomeRoute(routers);
-    const { name, params, query, meta } = this.$route;
+    this.setTagNavList()
+    this.setHomeRoute(routers)
+    const { name, params, query, meta } = this.$route
     this.addTag({
       route: { name, params, query, meta }
-    });
-    this.setBreadCrumb(this.$route);
+    })
+    this.setBreadCrumb(this.$route)
     // 如果当前打开页面不在标签栏中，跳到homeName页
     if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
         name: this.$config.homeName
-      });
+      })
     }
   }
-};
+}
 </script>
 <style lang="less" scoped>
 #router_box {

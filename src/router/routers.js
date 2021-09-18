@@ -188,7 +188,7 @@ export default [
           title: 'specification'
         },
         component: () => import('@/view/skill/specification.vue')
-      },
+      }
     ]
   },
   {

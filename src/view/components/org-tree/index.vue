@@ -35,54 +35,54 @@
 </template>
 
 <script>
-import OrgView from "./components/org-view.vue";
-import ZoomController from "./components/zoom-controller.vue";
-import "./index.less";
+import OrgView from './components/org-view.vue'
+import ZoomController from './components/zoom-controller.vue'
+import './index.less'
 const menuDic = {
-  edit: "编辑部门",
-  detail: "查看部门",
-  new: "新增子部门",
-  delete: "删除部门"
-};
+  edit: '编辑部门',
+  detail: '查看部门',
+  new: '新增子部门',
+  delete: '删除部门'
+}
 export default {
-  name: "org_tree_page",
+  name: 'org_tree_page',
   components: {
     OrgView,
     ZoomController
   },
-  data() {
+  data () {
     return {
       data: null,
       zoom: 100
-    };
+    }
   },
   computed: {
-    zoomHandled() {
-      return this.zoom / 100;
+    zoomHandled () {
+      return this.zoom / 100
     }
   },
   methods: {
-    setDepartmentData(data) {
-      data.isRoot = true;
-      return data;
+    setDepartmentData (data) {
+      data.isRoot = true
+      return data
     },
-    handleMenuClick({ data, key }) {
+    handleMenuClick ({ data, key }) {
       this.$Message.success({
         duration: 5,
         background: true,
         content: `点击了《${data.label}》节点的'${menuDic[key]}'菜单`
-      });
+      })
     },
-    getDepartmentData() {
-      this.$axios("node1/org", "post").then(res => {
-        this.data = res.data;
-      });
+    getDepartmentData () {
+      this.$axios('node1/org', 'post').then(res => {
+        this.data = res.data
+      })
     }
   },
-  mounted() {
-    this.getDepartmentData();
+  mounted () {
+    this.getDepartmentData()
   }
-};
+}
 </script>
 
 <style></style>

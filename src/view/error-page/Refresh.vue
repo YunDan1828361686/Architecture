@@ -5,49 +5,49 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations } from 'vuex'
 export default {
-  name: "Refresh",
-  data() {
+  name: 'Refresh',
+  data () {
     return {
       from: null
-    };
+    }
   },
   methods: {
-    ...mapMutations(["closeTag"])
+    ...mapMutations(['closeTag'])
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
-      if (from.name == "home") {
-        vm.$nextTick(function() {
+      if (from.name == 'home') {
+        vm.$nextTick(function () {
           this.closeTag({
-            name: "Refresh"
-          });
-          this.$router.push({ name: from.name });
-        });
+            name: 'Refresh'
+          })
+          this.$router.push({ name: from.name })
+        })
         // 自动刷新的页面（无页面缓存）
       } else {
-        vm.$nextTick(function() {
+        vm.$nextTick(function () {
           this.closeTag({
             name: from.name,
             query: from.query,
             params: from.params
-          });
+          })
           setTimeout(() => {
             this.closeTag({
-              name: "Refresh"
-            });
+              name: 'Refresh'
+            })
             this.$router.push({
               name: from.name,
               query: from.query,
               params: from.params
-            });
-          }, 20);
-        });
+            })
+          }, 20)
+        })
       }
-    });
+    })
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
