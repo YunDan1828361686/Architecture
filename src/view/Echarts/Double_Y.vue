@@ -2,8 +2,8 @@
   <div>
     <Row style="margin-bottom:20px">
       <Col span="24">
-        <div style="float: left;"></div>
-        <div style="float: right;"></div>
+        <div style="float: left;">左边</div>
+        <div style="float: right;">右边</div>
       </Col>
     </Row>
     <Row :gutter="20" style="margin-top: 10px;">
@@ -11,7 +11,7 @@
         :md="24"
         :lg="12"
         style="margin-bottom: 20px;"
-        v-for="(item_1,index_1) in echarts_data"
+        v-for="(item_1, index_1) in echarts_data"
         :key="index_1"
       >
         <!-- 优化Card加边框 -->

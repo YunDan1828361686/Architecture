@@ -120,12 +120,17 @@ export default {
         i--;
       }
     }
+    // 检测数组 ages 的所有元素是否都大于等于 18
+    let aaa = this.arr_3.every(item => item.age >= 18);
+    console.log(aaa);
+
     let test =
       '<p align="center"><img align="absmiddle"  width="750"  height="584"  src="/DSJPIC/MHSGBG_20210315/MHSGBG20003_25_1.jpg"/></p >';
     test = test.replace(
       /src=\"/g,
       `src="http://10.3.2.20/api/user/avatar?uid=200/xxxxxxxxxxxxxxxx`
     );
+    // str = this.table_form_1_data.roomName.replace(/(^\s*)|(\s*$)/g, ""); //去除空格;
     console.log(test);
     // // 设备厂家
     // // 设备型号

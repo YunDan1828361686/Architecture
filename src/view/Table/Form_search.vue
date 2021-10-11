@@ -162,7 +162,7 @@ export default {
       search_span_1: false,
       search_val_1: {
         span: "展开",
-        icon: "ios-arrow-down",
+        icon: "ios-arrow-down"
       },
       form_search_1: {
         input1: "",
@@ -172,15 +172,15 @@ export default {
         input5: "",
         input6: "",
         input7: "",
-        input8: "",
+        input8: ""
       },
       form_rules_1: {
         input1: [
           {
             required: true,
             message: "请输入用户名!",
-            trigger: "blur",
-          },
+            trigger: "blur"
+          }
         ],
         input2: [
           {
@@ -202,21 +202,51 @@ export default {
                   callback();
                 }
               }
-            },
-          },
+            }
+          }
         ],
         input3: [
           {
             required: true,
             message: "请输入邮箱！",
-            trigger: "blur",
+            trigger: "blur"
           },
-          { type: "email", message: "邮箱格式错误！", trigger: "blur" },
-        ],
-      },
+          { type: "email", message: "邮箱格式错误！", trigger: "blur" }
+        ]
+      }
     };
   },
-  mounted() {},
+  mounted() {
+    // // 展开收起逻辑详解
+    // [
+    //   {
+    //     title: "标题",
+    //     list: [{ title: "子级标题1" }, { title: "子级标题2" }]
+    //   }
+    // ];
+    // // H5循环数组渲染出所有行
+    // // 在H5中子级添加ref，循环数组，给每行的ref添加原高度（即展开的高度），和一行的高度（即收起的高度）
+    // // 重新渲染添加高度后的数组
+    // // 重新刷新组件
+    // this.dataSearch = res.data.data.standList;
+    // this.dataSearch.map(item => {
+    //   item.isOpen = false;
+    // });
+    // this.$nextTick(() => {
+    //   const _dom = this.$refs.wrap;
+    //   let _list = this.dataSearch;
+    //   // 循环源数据，给每行数据添加原高度
+    //   for (let i = 0; i < this.dataSearch.length; i++) {
+    //     _list[i].openH = `${_dom[i].clientHeight}px`;
+    //     _list[i].closeH = "25px";
+    //   }
+    //   // 重新渲染
+    //   this.dataSearch = _list;
+    //   // 重新刷新组件
+    //   this.$forceUpdate();
+    // });
+    // // 渲染后查看没有展开的高度是多少，判断是否等于这个高度判断是否展示（展开收起按钮）
+  },
   methods: {
     myclick() {
       this.search_span_1 = !this.search_span_1;
@@ -230,7 +260,7 @@ export default {
       }
     },
     handleSubmit(name) {
-      this.$refs[name].validate((valid) => {
+      this.$refs[name].validate(valid => {
         if (valid) {
           this.$Message.success("表单验证通过!");
         } else {
@@ -241,8 +271,8 @@ export default {
     handleReset(name) {
       // 重置$refs为form_search_1的表单数据
       this.$refs[name].resetFields();
-    },
-  },
+    }
+  }
 };
 </script>
 

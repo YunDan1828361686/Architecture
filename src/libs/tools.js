@@ -111,11 +111,7 @@ export const fun_date = (num1, num2) => {
 }
 
 // 递归树形结构取值
-export const flatten = (
-  data,
-  childKey,
-  level
-) => {
+export const flatten = (data, childKey, level) => {
   let arr = []
   data.forEach(item => {
     item.level = level
