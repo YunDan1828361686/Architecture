@@ -109,6 +109,7 @@ export const fun_date = (num1, num2) => {
   var afterDate = afteryear + '-' + (aftermonth < 10 ? '0' + aftermonth : aftermonth) + '-' + (afterday < 10 ? '0' + afterday : afterday)
   return [beforeDate, afterDate]
 }
+
 // 递归树形结构取值
 export const flatten = (
   data,
@@ -132,7 +133,8 @@ export const flatten = (
   })
   return arr
 }
-// 获取几天前的时间可传入两个参数
+
+// 时间戳转时间字符
 export const time_format = (date) => {
   var y = date.getFullYear()
   var m = date.getMonth() + 1
