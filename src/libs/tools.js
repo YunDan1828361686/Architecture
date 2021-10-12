@@ -115,19 +115,35 @@ export const flatten = (data, childKey, level) => {
   let arr = []
   data.forEach(item => {
     item.level = level
-    item.routerName = item.modulePath.substr(1)
+    item.routerName = item.label.substr(1)
     arr.push(item)
     if (item[childKey]) {
-      arr.push(
-        ...flatten(
-          item[childKey],
-          childKey,
-          level + 1
-        )
-      )
+      arr.push(...flatten(item[childKey], childKey, level + 1))
+      // 删除多余的childKey
+      delete item[childKey]
     }
   })
   return arr
+}
+
+// 递归树形结构赋值
+export const newTeam = function (data, parentId) {
+  let itemArr = [];
+  data.forEach(item => {
+    if (item.pid === parentId) {
+      let newNode = {};
+      newNode.id = item.id;
+      newNode.label = item.label;
+      newNode.pid = item.pid;
+      newNode.children = newTeam(data, item.id);
+      if (!newNode.children.length) {
+        // 删除多余的key即children
+        delete newNode["children"]
+      }
+      itemArr.push(newNode);
+    }
+  })
+  return itemArr;
 }
 
 // 时间戳转时间字符
