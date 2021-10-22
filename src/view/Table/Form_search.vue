@@ -246,6 +246,10 @@ export default {
     //   this.$forceUpdate();
     // });
     // // 渲染后查看没有展开的高度是多少，判断是否等于这个高度判断是否展示（展开收起按钮）
+    // transform-origin: 59% 0;
+    // opacity: 0;
+    // transition: all .3s ease-out;
+    // transform: scale(0);
   },
   methods: {
     myclick() {
