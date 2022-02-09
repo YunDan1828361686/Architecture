@@ -1,14 +1,15 @@
 import { setToken, getToken } from '@/libs/util'
 import axios from 'axios'
+import Qs from 'qs'
 export default {
   state: {
     userName: '',
     userId: '',
     avatarImgPath: '',
     token: getToken(),
-    access: '',
-    hasGetInfo: false,
-    Vuex_test1: 'Vuex数据'
+    Vuex_test1: 'Vuex数据',
+    // 储存未处理时的路由
+    menuListData: [],
   },
   mutations: {
     setAvatar(state, avatarPath) {
@@ -20,18 +21,15 @@ export default {
     setUserName(state, name) {
       state.userName = name
     },
-    setAccess(state, access) {
-      state.access = access
-    },
     setToken(state, token) {
       state.token = token
       setToken(token)
     },
-    setHasGetInfo(state, status) {
-      state.hasGetInfo = status
-    },
     updated_Vuex_test1(state, name) {
       state.Vuex_test1 = name
+    },
+    setMenuListData(state, list) {
+      state.menuListData = list
     },
   },
   getters: {
@@ -51,26 +49,23 @@ export default {
           commit("setspinShow_", true)
           localStorage.removeItem("tagNaveList");
           commit('setToken', '')
-          commit('setAccess', [])
           commit('setAvatar', '')
           commit('setUserId', '')
           commit('setUserName', '')
-          commit('setHasGetInfo', true)
+          commit('setMenuListData', [])
           resolve()
         }).catch(err => {
           commit("setspinShow_", true)
           localStorage.removeItem("tagNaveList");
           commit('setToken', '')
-          commit('setAccess', [])
           commit('setAvatar', '')
           commit('setUserId', '')
           commit('setUserName', '')
-          commit('setHasGetInfo', true)
+          commit('setMenuListData', [])
           reject()
         })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
         // commit('setToken', '')
-        // commit('setAccess', [])
         // resolve()
       })
     },
@@ -78,18 +73,19 @@ export default {
     getUserInfo({ state, commit }, val) {
       return new Promise((resolve, reject) => {
         axios({
-          // url: '/login',
-          url: '/api/login',
+          url: val.HttpApi + '/login',
           method: 'post',
-          data: val
+          data: val,
+          // data: Qs.stringify(val),
         }).then(res => {
-          // 判断状态码后再加入缓存
+          // ~判断状态码后再加入缓存
+          // 用户头像
           commit('setAvatar', res.data.avatar)
+          // 用户ID
           commit('setUserId', res.data.user_id)
+          // 用户名
           commit('setUserName', res.data.name)
-          commit('setAccess', res.data.access)
           commit('setToken', res.data.token)
-          commit('setHasGetInfo', true)
           resolve(res)
         }).catch(err => {
           reject(err)

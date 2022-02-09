@@ -12,6 +12,7 @@ import {
 import router from '@/router'
 import routers from '@/router/routers'
 import config from '@/config'
+import { loadMenu } from '@/libs/router-util'
 const { homeName } = config
 
 const closePage = (state, route) => {
@@ -31,9 +32,14 @@ export default {
     spinShow_: false
   },
   getters: {
-    menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
+    menuList: (state, getters, rootState) => getMenuByRouter(routers.concat(loadMenu()))
   },
   mutations: {
+    updateMenuList(state, routes) {
+      routes.forEach(element => {
+        router.addRoute(element);
+      });
+    },
     setBreadCrumb(state, route) {
       state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
     },

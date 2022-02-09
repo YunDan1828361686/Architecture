@@ -70,6 +70,8 @@ export default {
       this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
     },
     handleSuccess(res, file) {
+      // 手动上传
+      this.$refs.upLoadRef.post(this.Upload_file);
       if (res.code != 200) return;
       // 上传成功后返回图片路径，图片名称
       // !!!

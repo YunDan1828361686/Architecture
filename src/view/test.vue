@@ -4,7 +4,7 @@
     <Checkbox label="1">Age</Checkbox>
     <Checkbox label="2">Province</Checkbox>
   </CheckboxGroup>
-  <Table border :columns="columns2" :data="data3"></Table>
+  <!-- <Table border :columns="columns2" :data="data3"></Table> -->
 </template>
 <script>
 export default {

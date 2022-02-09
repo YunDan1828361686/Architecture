@@ -21,6 +21,8 @@ import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 import Qs from 'qs'
 import axios from 'axios'
+// 滑块验证
+import SlideVerify from 'vue-monoplasty-slide-verify';
 
 // 警告Added non-passive event listener to a scroll-blocking 'mousewheel' event.
 // cnpm i default-passive-events -S
@@ -30,17 +32,19 @@ Vue.use(iView)
 Vue.use(VOrgTree)
 Vue.use(TreeTable)
 Vue.use(cascaderMulti)
-
+Vue.use(SlideVerify);
+// 本地跨域环境
+Vue.prototype.$url = "/api"
 Vue.prototype.$Qs = Qs
 Vue.prototype.axios = axios
 Vue.prototype.$axios = function (url, method, data) {
   if (method.toLowerCase() == "get") {
     return new Promise(function (resolve, reject) {
-      axios({ 'url': '/api' + url, method, params: data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
+      axios({ 'url': Vue.prototype.$url + url, method, params: data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
     })
   } else if (method.toLowerCase() == "post") {
     return new Promise(function (resolve, reject) {
-      axios({ 'url': '/api' + url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
+      axios({ 'url': Vue.prototype.$url + url, method, data }).then(function (response) { resolve(response) }).catch(function (err) { reject(err) })
     })
   }
 }

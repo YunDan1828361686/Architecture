@@ -6,13 +6,18 @@
   <div class="login">
     <div class="login-con">
       <div class="form-con">
-        <div class="login_logo">
-          <a href="#">
-            <img src="../../assets/images/login-Avatar.png" />
-          </a>
+        <div
+          style="position: fixed;height: 440px;width:400px;right: 50px;top: 50px;z-index: 10;"
+          v-if="Verify_if"
+        >
+          <Verify
+            ref="Verify_if_"
+            @Verify_success="Verify_success"
+            @Verify_fail="Verify_fail"
+          />
         </div>
         <div class="login_name">
-          <p>会员登录</p>
+          <h1>用户登录</h1>
         </div>
         <form id="form_login" autocomplete="off" @submit.prevent="onSubmit">
           <div>
@@ -23,8 +28,9 @@
               required
               type="text"
               autocomplete="off"
+              @change="user_name_change"
             />
-            <label alt="请输入账号" placeholder="账号"></label>
+            <label alt="请输入手机号" placeholder="手机号"></label>
           </div>
           <div>
             <input
@@ -36,16 +42,6 @@
               autocomplete="off"
             />
             <label alt="请输入密码" placeholder="密码"></label>
-          </div>
-          <div style="display: flex">
-            <div style="margin-right: 30px">
-              <input id="verVal" class="input_lab" required type="text" />
-              <label alt="请输入验证码" placeholder="验证码"></label>
-            </div>
-            <div>
-              <canvas width="100" height="40" id="verifyCanvas"></canvas>
-              <img id="code_img" />
-            </div>
           </div>
           <div style="display: flex; justify-content: space-around">
             <input
@@ -61,252 +57,243 @@
               "
             />
             <Button
-              type="success"
+              html-type="submit"
+              type="primary"
               long
-              ref="click1"
-              @click="login_btn"
               :loading="login_spin"
+              :disabled="login_disabled"
               >登录</Button
             >
           </div>
+          <div
+            style="display: flex;justify-content: space-between;margin-top:15px"
+          >
+            <p
+              class="password_hover"
+              style="cursor: pointer;"
+              @click="password_hover_click"
+            >
+              忘记密码？
+            </p>
+            <a @click="no_user">立即注册</a>
+          </div>
         </form>
       </div>
+    </div>
+    <img
+      style="width:560px;height:40px;position: absolute;top: 12%;left: 10%;"
+      src="../../assets/images/logo-bg.png"
+      alt=""
+    />
+    <div
+      style="text-align: center;position: absolute;width: 100%;bottom: 50px;color:#2d8cf0;font-size: 18px;"
+    >
+      Copyright　©　2022　航空领域特殊过程评价中心　版权所有
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { Spin } from 'view-design'
-import $ from 'jquery'
+import { mapActions } from "vuex";
+import { Spin } from "view-design";
+import Verify from "@/view/login/Verify.vue";
+import $ from "jquery";
+import { loadMenu } from "@/libs/router-util";
 export default {
-  data () {
+  data() {
     return {
+      Verify_if: false,
+      login_disabled: true,
       login_spin: false,
-      // 生成验证码的函数
-      verificationCode: '',
-      // 验证码
-      verVal: ''
-    }
+      // 路由列表
+      res_list: [],
+    };
   },
-  components: {},
-  mounted () {
-    this.$Message['success']({
-      background: true,
-      content: '账号是super_admin或者admin,密码随便填,验证码随便填！',
-      duration: 5
-    })
-    // 验证码
-    var that = this
-    this.verificationCode = {
-      init () {
-        var nums = [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '0',
-          'A',
-          'B',
-          'C',
-          'D',
-          'E',
-          'F',
-          'G',
-          'H',
-          'I',
-          'J',
-          'K',
-          'L',
-          'M',
-          'N',
-          'O',
-          'P',
-          'Q',
-          'R',
-          'S',
-          'T',
-          'U',
-          'V',
-          'W',
-          'X',
-          'Y',
-          'Z',
-          'a',
-          'b',
-          'c',
-          'd',
-          'e',
-          'f',
-          'g',
-          'h',
-          'i',
-          'j',
-          'k',
-          'l',
-          'm',
-          'n',
-          'o',
-          'p',
-          'q',
-          'r',
-          's',
-          't',
-          'u',
-          'v',
-          'w',
-          'x',
-          'y',
-          'z'
-        ]
-        var str = ''
-        that.verVal = drawCode()
-        // 绘制验证码
-        function drawCode (str) {
-          var canvas = document.getElementById('verifyCanvas') // 获取HTML端画布
-          var context = canvas.getContext('2d') // 获取画布2D上下文
-          context.fillStyle = 'cornflowerblue' // 画布填充色
-          context.fillRect(0, 0, canvas.width, canvas.height) // 清空画布
-          context.fillStyle = 'white' // 设置字体颜色
-          context.font = '25px Arial' // 设置字体
-          var rand = new Array()
-          var x = new Array()
-          var y = new Array()
-          for (var i = 0; i < 4; i++) {
-            rand.push(rand[i])
-            rand[i] = nums[Math.floor(Math.random() * nums.length)]
-            x[i] = i * 20 + 10
-            y[i] = Math.random() * 20 + 20
-            context.fillText(rand[i], x[i], y[i])
-          }
-          str = rand.join('').toUpperCase()
-          // 画3条随机线
-          for (var i = 0; i < 3; i++) {
-            drawline(canvas, context)
-          }
-
-          // 画30个随机点
-          for (var i = 0; i < 30; i++) {
-            drawDot(canvas, context)
-          }
-          convertCanvasToImage(canvas)
-          return str
-        }
-        // 随机线
-        function drawline (canvas, context) {
-          context.moveTo(
-            Math.floor(Math.random() * canvas.width),
-            Math.floor(Math.random() * canvas.height)
-          ) // 随机线的起点x坐标是画布x坐标0位置，y坐标是画布高度的随机数
-          context.lineTo(
-            Math.floor(Math.random() * canvas.width),
-            Math.floor(Math.random() * canvas.height)
-          ) // 随机线的终点x坐标是画布宽度，y坐标是画布高度的随机数
-          context.lineWidth = 0.5 // 随机线宽
-          context.strokeStyle = 'rgba(50,50,50,0.3)' // 随机线描边属性
-          context.stroke() // 描边，即起点描到终点
-        }
-        // 随机点(所谓画点其实就是画1px像素的线，方法不再赘述)
-        function drawDot (canvas, context) {
-          var px = Math.floor(Math.random() * canvas.width)
-          var py = Math.floor(Math.random() * canvas.height)
-          context.moveTo(px, py)
-          context.lineTo(px + 1, py + 1)
-          context.lineWidth = 0.2
-          context.stroke()
-        }
-        // 绘制图片
-        function convertCanvasToImage (canvas) {
-          document.getElementById('verifyCanvas').style.display = 'none'
-          var image = document.getElementById('code_img')
-          image.src = canvas.toDataURL('image/png')
-          return image
-        }
-        // 点击图片刷新
-        document.getElementById('code_img').onclick = function () {
-          resetCode()
-        }
-        function resetCode () {
-          $('#verifyCanvas').remove()
-          $('#code_img').before(
-            '<canvas width="100" height="40" id="verifyCanvas"></canvas>'
-          )
-          that.verVal = drawCode()
-        }
-      }
+  components: { Verify },
+  mounted() {
+    if (this.$store.state.user.login_obj == "Message") {
+      setTimeout(() => {
+        this.$Message.destroy();
+        this.$Message.warning({
+          content: "自动登录验证失败,请输入手机号及密码登录！",
+          background: true,
+          duration: 3,
+        });
+        this.$store.commit("setlogin_obj", "");
+        Spin.hide();
+      }, 300);
     }
-    this.verificationCode.init()
-    // console.log("vue已经被挂载出来了");
   },
   methods: {
-    ...mapActions(['getUserInfo']),
-    onSubmit () {
-      this.login_btn()
+    ...mapActions(["getUserInfo"]),
+    no_user() {
+      this.$router.push("register");
     },
-    login_btn () {
-      this.login_spin = true
-      Spin.show()
-      this.$Message.loading({
-        content: '正在验证信息...',
-        duration: 0
-      })
-      if (
-        document.querySelector('#user_name').value == '' ||
-        document.querySelector('#user_password').value == ''
-      ) {
-        // 账号密码未输入
-        this.$Message.destroy()
-        this.$Message.warning('账号或密码未输入！')
-        this.login_spin = false
-        Spin.hide()
-      } else {
-        // else if (
-        //   $("#verVal")
-        //     .val()
-        //     .toUpperCase() != this.verVal
-        // ) {
-        //   this.$Message.destroy();
-        //   this.$Loading.error();
-        //   this.$Message.error("验证码错误！");
-        //   // 更新验证码
-        //   $("#code_img").click();
-        //   this.login_spin = false;
-        // }
-        let userName = $('#user_name')
-          .val()
-          .trim()
-        let password = $('#user_password').val()
-        // 模拟接口延迟
-        this.getUserInfo({ userName, password })
-          .then(res => {
-            this.$Message.destroy()
-            this.$Message.success({
-              content: '登录成功！',
-              background: true,
-              duration: 3
+    password_hover_click() {
+      this.$router.push("First_step");
+    },
+    user_name_change() {
+      this.login_disabled = true;
+      let username = $("#user_name")
+        .val()
+        .trim();
+      if (username) {
+        // ~假判断
+        if (username != "admin" && username != "system") {
+          this.$axios("/open/validUsername", "GET", { phoneNumber: username })
+            .then((res) => {
+              if (!res.data.length) {
+                setTimeout(() => {
+                  this.$Message["warning"]({
+                    background: true,
+                    content: "您的手机号还未注册，快点击立即注册按钮注册吧～",
+                    duration: 3,
+                  });
+                  this.login_disabled = true;
+                }, 1000);
+              } else {
+                this.login_disabled = false;
+              }
             })
-            this.$router.push({
-              name: this.$config.homeName
-            })
-            this.login_spin = false
-          })
-          .catch(res => {
-            this.$Message.destroy()
-            Spin.hide()
-            this.login_spin = false
-            this.$Message['error']({
-              background: true,
-              content: '登录超时，请联系管理员！',
-              duration: 3
-            })
-          })
+            .catch((err) => {
+              setTimeout(() => {
+                this.$Message["warning"]({
+                  background: true,
+                  content: "您的手机号还未注册，快点击立即注册按钮注册吧～",
+                  duration: 3,
+                });
+                this.login_disabled = true;
+              }, 1000);
+            });
+        } else {
+          this.login_disabled = false;
+        }
       }
-    }
-  }
-}
+    },
+    onSubmit() {
+      this.login_btn();
+    },
+    Verify_success() {
+      this.Verify_if = false;
+      document.querySelector("#user_password").value = "";
+      setTimeout(() => {
+        document.getElementById("user_password").focus();
+      }, 300);
+    },
+    Verify_fail() {},
+    login_btn() {
+      this.login_spin = true;
+      Spin.show();
+      this.$Message.destroy();
+      this.$Message.loading({
+        content: "正在验证信息...",
+        duration: 0,
+      });
+      if (
+        document.querySelector("#user_name").value == "" ||
+        document.querySelector("#user_password").value == ""
+      ) {
+        // 手机号密码未输入
+        this.$Message.destroy();
+        this.$Message.warning("手机号或密码未输入！");
+        this.$Loading.error();
+        this.login_spin = false;
+        Spin.hide();
+      } else {
+        let username = $("#user_name")
+          .val()
+          .trim();
+        let password = $("#user_password").val();
+        // 模拟接口延迟
+        this.getUserInfo({
+          username,
+          password,
+          HttpApi: this.$url,
+        })
+          .then((res) => {
+            setTimeout(() => {
+              this.$Message.destroy();
+              this.$Message.loading({
+                content: "正在获取侧栏...",
+                duration: 0,
+              });
+              this.getmenu();
+            }, 300);
+          })
+          .catch((res) => {
+            // 关闭系统遮罩
+            Spin.hide();
+            // 关闭全局提示
+            this.$Message.destroy();
+            // 是否禁用登录按钮
+            this.login_spin = false;
+            // 项目内部自定义遮罩
+            this.$store.commit("setspinShow_", false);
+            if (res.data) {
+              if (res.data.code == 401) {
+                // 当前重试次数较多，已被锁定！
+                this.$Message["error"]({
+                  background: true,
+                  content: "当前重试次数较多，已被锁定！",
+                  duration: 3,
+                });
+                return;
+              }
+            }
+            if (res.response) {
+              if (res.response.data.status == 500) {
+                this.$Message["error"]({
+                  background: true,
+                  content: "请输入正确的手机号和密码,或者联系管理员",
+                  duration: 3,
+                });
+                this.Verify_if = true;
+                this.$nextTick(() => {
+                  this.$refs.Verify_if_.submitForm();
+                });
+              } else {
+                this.$Message["error"]({
+                  background: true,
+                  content: "未知异常，请联系管理员！",
+                  duration: 3,
+                });
+              }
+            }
+          });
+      }
+    },
+    getmenu() {
+      this.$axios(
+        "/getmenu",
+        "post",
+        this.$Qs.stringify({
+          userId: this.$store.state.user.userId,
+        })
+      ).then((res) => {
+        setTimeout(() => {
+          // 储存未处理时的路由
+          this.$store.commit("setMenuListData", res.data);
+          // 获取处理后的路由
+          let list = loadMenu();
+          // 用处理好的路由更新路由表
+          this.$store.commit("updateMenuList", list);
+          this.$Message.destroy();
+          this.$Message.success({
+            content: "登录成功！",
+            background: true,
+            duration: 3,
+          });
+          // 登录按钮是否禁用
+          this.login_spin = false;
+          // 项目内部自定义遮罩
+          this.$store.commit("setspinShow_", false);
+          // 最外层遮罩用路由跳转里的路由守卫取消
+          this.$router.push({
+            name: this.$config.homeName,
+          });
+        }, 300);
+      });
+    },
+  },
+};
 </script>

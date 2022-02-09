@@ -2,17 +2,17 @@
     width              : 100%;
     min-width          : 1000px;
     height             : 100%;
-    background-image   : url('../../assets/images/login-bg.jpg');
-    background-size    : cover;
-    background-position: center;
+    min-height         : 600px;
+    background-image   : url('../../assets/images/background_img.png');
     position           : relative;
-
+    background-position: center;
+    background-repeat  : no-repeat;
+    background-size    : cover;
     &-con {
         position : absolute;
         right    : 160px;
-        top      : 40%;
+        top      : 50%;
         transform: translateY(-60%);
-        width    : 400px;
 
         &-header {
             font-size  : 16px;
@@ -23,16 +23,18 @@
 
         .form-con {
             padding         : 10px 0 0;
-            height          : 360px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            // height          : 400px;
             width           : 400px;
             padding         : 35px;
             background-color: #ffffff;
-            border-radius   : 6px;
+            // border-radius   : 6px;
             box-sizing      : border-box;
             float           : right;
             margin-right    : 50px;
             position        : relative;
             margin-top      : 50px;
+            border-radius   : 3px;
         }
     }
 }
@@ -46,12 +48,13 @@
     margin            : 0 0 1em;
     padding           : 1em;
     border            : 1px solid #cccccc;
-    border-radius     : 40px;
+    // border-radius     : 40px;
     background        : #fff;
     resize            : none;
     outline           : none;
     padding-left      : 27px;
     letter-spacing    : 2px;
+    border-radius     : 3px;
 }
 
 .input_lab[required]:focus {
@@ -78,7 +81,7 @@
 .input_lab[required]+label[placeholder] {
     display       : block;
     pointer-events: none;
-    line-height   : 40px;
+    line-height   : 37px;
     margin-top    : -52px;
     margin-bottom : 20px;
 }
@@ -115,13 +118,14 @@ input:-webkit-autofill {
 #form_login {
     display       : flex;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 
 .login_logo {
     width        : 120px;
     height       : 120px;
     border       : 5px solid #93defe;
-    border-radius: 100px;
+    // border-radius: 100px;
     background   : #fff;
     text-align   : center;
     line-height  : 110px;
@@ -133,15 +137,17 @@ input:-webkit-autofill {
 .login_name {
     width     : 100%;
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
-.login_name p {
+.login_name h1 {
     width     : 100%;
     text-align: center;
-    font-size : 18px;
-    color     : #444;
-    padding   : 10px 0 20px;
+    color: #3388ff;
+    font-size: 30px;
+    // font-weight: 600;
+    padding   : 10px 0 10px;
+    letter-spacing    : 5px;
 }
 
 .login_logo img {
@@ -160,4 +166,16 @@ input:-webkit-autofill {
     float     : left;
     text-align: center;
     margin-top: 60px;
+}
+
+.station_select_box{
+    .ivu-select-selection{
+        padding-left: 15px;
+        border-radius     : 3px;
+        border: 1px solid #cccccc;
+    }
+}
+
+.password_hover:hover{
+    color: #57a3f3
 }

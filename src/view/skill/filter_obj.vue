@@ -25,7 +25,7 @@ export default {
         "apple",
         "orange",
         "orange",
-        "strawberry"
+        "strawberry",
       ],
       arr_2: ["A", "", "B", null, undefined, "C", "  "],
       arr_3: [
@@ -33,8 +33,8 @@ export default {
         { name: "小红", age: "18" },
         { name: "小刚", age: "16" },
         { name: "小美", age: "17" },
-        { name: "明美", age: "19" }
-      ]
+        { name: "明美", age: "19" },
+      ],
     };
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
     // this.find_update(this.Tree_data, item[0].id);
     // 循环树
     update_disabled(list) {
-      list.map(item => {
+      list.map((item) => {
         // 默认不选中
         // item.selected = false;
         // 可操作
@@ -67,7 +67,7 @@ export default {
     },
     // 循环树
     find_update(list, val) {
-      list.map(item => {
+      list.map((item) => {
         if (item.id == val) {
           // 默认选中
           item.selected = true;
@@ -81,7 +81,7 @@ export default {
           }
         }
       });
-    }
+    },
   },
   watch: {},
   computed: {},
@@ -101,16 +101,18 @@ export default {
     // }, []);
 
     // 删掉空字符串
-    let arr_2_filte = this.arr_2.filter(item => item && item.trim());
+    let arr_2_filte = this.arr_2.filter((item) => item && item.trim());
     // 筛选出数组对象age=="18"的对象
     // 筛选出数组对象name包含"明"的对象
-    let arr_3_filte = this.arr_3.filter(item => {
+    let arr_3_filte = this.arr_3.filter((item) => {
       // 等于18
       // return item.age == "18";
       // 有"明"
       return item.name.indexOf("明") !== -1;
       // 无"明"
       // return item.name.indexOf("明") == -1;
+      // 有"明"为true，无"明"为false
+      // return item.name.includes("明")
     });
     // 删除数组中的apple
     for (let i = 0; i < this.arr_1.length; i++) {
@@ -121,7 +123,7 @@ export default {
       }
     }
     // 检测数组 ages 的所有元素是否都大于等于 18
-    let aaa = this.arr_3.every(item => item.age >= 18);
+    let aaa = this.arr_3.every((item) => item.age >= 18);
     console.log(aaa);
 
     let test =
@@ -160,7 +162,7 @@ export default {
     //     duration: 3,
     //   });
     // }
-  }
+  },
 };
 </script>
 <style lang="less" scoped></style>

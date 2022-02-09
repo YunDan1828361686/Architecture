@@ -6,6 +6,7 @@
       :collapsed-width="64"
       v-model="collapsed"
       class="left-sider"
+      hide-trigger
       :style="{ overflow: 'hidden' }"
     >
       <side-menu
@@ -110,7 +111,7 @@ export default {
     Refresh,
     Fullscreen,
     User,
-    ABackTop
+    ABackTop,
   },
   data() {
     return {
@@ -119,7 +120,7 @@ export default {
       minLogo,
       maxLogo,
       isFullscreen: false,
-      now_padding: ""
+      now_padding: "",
     };
   },
   computed: {
@@ -140,9 +141,9 @@ export default {
         "ParentView",
         ...(this.tagNavList.length
           ? this.tagNavList
-              .filter(item => !(item.meta && item.meta.notCache))
-              .map(item => item.name)
-          : [])
+              .filter((item) => !(item.meta && item.meta.notCache))
+              .map((item) => item.name)
+          : []),
       ];
       return list;
     },
@@ -157,7 +158,7 @@ export default {
     },
     spinShow_() {
       return this.$store.state.app.spinShow_;
-    }
+    },
   },
   methods: {
     ...mapMutations([
@@ -166,7 +167,7 @@ export default {
       "addTag",
       "setHomeRoute",
       "closeTag",
-      "setCollapsed_"
+      "setCollapsed_",
     ]),
     turnToPage(route) {
       let { name, params, query } = {};
@@ -183,7 +184,7 @@ export default {
       this.$router.push({
         name,
         params,
-        query
+        query,
       });
     },
     handleCollapsedChange(state) {
@@ -248,14 +249,14 @@ export default {
         document.getElementById("router_box").style.padding =
           " 20px 20px 20px 10px";
       }
-    }
+    },
   },
   watch: {
     $route(newRoute) {
       const { name, query, params, meta } = newRoute;
       this.addTag({
         route: { name, query, params, meta },
-        type: "push"
+        type: "push",
       });
       this.setBreadCrumb(newRoute);
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
@@ -266,11 +267,15 @@ export default {
       this.setCollapsed_(new Date());
       // this.refresh_loading();
     },
-    spinShow_(newVal) {
-      // 监听vuex内  更新遮罩状态
-      // this.spinShow = true;
-      this.spinShow = newVal;
-    }
+    spinShow_: {
+      handler(newVal, oldVal) {
+        // 监听vuex内  更新遮罩状态
+        // this.spinShow = true;
+        this.spinShow = newVal;
+      },
+      // 加上之后第一次定义时就会执行
+      immediate: true,
+    },
   },
   mounted() {
     /**
@@ -280,13 +285,13 @@ export default {
     this.setHomeRoute(routers);
     const { name, params, query, meta } = this.$route;
     this.addTag({
-      route: { name, params, query, meta }
+      route: { name, params, query, meta },
     });
     this.setBreadCrumb(this.$route);
     // 如果当前打开页面不在标签栏中，跳到homeName页
-    if (!this.tagNavList.find(item => item.name === this.$route.name)) {
+    if (!this.tagNavList.find((item) => item.name === this.$route.name)) {
       this.$router.push({
-        name: this.$config.homeName
+        name: this.$config.homeName,
       });
     }
     this.$nextTick(() => {
@@ -308,7 +313,7 @@ export default {
         on(window, "resize", this.style_padding_Y);
       }, 200);
     });
-  }
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -316,18 +321,6 @@ export default {
   position: relative;
   width: 100%;
   padding: 20px 20px 20px 10px;
-}
-/* fade-transform */
-.fade-transform-enter-active {
-  transition: all 0.6s ease;
-}
-.fade-transform-leave-active {
-  transition: all 0.2s ease-out;
-}
-.fade-transform-enter,
-.fade-transform-leave-to {
-  opacity: 0;
-  transform: translateX(50px);
 }
 /* 可以设置不同的进入和离开动画 */
 /* 设置持续时间和动画函数 */
@@ -342,5 +335,11 @@ export default {
 .slide-fade-leave-to {
   transform: translateY(-100px);
   opacity: 0;
+}
+.main-layout-con {
+  background-color: #f0f4f3;
+}
+.left-sider {
+  box-shadow: 0px 10px 5px 0px rgba(98, 98, 98, 0.4);
 }
 </style>

@@ -1,17 +1,33 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
-  mounted() {}
+  mounted() {},
 };
 </script>
 
 <style lang="less">
+/* fade-transform */
+.fade-transform-enter-active {
+  transition: all 0.6s ease;
+}
+.fade-transform-leave-active {
+  transition: all 0.2s ease;
+}
+.fade-transform-enter,
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
+}
 .size {
   width: 100%;
   height: 100%;
@@ -22,6 +38,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
+  font-family: Microsoft YaHei,sans-serif;
 }
 #app {
   overflow: overlay;
@@ -86,26 +103,9 @@ body {
   overflow: visible;
 }
 </style>
-/***
- *                    _ooOoo_
- *                   o8888888o
- *                   88" . "88
- *                   (| -_- |)
- *                    O\ = /O
- *                ____/`---'\____
- *              .   ' \\| |// `.
- *               / \\||| : |||// \
- *             / _||||| -:- |||||- \
- *               | | \\\ - /// | |
- *             | \_| ''\---/'' | |
- *              \ .-\__ `-` ___/-. /
- *           ___`. .' /--.--\ `. . __
- *        ."" '< `.___\_<|>_/___.' >'"".
- *       | | : `- \`.;`\ _ /`;.`/ - ` : | |
- *         \ \ `-. \_ __\ /__ _/ .-` / /
- * ======`-.____`-.___\_____/___.-`____.-'======
- *                    `=---='
- *
- * .............................................
- *          佛祖保佑             永无BUG
- */
+/*** * _ooOoo_ * o8888888o * 88" . "88 * (| -_- |) * O\ = /O * ____/`---'\____ *
+. ' \\| |// `. * / \\||| : |||// \ * / _||||| -:- |||||- \ * | | \\\ - /// | | *
+| \_| ''\---/'' | | * \ .-\__ `-` ___/-. / * ___`. .' /--.--\ `. . __ * ."" '<
+`.___\_<|>_/___.' >'"". * | | : `- \`.;`\ _ /`;.`/ - ` : | | * \ \ `-. \_ __\
+/__ _/ .-` / / * ======`-.____`-.___\_____/___.-`____.-'====== * `=---=' * *
+............................................. * 佛祖保佑 永无BUG */
