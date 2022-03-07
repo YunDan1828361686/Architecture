@@ -69,16 +69,17 @@
         >
           <div>
             <span style="margin-right: 10px">共{{ table_total_1 }}条记录</span>
-            <span>已选择{{ selectedSum_1 }}条记录</span>
+            <span>已勾选{{ selectedSum_1 }}条记录</span>
           </div>
           <div>
             <Page
+              show-sizer
+              show-elevator
               :total="table_total_1"
               :current="table_current_1"
               @on-change="table_Pagechange_1"
+              :page-size="this.table_form_1.page_size"
               @on-page-size-change="table_PageSizechange_1"
-              show-sizer
-              show-elevator
             ></Page>
           </div>
         </div>
@@ -153,25 +154,6 @@ export default {
           // tooltip: true,
           minWidth: 200,
           render: (h, params) => {
-            // //使用H5自带的title属性
-            // return h("div", [
-            //   h(
-            //     "span",
-            //     {
-            //       style: {
-            //         display: "inline-block",
-            //         width: "100%",
-            //         overflow: "hidden",
-            //         textOverflow: "ellipsis",
-            //         whiteSpace: "nowrap",
-            //       },
-            //       domProps: {
-            //         title: params.row.address,
-            //       },
-            //     },
-            //     params.row.address
-            //   ),
-            // ]);
             return h("div", [
               h(
                 "Tooltip",
@@ -265,9 +247,9 @@ export default {
       // 获取表格数据时用到的参数
       table_form_1: {
         // 获取第几页的数据
-        page_current: "",
+        page_current: "1",
         // 分页的粒度
-        page_size: "",
+        page_size: "10",
         // 检索
         age: "",
         search_select_1: "全部",
@@ -355,7 +337,7 @@ export default {
       }
     },
     // 表数据
-    TableData_1: _debounce(function () {
+    TableData_1: _debounce(function() {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
@@ -368,6 +350,8 @@ export default {
         this.table_total_1 = res.data.total;
         // 当前页码
         this.table_current_1 = res.data.current;
+        // 当前粒度
+        this.table_form_1.page_size = res.data.size;
         // 表数据
         this.tableData_1 = res.data.TableData;
       });
@@ -450,8 +434,7 @@ export default {
             num_id: "6",
             name: "John Brown",
             age: 18,
-            address:
-              "写死的测试用的",
+            address: "写死的测试用的",
           },
           {
             num_id: "8",
@@ -504,9 +487,9 @@ export default {
     },
   },
   watch: {
-    tableData_1: function () {
+    tableData_1: function() {
       // 给表格数据赋值后并渲染完成表格后执行
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         // Spin.hide();
         this.setChecked();
         this.loading_1 = false;
