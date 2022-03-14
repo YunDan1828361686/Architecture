@@ -1,17 +1,17 @@
 import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
-import { forEach, hasOneOf, objEqual } from '@/libs/tools'
+import { forEach, objEqual, base64encode, base64decode } from '@/libs/tools'
 const { title, cookieExpires } = config
 
 export const TOKEN_KEY = 'token'
 
 export const setToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
+  Cookies.set(TOKEN_KEY, base64encode(token), { expires: cookieExpires || 1 })
 }
 
 export const getToken = () => {
-  const token = Cookies.get(TOKEN_KEY)
+  const token = base64decode(Cookies.get(TOKEN_KEY))
   if (token) return token
   else return false
 }
@@ -33,7 +33,7 @@ export const getMenuByRouter = (list) => {
         name: item.name,
         meta: item.meta
       }
-      if ((hasChild(item) || (item.meta && item.meta.showAlways)) ) {
+      if ((hasChild(item) || (item.meta && item.meta.showAlways))) {
         obj.children = getMenuByRouter(item.children)
       }
       if (item.meta && item.meta.href) obj.href = item.meta.href
