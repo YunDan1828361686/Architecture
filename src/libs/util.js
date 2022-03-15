@@ -11,8 +11,8 @@ export const setToken = (token) => {
 }
 
 export const getToken = () => {
-  const token = base64decode(Cookies.get(TOKEN_KEY))
-  if (token) return token
+  const token = Cookies.get(TOKEN_KEY)
+  if (token) return base64decode(token)
   else return false
 }
 
