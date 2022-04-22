@@ -352,6 +352,13 @@ export default {
         this.table_current_1 = res.data.current;
         // 当前粒度
         this.table_form_1.page_size = res.data.size;
+        // 序号
+        res.data.TableData.map((item, index) => {
+          item.index_ =
+            this.table_form_1.page_size * (this.table_current_1 - 1) +
+            index +
+            1;
+        });
         // 表数据
         this.tableData_1 = res.data.TableData;
       });
@@ -360,6 +367,11 @@ export default {
     table_Pagechange_1(index) {
       this.table_form_1.page_current = index;
       this.loading_1 = true;
+      // 翻页 滚动到顶部
+      setTimeout(() => {
+        //这里要延迟下滚动
+        document.getElementsByClassName("ivu-table-body")[0].scroll(0, 0);
+      }, 400);
       this.TableData_1();
     },
     // 切换每页显示数量

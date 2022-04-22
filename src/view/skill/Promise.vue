@@ -6,9 +6,30 @@
 export default {
   name: "Promise",
   data() {
-    return {};
+    return {
+      list: [1, 2, 3],
+    };
   },
-  methods: {},
+  methods: {
+    // 多个不同的参数（同步）按顺序执行一个异步方法（接口）去执行一些事情，且同步执行回调函数
+    getload(item, index) {
+      return new Promise((resolve, reject) => {
+        setTimeout(function() {
+          console.log(2);
+          resolve(2 + item);
+        }, 1000);
+      });
+    },
+    async loadData() {
+      for (let index = 0; index < this.list; index++) {
+        const item = this.list[index];
+        //获取审核员
+        await this.getload(item, index).then((data) => {
+          console.log(data);
+        });
+      }
+    },
+  },
   mounted() {
     const this_ = this;
     async function Promise1() {
