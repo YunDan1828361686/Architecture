@@ -151,6 +151,17 @@ export default {
     //   });
     // }
   },
+  recursion_time(Review_time_) {
+    let Review_time_status;
+    if (new Date().getTime() > Review_time_ + 1000 * 60 * 60 * 24 * 3) {
+      Review_time_status = this.recursion_time(
+        Review_time_ + 1000 * 60 * 60 * 24 * 3
+      );
+    } else {
+      return Review_time_ + 1000 * 60 * 60 * 24 * 3;
+    }
+    return Review_time_status;
+  },
 };
 </script>
 <style lang="less" scoped></style>
