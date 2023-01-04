@@ -121,6 +121,48 @@ export default {
           width: 90,
           // 排序
           sortable: "true",
+          renderHeader(h, params) {
+            return h(
+              "tooltip",
+              {
+                props: {
+                  transfer: true,
+                  placement: "top",
+                  "max-width": "240", //设最大宽度，添加此属性后文字太长会换行，否则浮窗里只会显示一些文字，多余的文字在浮窗外且看不见
+                },
+              },
+              [
+                h("span", [
+                  //原title在这里写
+                  h("span", "标题"),
+                  //图标，无需图标注释即可
+                  h("Icon", {
+                    // 这里注释是显示 问号图标形式触发
+                    props: {
+                      type: "md-help-circle",
+                      color: "#c8c8c8",
+                      size: "16",
+                    },
+                    style: {
+                      "margin-left": "5px",
+                    },
+                  }),
+                ]),
+                h(
+                  "div",
+                  {
+                    slot: "content",
+                  },
+                  [
+                    //换行多个提示就增加数组元素
+                    h("p", "1、XXXXXXXXXX"),
+                    h("p", "2、YYYYYYYYYY"),
+                    h("p", "3、ZZZZZZZZZZ"),
+                  ]
+                ),
+              ]
+            );
+          },
         },
         {
           title: "姓名",
@@ -337,7 +379,7 @@ export default {
       }
     },
     // 表数据
-    TableData_1: _debounce(function() {
+    TableData_1: _debounce(function () {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
@@ -499,9 +541,9 @@ export default {
     },
   },
   watch: {
-    tableData_1: function() {
+    tableData_1: function () {
       // 给表格数据赋值后并渲染完成表格后执行
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         // Spin.hide();
         this.setChecked();
         this.loading_1 = false;
