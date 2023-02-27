@@ -11,7 +11,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "cascader-multi": "^2.0.3",
     "countup": "^1.8.2",
     "default-passive-events": "^1.0.10",
