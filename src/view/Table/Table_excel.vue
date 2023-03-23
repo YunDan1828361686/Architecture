@@ -291,7 +291,7 @@ export default {
         // 获取第几页的数据
         page_current: "1",
         // 分页的粒度
-        page_size: "10",
+        page_size: 10,
         // 检索
         age: "",
         search_select_1: "全部",
