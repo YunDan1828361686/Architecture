@@ -14,7 +14,7 @@ export default {
     // 多个不同的参数（同步）按顺序执行一个异步方法（接口）去执行一些事情，且同步执行回调函数
     getload(item, index) {
       return new Promise((resolve, reject) => {
-        setTimeout(function() {
+        setTimeout(function () {
           console.log(2);
           resolve(2 + item);
         }, 1000);
@@ -80,9 +80,47 @@ export default {
       console.log(pAres, pBres);
     });
 
+    let pC = new Promise((resolve, reject) => {
+      request({
+        url: "datas/dsDataSource/countSourcesNum",
+        method: "post",
+      })
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err.data);
+        });
+    });
+    let pD = new Promise((resolve, reject) => {
+      request({
+        url: "datas/dsTransferJobLog/queryListCurrentDay",
+        method: "post",
+      })
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err.data);
+        });
+    });
+    Promise.all(
+      [pC, pD].map((p) => {
+        return p.then((e) => p).catch((err) => "0");
+      })
+    )
+      .then((result) => {
+        let pAres = result[0];
+        let pBres = result[1];
+        console.log(pAres, pBres);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     function timeoutA() {
       return new Promise((resolve, reject) => {
-        setTimeout(function() {
+        setTimeout(function () {
           console.log(1);
           resolve(1);
         }, 1000);
@@ -91,7 +129,7 @@ export default {
 
     function timeoutB(val) {
       return new Promise((resolve, reject) => {
-        setTimeout(function() {
+        setTimeout(function () {
           console.log(2);
           resolve(2 + val);
         }, 1000);

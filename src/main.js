@@ -33,8 +33,8 @@ Vue.use(VOrgTree)
 Vue.use(TreeTable)
 Vue.use(cascaderMulti)
 Vue.use(SlideVerify);
-// 本地跨域环境
-Vue.prototype.$url = "/api"
+// 生产环境用""不跨域，其他环境用/api跨域
+Vue.prototype.$url = process.env.NODE_ENV === 'production' ? '' : '/api'
 Vue.prototype.$Qs = Qs
 Vue.prototype.axios = axios
 Vue.prototype.$axios = function (url, method, data) {
