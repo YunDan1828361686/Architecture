@@ -13,6 +13,7 @@
 <script>
 // 遮罩
 import { Spin } from "view-design";
+import _ from "lodash";
 export default {
   name: "filter_obj",
   data() {
@@ -27,7 +28,7 @@ export default {
         "orange",
         "strawberry",
       ],
-      arr_2: ["A", "", "B", null, undefined, "C", "  "],
+      arr_2: ["A", "", "B", "C", "  ", false, null, 0, "", undefined, NaN],
       arr_3: [
         { name: "小明", age: "18" },
         { name: "小红", age: "18" },
@@ -74,6 +75,19 @@ export default {
   watch: {},
   computed: {},
   mounted() {
+    // 数组对象去重,完全去重
+    var arr_1 = [
+      { name: "小明", age: "18" },
+      { name: "小红", age: "18" },
+      { name: "小刚", age: "16" },
+      { name: "小美", age: "17" },
+      { name: "明美", age: "19" },
+      { name: "明美", age: "19" },
+      { name: "明美", age: "20" },
+    ];
+    var arr_2 = _.uniqWith(arr_1, _.isEqual);
+    console.log(arr_1, arr_2, "================");
+
     // 去重，仅保留第一次出现的元素
     let arr_1_filte = this.arr_1.filter((element, index, self) => {
       return self.indexOf(element) === index;
@@ -90,6 +104,7 @@ export default {
 
     // 删掉空字符串
     let arr_2_filte = this.arr_2.filter((item) => item && item.trim());
+    console.log(arr_2_filte);
     // 筛选出数组对象age=="18"的对象
     // 筛选出数组对象name包含"明"的对象
     let arr_3_filte = this.arr_3.filter((item) => {
@@ -115,9 +130,9 @@ export default {
     console.log(aaa);
 
     let test =
-      '<p align="center"><img align="absmiddle"  width="750"  height="584"  src="/DSJPIC/MHSGBG_20210315/MHSGBG20003_25_1.jpg"/></p >';
+      '<p align="center"><img align="absmiddle" width="750" height="584" src="/DSJPIC/MHSGBG_20210315/MHSGBG20003_25_1.jpg"/></p >';
     test = test.replace(
-      /src=\"/g,
+      /src="/g,
       `src="http://10.3.2.20/api/user/avatar?uid=200/xxxxxxxxxxxxxxxx`
     );
     // str = this.table_form_1_data.roomName.replace(/(^\s*)|(\s*$)/g, ""); //去除空格;

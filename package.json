@@ -18,6 +18,7 @@
     "echarts": "^4.9.0",
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.0",
+    "lodash": "^4.17.21",
     "qs": "^6.7.0",
     "tree-table-vue": "^1.1.0",
     "v-click-outside-x": "^4.0.19",
