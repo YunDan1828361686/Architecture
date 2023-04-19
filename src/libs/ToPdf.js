@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-
+// Horizontal是横
 export const Save_PDF_Horizontal = (className, fileName) => {
   return new Promise((resolve, reject) => {
     let title = fileName || '标题';// 导出文件名，默认为“标题”
@@ -94,6 +94,7 @@ export const Save_PDF_Horizontal = (className, fileName) => {
     toCanvas_l();
   });
 };
+// Vertical是竖
 export const Save_PDF_Vertical = (className, fileName) => {
   return new Promise((resolve, reject) => {
     let title = fileName || '标题';// 导出文件名，默认为“标题”
