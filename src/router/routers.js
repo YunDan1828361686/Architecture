@@ -118,6 +118,14 @@ export default [
     component: Main,
     children: [
       {
+        path: 'Time',
+        name: 'Time',
+        meta: {
+          title: 'Time'
+        },
+        component: () => import('@/view/skill/Time.vue')
+      },
+      {
         path: 'Promise',
         name: 'Promise',
         meta: {

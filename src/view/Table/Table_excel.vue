@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Row style="margin-bottom: 20px">
+    <Row style="padding-bottom: 20px" class="ExportedEle">
       <Col span="24">
         <div style="float: left">
           <Input @on-search="search_input_change_1" search enter-button>
@@ -32,6 +32,22 @@
           >
             <Button type="error" icon="md-trash" @click="removes_1"></Button>
           </Tooltip>
+          <Button
+            type="info"
+            icon="md-add"
+            @click="handleWatermarkAdd"
+            style="margin-left: 20px"
+          >
+            添加水印
+          </Button>
+          <Button
+            type="info"
+            icon="md-add"
+            @click="handleWatermarkDelete"
+            style="margin-left: 20px"
+          >
+            去除水印
+          </Button>
           <More_excel
             ref="More_excel"
             @Dropdown_change_1="Dropdown_change_1"
@@ -48,6 +64,7 @@
       ref="table1"
       height="522"
       highlight-row
+      class="ExportedEle"
       :data="tableData_1"
       :loading="loading_1"
       :columns="tableColumns_1"
@@ -57,7 +74,7 @@
       @on-select-cancel="handleCancelRow_1"
       @on-select-all-cancel="handleSelectAll_1"
     ></Table>
-    <Row>
+    <Row class="ExportedEle">
       <Col span="24">
         <div
           style="
@@ -93,6 +110,12 @@ import { Spin } from "view-design";
 import Drawer_add from "./Drawer_add.vue";
 import More_excel from "./More_excel.vue";
 import { _debounce, _throttle } from "@/libs/Perform_optimization.js";
+import {
+  WatermarkAdd,
+  WatermarkDelete,
+  Save_PDF_Horizontal,
+  Save_PDF_Vertical,
+} from "@/libs/ToPdf.js";
 
 export default {
   name: "Table_excel",
@@ -118,7 +141,7 @@ export default {
           title: "序号",
           key: "num_id",
           align: "center",
-          width: 90,
+          width: 120,
           // 排序
           sortable: "true",
           renderHeader(h, params) {
@@ -324,6 +347,24 @@ export default {
     };
   },
   methods: {
+    handleWatermarkAdd() {
+      // Spin.show();
+      WatermarkAdd(
+        "测试水印第一行",
+        "测试水印第二行",
+        this.$refs.table1.$el
+      ).then(() => {
+        // ExportedEle为要转pdf的元素class，测试为导出的文件名
+        // Horizontal是横，Vertical是竖
+        // Save_PDF_Horizontal("ExportedEle", "测试");
+        Save_PDF_Vertical("ExportedEle", "测试").finally(() => {
+          Spin.hide();
+        });
+      });
+    },
+    handleWatermarkDelete() {
+      WatermarkDelete();
+    },
     //  选中某一行
     handleSelectRow_1(selection, row) {
       this.selectedData_1.add(row.num_id);

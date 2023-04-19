@@ -36,6 +36,13 @@ Vue.use(SlideVerify);
 // 生产环境用""不跨域，其他环境用/api跨域
 Vue.prototype.$url = process.env.NODE_ENV === 'production' ? '' : '/api'
 Vue.prototype.$Qs = Qs
+
+// 引入插件
+Vue.prototype.$dayjs = require('dayjs')
+// 引入插件
+import isBetween from 'dayjs/plugin/isBetween';
+Vue.prototype.$dayjs.extend(isBetween);
+
 Vue.prototype.axios = axios
 Vue.prototype.$axios = function (url, method, data) {
   if (method.toLowerCase() == "get") {
