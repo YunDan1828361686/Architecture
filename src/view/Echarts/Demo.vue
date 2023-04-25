@@ -7,13 +7,13 @@
       <span class="bottom-left border-span"></span>
       <span class="bottom-right border-span"></span>
       <Card>
-        <div id="echarts_index_1"></div>
+        <div id="echarts_index_1" ref="echarts_index_1"></div>
         <Spin size="large" fix v-if="spinShow_1"></Spin>
       </Card>
     </div>
   </div>
 </template>
- 
+
 <script>
 // 哪个组件用  在哪引入echarts
 // 浏览器窗口大小发生变化
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       spinShow_1: false,
-      myCharts_dom_1: [],
+      myCharts_dom: [],
       echarts_data: [],
     };
   },
@@ -43,7 +43,7 @@ export default {
       if (this.$route.name == "Demo") {
         {
           console.log("重新渲染了");
-          this.myCharts_dom_1.map((item) => {
+          this.myCharts_dom.map((item) => {
             console.log(item);
             item.resize();
           });
@@ -55,7 +55,6 @@ export default {
       return Math.ceil(Math.max(...arr) / 10) * 10; // 找到最大值 除10 向上取整 乘10 输出最大值
     },
     up_init() {
-      var myCharts = document.getElementById("echarts_index_1");
       let option = {
         // 1、 格式化提示信息
         title: {
@@ -138,14 +137,29 @@ export default {
         ],
         series: this.echarts_data.yAxis_series,
       };
+      // 如果有别的事件导致这个echarts重新setOption了，就会导致这个echarts的click或别的事件多次执行，所以要清理并销毁
+      if (this.myCharts_dom[0]) {
+        // 清理并销毁echarts的init实例
+        this.myCharts_dom[0].clear();
+        this.myCharts_dom[0].dispose();
+      }
       // 当数据更新了 在dom中渲染后 再去渲染echarts
+      // var myCharts = this.$refs.echarts_index_1;
+      var myCharts = document.getElementById("echarts_index_1");
+      // 存储已经init的echarts实例
+      this.$set(this.myCharts_dom, "0", echarts.init(myCharts, "tdTheme"));
       this.$nextTick(() => {
-        // 存储已经init的echarts实例，注意如果有多个echarts请用class，如触发时机不同，请关注this.myCharts_dom_1
-        this.$set(this.myCharts_dom_1, "0", echarts.init(myCharts, "tdTheme"));
         // 让第一个加进去的渲染
-        this.myCharts_dom_1[0].setOption(option, true);
+        this.myCharts_dom[0].setOption(option, true);
+        // 添加点击事件
+        this.EchartsClick();
         // 窗口发生改变重新加载echarts
         on(window, "resize", this.resize);
+      });
+    },
+    EchartsClick() {
+      this.myCharts_dom[0].on("click", (params) => {
+        console.log(params);
       });
     },
   },
@@ -173,7 +187,7 @@ export default {
   },
 };
 </script>
- 
+
 <style lang="less" scoped>
 #echarts_index_1 {
   margin-top: 20px;

@@ -1,7 +1,8 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+
 // Horizontal是横
-export const Save_PDF_Horizontal = (className, fileName) => {
+export const Save_PDF_Horizontal = (className, fileName, paddingSize = 0) => {
   return new Promise((resolve, reject) => {
     let title = fileName || '标题';// 导出文件名，默认为“标题”
     const children = document.getElementsByClassName(className);
@@ -14,10 +15,8 @@ export const Save_PDF_Horizontal = (className, fileName) => {
           scale: 4 // 提升导出的文件的分辨率
         }).then(res => { // 计算每个dom的高度，方便后面计算分页
           // 设置padding也就是要导出的元素在pdf中的边距
-          res.imgWidth = 841.89 - 60;
-          res.imgHeight = (841.89 - 60) / res.width * res.height;
-          // res.imgWidth = 841.89;
-          // res.imgHeight = 841.89 / res.width * res.height;
+          res.imgWidth = 841.89 - paddingSize;
+          res.imgHeight = (841.89 - paddingSize) / res.width * res.height;
           canvas.push(res);
           i++;
           if (canvas.length === children.length) {
@@ -72,13 +71,13 @@ export const Save_PDF_Horizontal = (className, fileName) => {
           const img = page[k];
           if (img.imgHeight < 565.28) { // 当某个dom高度小于页面宽度，直接添加图片
             if (img.imgHeight != 0) {
-              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', 30, position, img.imgWidth, img.imgHeight);
+              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', paddingSize / 2, position, img.imgWidth, img.imgHeight);
               position += img.imgHeight;
               allH -= img.imgHeight;
             }
           } else { // 当某个dom高度大于页面宽度，则需另行处理
             while (allH > 0) {
-              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', 30, position, img.imgWidth, img.imgHeight);
+              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', paddingSize / 2, position, img.imgWidth, img.imgHeight);
               allH -= img.topH || 565.28;
               position -= img.topH || 565.28;
               img.topH = 0;
@@ -94,8 +93,9 @@ export const Save_PDF_Horizontal = (className, fileName) => {
     toCanvas_l();
   });
 };
+
 // Vertical是竖
-export const Save_PDF_Vertical = (className, fileName) => {
+export const Save_PDF_Vertical = (className, fileName, paddingSize = 0) => {
   return new Promise((resolve, reject) => {
     let title = fileName || '标题';// 导出文件名，默认为“标题”
     const children = document.getElementsByClassName(className);
@@ -108,10 +108,8 @@ export const Save_PDF_Vertical = (className, fileName) => {
           scale: 4 // 提升导出的文件的分辨率
         }).then(res => { // 计算每个dom的高度，方便后面计算分页
           // 设置padding也就是要导出的元素在pdf中的边距
-          res.imgWidth = 595.28 - 60;
-          res.imgHeight = (595.28 - 60) / res.width * res.height;
-          // res.imgWidth = 595.28;
-          // res.imgHeight = 592.28 / res.width * res.height;
+          res.imgWidth = 595.28 - paddingSize;
+          res.imgHeight = (595.28 - paddingSize) / res.width * res.height;
           canvas.push(res);
           i++;
           if (canvas.length === children.length) {
@@ -166,13 +164,13 @@ export const Save_PDF_Vertical = (className, fileName) => {
           const img = page[k];
           if (img.imgHeight < 811.89) { // 当某个dom高度小于页面宽度，直接添加图片
             if (img.imgHeight != 0) {
-              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', 30, position, img.imgWidth, img.imgHeight);
+              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', paddingSize / 2, position, img.imgWidth, img.imgHeight);
               position += img.imgHeight;
               allH -= img.imgHeight;
             }
           } else { // 当某个dom高度大于页面宽度，则需另行处理
             while (allH > 0) {
-              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', 30, position, img.imgWidth, img.imgHeight);
+              PDF.addImage(img.toDataURL('image/jpeg', 1.0), 'JPEG', paddingSize / 2, position, img.imgWidth, img.imgHeight);
               allH -= img.topH || 811.89;
               position -= img.topH || 811.89;
               img.topH = 0;
@@ -188,6 +186,7 @@ export const Save_PDF_Vertical = (className, fileName) => {
     toCanvas();
   });
 };
+
 // 添加水印 通过插入元素实现
 export const WatermarkAdd = (str1, str2, dom) => {
   return new Promise((resolve, reject) => {

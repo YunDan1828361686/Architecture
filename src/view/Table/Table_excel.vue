@@ -347,8 +347,10 @@ export default {
     };
   },
   methods: {
+    // 添加水印的按钮点击
     handleWatermarkAdd() {
-      // Spin.show();
+      Spin.show();
+      // 添加水印
       WatermarkAdd(
         "测试水印第一行",
         "测试水印第二行",
@@ -357,12 +359,16 @@ export default {
         // ExportedEle为要转pdf的元素class，测试为导出的文件名
         // Horizontal是横，Vertical是竖
         // Save_PDF_Horizontal("ExportedEle", "测试");
-        Save_PDF_Vertical("ExportedEle", "测试").finally(() => {
+        Save_PDF_Vertical("ExportedEle", "测试", 60).finally(() => {
+          // 清除水印
+          this.handleWatermarkDelete();
           Spin.hide();
         });
       });
     },
+    // 去除水印的按钮点击
     handleWatermarkDelete() {
+      // 去除水印
       WatermarkDelete();
     },
     //  选中某一行
