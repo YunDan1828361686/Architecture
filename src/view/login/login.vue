@@ -7,7 +7,14 @@
     <div class="login-con">
       <div class="form-con">
         <div
-          style="position: fixed;height: 440px;width:400px;right: 50px;top: 50px;z-index: 10;"
+          style="
+            position: fixed;
+            height: 440px;
+            width: 400px;
+            right: 50px;
+            top: 50px;
+            z-index: 10;
+          "
           v-if="Verify_if"
         >
           <Verify
@@ -32,13 +39,36 @@
             />
             <label alt="请输入手机号" placeholder="手机号"></label>
           </div>
-          <div>
+          <div style="position: relative">
+            <div
+              style="
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                height: 40px;
+                width: 40px;
+                line-height: 40px;
+                text-align: center;
+                cursor: pointer;
+              "
+            >
+              <Icon
+                v-if="see_password"
+                @click="see_password = false"
+                type="ios-eye-off-outline"
+              />
+              <Icon
+                v-if="!see_password"
+                @click="see_password = true"
+                type="ios-eye-outline"
+              />
+            </div>
             <input
               id="user_password"
               name="user_password"
               class="input_lab"
               required
-              type="password"
+              :type="see_password ? 'password' : 'text'"
               autocomplete="off"
             />
             <label alt="请输入密码" placeholder="密码"></label>
@@ -66,11 +96,15 @@
             >
           </div>
           <div
-            style="display: flex;justify-content: space-between;margin-top:15px"
+            style="
+              display: flex;
+              justify-content: space-between;
+              margin-top: 15px;
+            "
           >
             <p
               class="password_hover"
-              style="cursor: pointer;"
+              style="cursor: pointer"
               @click="password_hover_click"
             >
               忘记密码？
@@ -81,12 +115,25 @@
       </div>
     </div>
     <img
-      style="width:560px;height:40px;position: absolute;top: 12%;left: 10%;"
+      style="
+        width: 560px;
+        height: 40px;
+        position: absolute;
+        top: 12%;
+        left: 10%;
+      "
       src="../../assets/images/logo-bg.png"
       alt=""
     />
     <div
-      style="text-align: center;position: absolute;width: 100%;bottom: 50px;color:#2d8cf0;font-size: 18px;"
+      style="
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        bottom: 50px;
+        color: #2d8cf0;
+        font-size: 18px;
+      "
     >
       Copyright　©　2022　航空领域特殊过程评价中心　版权所有
     </div>
@@ -107,6 +154,7 @@ export default {
       login_spin: false,
       // 路由列表
       res_list: [],
+      see_password: true,
     };
   },
   components: { Verify },
@@ -134,9 +182,7 @@ export default {
     },
     user_name_change() {
       this.login_disabled = true;
-      let username = $("#user_name")
-        .val()
-        .trim();
+      let username = $("#user_name").val().trim();
       if (username) {
         // ~假判断
         if (username != "admin" && username != "system") {
@@ -200,9 +246,7 @@ export default {
         this.login_spin = false;
         Spin.hide();
       } else {
-        let username = $("#user_name")
-          .val()
-          .trim();
+        let username = $("#user_name").val().trim();
         let password = $("#user_password").val();
         // 模拟接口延迟
         this.getUserInfo({
