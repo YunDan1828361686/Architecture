@@ -16,6 +16,7 @@
     "countup": "^1.8.2",
     "dayjs": "^1.11.7",
     "default-passive-events": "^1.0.10",
+    "dhtmlx-gantt": "^8.0.1",
     "echarts": "^4.9.0",
     "html2canvas": "^1.4.1",
     "jquery": "^3.4.1",

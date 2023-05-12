@@ -361,7 +361,15 @@ export default [
           title: 'Demo'
         },
         component: () => import('@/view/Echarts/Demo.vue')
-      }
+      },
+      {
+        path: 'Gantt',
+        name: 'Gantt',
+        meta: {
+          title: 'Gantt'
+        },
+        component: () => import('@/view/Echarts/Gantt.vue')
+      },
     ]
   },
   {
