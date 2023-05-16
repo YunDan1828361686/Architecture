@@ -24,67 +24,78 @@ export default {
           {
             id: 11,
             text: "Project #1",
-            type: gantt.config.types.project,
+            type: "project",
             progress: 0.6,
+            assigned: "entry1",
             open: true,
           },
           {
             id: 12,
             text: "Task #1",
             start_date: "2022-03-14",
+            type: "task",
             duration: "5",
             parent: "11",
             progress: 1,
+            assigned: "entry1",
             open: true,
           },
           {
             id: 13,
             text: "Task #2",
             start_date: "2022-03-08",
-            type: gantt.config.types.project,
+            type: "meeting",
             parent: "11",
             progress: 0.5,
+            assigned: "entry1",
             open: true,
           },
           {
             id: 14,
             text: "Task #3",
             start_date: "2022-03-09",
+            type: "task",
             duration: "6",
             parent: "11",
             progress: 0.8,
+            assigned: "entry2",
             open: true,
           },
           {
             id: 15,
             text: "Task #4",
-            type: gantt.config.types.project,
+            type: "task",
             parent: "11",
             progress: 0.2,
+            assigned: "entry2",
             open: true,
           },
           {
             id: 16,
-            text: "Final milestone",
+            text: "Final project",
             start_date: "2022-03-06",
-            type: gantt.config.types.meeting,
+            type: "meeting",
             parent: "11",
             progress: 0,
+            assigned: "entry2",
             open: true,
           },
           {
             id: 17,
             text: "Task #2.1",
             start_date: "2022-03-05",
+            type: "task",
             duration: "2",
             parent: "13",
             progress: 1,
+            assigned: "entry2",
             open: true,
           },
           {
             id: 18,
             text: "Task #2.2",
             start_date: "2022-04-25",
+            type: "task",
             duration: "3",
             parent: "13",
             progress: 0.8,
@@ -94,6 +105,7 @@ export default {
             id: 19,
             text: "Task #2.3",
             start_date: "2022-04-04",
+            type: "task",
             duration: "4",
             parent: "13",
             progress: 0.2,
@@ -103,6 +115,7 @@ export default {
             id: 20,
             text: "Task #2.4",
             start_date: "2022-04-01",
+            type: "task",
             duration: "4",
             parent: "13",
             progress: 0,
@@ -112,6 +125,7 @@ export default {
             id: 21,
             text: "Task #4.1",
             start_date: "2022-03-07",
+            type: "task",
             duration: "4",
             parent: "15",
             progress: 0.5,
@@ -121,6 +135,7 @@ export default {
             id: 22,
             text: "Task #4.2",
             start_date: "2022-03-08",
+            type: "task",
             duration: "4",
             parent: "15",
             progress: 0.1,
@@ -128,9 +143,9 @@ export default {
           },
           {
             id: 23,
-            text: "Mediate milestone",
+            text: "Mediate meeting",
             start_date: "2022-03-03",
-            type: gantt.config.types.milestone,
+            type: "task",
             parent: "15",
             progress: 0,
             open: true,
@@ -253,24 +268,94 @@ export default {
       //     format: "<span style='line-height:normal'>周%D</span>",
       //   },
       // ];
-      gantt.config.types["meeting"] = "type_id";
-      gantt.locale.labels["type_meeting"] = "Meeting";
 
-      //sections for tasks with 'meeting' type
-
-      gantt.locale.labels.section_title = "Subject";
-      gantt.locale.labels.section_details = "Details";
-      gantt.config.lightbox["meeting_sections"] = [
+      // 一般类型的弹窗
+      let generalType = [
+        // 输入框
         {
-          name: "title",
-          height: 20,
+          name: "description",
+          map_to: "text",
+          type: "textarea",
+          focus: true,
+        },
+        // 选择框
+        {
+          name: "priority",
+          map_to: "priority",
+          type: "select",
+          options: [
+            {
+              key: "1",
+              label: "Hight",
+            },
+            {
+              key: "2",
+              label: "Normal",
+            },
+            {
+              key: "3",
+              label: "Low",
+            },
+          ],
+        },
+        // 多选框
+        {
+          name: "assigned",
+          type: "checkbox",
+          map_to: "assigned",
+          options: [
+            {
+              key: "entry1",
+              label: "entry1",
+            },
+            {
+              key: "entry2",
+              label: "entry2",
+            },
+          ],
+          onchange: function () {
+            console.log("checkbox switched");
+          },
+        },
+        // 选择框
+        {
+          name: "progress",
+          map_to: "progress",
+          type: "select",
+          options: [
+            { key: "0", label: "未开始" },
+            { key: "0.1", label: "10%" },
+            { key: "0.2", label: "20%" },
+            { key: "0.3", label: "30%" },
+            { key: "0.4", label: "40%" },
+            { key: "0.5", label: "50%" },
+            { key: "0.6", label: "60%" },
+            { key: "0.7", label: "70%" },
+            { key: "0.8", label: "80%" },
+            { key: "0.9", label: "90%" },
+            { key: "1", label: "完成" },
+          ],
+        },
+        { name: "type", type: "typeselect", map_to: "type" },
+        // 自定义详情
+        {
+          name: "template",
+          type: "template",
+          map_to: "my_template",
+        },
+        // { name: "time", type: "duration", map_to: "auto" },
+        { name: "time", type: "time", map_to: "auto" },
+      ];
+      // 增加的类型的弹窗
+      let meetingPopup = [
+        {
+          name: "description",
           map_to: "text",
           type: "textarea",
           focus: true,
         },
         {
           name: "details",
-          height: 70,
           map_to: "details",
           type: "textarea",
           focus: true,
@@ -278,28 +363,78 @@ export default {
         { name: "type", type: "typeselect", map_to: "type" },
         { name: "time", type: "time", map_to: "auto" },
       ];
-
-      //sections for regular lightbox
-      gantt.config.lightbox.sections = [
-        {
-          name: "description",
-          height: 70,
-          map_to: "text",
-          type: "textarea",
-          focus: true,
-        },
-        { name: "type", type: "typeselect", map_to: "type" },
-        { name: "time", type: "duration", map_to: "auto" },
+      // 自定义弹窗内容
+      gantt.attachEvent("onBeforeLightbox", function (id) {
+        var task = gantt.getTask(id);
+        // console.log(task, id);
+        task.my_template =
+          "<span id='title1'>测试文本: </span>" +
+          "一句话" +
+          "<br/>" +
+          "<span id='title2'>进度: </span>" +
+          task.progress * 100 +
+          " %";
+        return true;
+      });
+      // 弹窗内增加的属性的label
+      gantt.locale.labels["section_priority"] = "优先事项";
+      gantt.locale.labels["section_assigned"] = "分配给";
+      gantt.locale.labels["section_progress"] = "进度";
+      gantt.locale.labels["section_template"] = "详情";
+      // 删除自带的类型
+      delete gantt.config.types["placeholder"];
+      delete gantt.config.types["milestone"];
+      // 增加类型
+      gantt.config.types["meeting"] = "meeting";
+      // 增加的类型的label
+      gantt.locale.labels["type_Team"] = "项目";
+      gantt.locale.labels["type_Work"] = "任务";
+      gantt.locale.labels["type_meeting"] = "会议";
+      gantt.locale.labels["section_description"] = "描述";
+      gantt.locale.labels["section_details"] = "详情";
+      // 一般类型的弹窗的表单项
+      gantt.config.lightbox.sections = generalType;
+      // 增加的类型的弹窗的表单项
+      gantt.config.lightbox.meeting_sections = meetingPopup;
+      // 出现弹窗之前
+      gantt.attachEvent("onBeforeLightbox", function (id) {
+        gantt.resetLightbox();
+        const task = gantt.getTask(id);
+        console.log(task, task.type);
+        return true;
+      });
+      // 增加的弹窗的按钮，前两个是自带的
+      gantt.config.buttons_left = [
+        "dhx_save_btn",
+        "dhx_cancel_btn",
+        "complete_button",
       ];
+      // 增加的弹窗的按钮的label
+      gantt.locale.labels["complete_button"] = "完成";
+      // 自定义弹窗按钮的事件
+      gantt.attachEvent("onLightboxButton", function (button_id, node, e) {
+        console.log(button_id);
+        if (button_id == "complete_button") {
+          var id = gantt.getState().lightbox;
+          console.log(id);
+          gantt.updateTask(id);
+          gantt.hideLightbox();
+          console.log(
+            "完成按钮",
+            gantt.getTask(id),
+            "父级ID是",
+            gantt.getTask(id).$rendered_parent
+          );
+        }
+      });
+
       // 给网格区域的任务添加右侧的注释
       gantt.templates.rightside_text = function (start, end, task) {
-        console.log(task.type);
-        if (task.type == gantt.config.types.milestone) {
+        if (task.type == gantt.config.types.task) {
           return "加注释";
         }
         return "";
       };
-
       // 顶部表头的高度
       gantt.config.scale_height = 120;
       // 设置时间轴区域中列的最小宽度
@@ -326,6 +461,12 @@ export default {
         },
         {
           name: "start_date",
+          width: 80,
+          align: "center",
+        },
+        {
+          name: "assigned",
+          label: "分配给",
           width: 80,
           align: "center",
         },
@@ -402,9 +543,9 @@ export default {
             document.body.scrollTop +
             document.documentElement.scrollTop;
         if (taskId) {
-          console.log(x, y, taskId);
+          // console.log(x, y, taskId);
         } else if (linkId) {
-          console.log(x, y, linkId);
+          // console.log(x, y, linkId);
         }
         if (taskId || linkId) {
           return false;
@@ -415,7 +556,6 @@ export default {
       gantt.config.work_time = true;
       // 设置表格行的默认高度
       gantt.config.row_height = 30;
-
       // 初始化
       gantt.init(this.$refs.gantt);
       // 数据解析
@@ -492,14 +632,8 @@ export default {
   line-height: 16px;
   z-index: 1500 !important;
 }
-// .gantt_cal_light[aria-hidden="false"] {
-//   opacity: 1;
-// }
-// .gantt_cal_light[aria-hidden="true"] {
-//   opacity: 0;
-// }
 .gantt_cal_light {
-  transition: all 0.3s ease;
+  // transition: all 0.2s ease;
   height: auto !important;
   // 弹窗的header
   .gantt_cal_ltitle {
@@ -508,8 +642,11 @@ export default {
   }
   // 弹窗的body
   .gantt_cal_larea {
+    overflow-y: auto;
+    padding: 0px 10px;
     .gantt_cal_lsection {
       padding: 10px;
+      padding-top: 20px;
       padding-bottom: 5px;
     }
     .gantt_section_time {
@@ -524,6 +661,7 @@ export default {
       }
       .gantt_duration {
         height: 30px;
+        width: auto;
         span {
           line-height: 30px;
         }
@@ -572,6 +710,19 @@ export default {
         outline: 0;
         box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
       }
+      // 多选框
+      label {
+        cursor: pointer;
+        input {
+          height: 17px;
+          width: 16px;
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+      }
+      label + label {
+        margin-left: 20px;
+      }
     }
     .gantt_wrap_section {
       display: flex;
@@ -589,6 +740,9 @@ export default {
         select {
           height: 30px;
         }
+      }
+      .gantt_cal_template {
+        height: auto !important;
       }
       .gantt_section_time {
         padding: 10px !important;
@@ -630,14 +784,4 @@ export default {
     border-color: #ffad33;
   }
 }
-
-// .gantt_cal_larea {
-//   overflow-y: auto;
-//   .gantt_cal_lsection {
-//     height: 30px;
-//   }
-//   .gantt_cal_ltext {
-//     height: 30px !important;
-//   }
-// }
 </style>
