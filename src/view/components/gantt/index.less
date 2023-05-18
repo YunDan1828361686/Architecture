@@ -1,0 +1,192 @@
+.gantt-warpper {
+  .gantt-container {
+    height: 100%;
+    z-index: 1000 !important;
+    // 全屏按钮
+    .gantt-fullscreen {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 2px;
+      font-size: 32px;
+      background: transparent;
+      cursor: pointer;
+      opacity: 0.5;
+      text-align: center;
+      -webkit-transition: background-color 0.5s, opacity 0.5s;
+      transition: background-color 0.5s, opacity 0.5s;
+    }
+
+    .gantt-fullscreen:hover {
+      background: rgba(150, 150, 150, 0.5);
+      opacity: 1;
+    }
+    // 设置网格上方的时间单元格
+    .gantt_task_scale .gantt_scale_cell {
+      cursor: default;
+    }
+    // 设置网格上方的时间单元格
+    .weekend {
+      background: #f0dfe5 !important;
+    }
+  }
+}
+// 全局生效的样式
+// 悬浮框
+.gantt_tooltip {
+  font-size: 13px;
+  line-height: 16px;
+  z-index: 1500 !important;
+}
+.gantt_cal_light {
+  // transition: all 0.2s ease;
+  height: auto !important;
+  // 弹窗的header
+  .gantt_cal_ltitle {
+    font-size: 14px;
+    padding: 15px 10px;
+  }
+  // 弹窗的body
+  .gantt_cal_larea {
+    overflow-y: auto;
+    padding: 0px 10px;
+    .gantt_cal_lsection {
+      padding: 10px;
+      padding-top: 20px;
+      padding-bottom: 5px;
+    }
+    .gantt_section_time {
+      height: 50px !important;
+      padding: 10px;
+      padding-bottom: 5px;
+      .gantt_time_selects {
+        height: 30px;
+        select {
+          height: 30px;
+        }
+      }
+      .gantt_duration {
+        height: 30px;
+        width: auto;
+        span {
+          line-height: 30px;
+        }
+      }
+    }
+
+    .gantt_cal_lsection {
+      height: 20px;
+      box-sizing: content-box;
+    }
+    .gantt_cal_ltext {
+      height: auto !important;
+      box-sizing: content-box;
+      select {
+        height: 30px;
+      }
+      textarea,
+      select,
+      input {
+        display: inline-block;
+        width: 100%;
+        height: 32px;
+        line-height: 1.5;
+        padding: 4px 7px;
+        font-size: 14px;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        color: #515a6e;
+        background-color: #fff;
+        background-image: none;
+        position: relative;
+        cursor: text;
+        transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+      }
+      textarea:focus,
+      textarea:hover,
+      select:focus,
+      select:hover,
+      input:focus,
+      input:hover {
+        border-color: #57a3f3;
+      }
+      select:focus-visible {
+        border-color: #57a3f3;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+      }
+      // 多选框
+      label {
+        cursor: pointer;
+        input {
+          height: 17px;
+          width: 16px;
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+      }
+      label + label {
+        margin-left: 20px;
+      }
+    }
+    .gantt_wrap_section {
+      display: flex;
+      align-items: center;
+      .gantt_cal_lsection {
+        height: 28px !important;
+        line-height: 28px;
+        padding: 10px;
+      }
+      .gantt_cal_ltext {
+        height: 28px !important;
+        line-height: 26px;
+        width: 100%;
+        padding: 10px;
+        select {
+          height: 30px;
+        }
+      }
+      .gantt_cal_template {
+        height: auto !important;
+      }
+      .gantt_section_time {
+        padding: 10px !important;
+        select {
+          height: 28px;
+        }
+      }
+    }
+  }
+  .gantt_btn_set {
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  .gantt_save_btn_set {
+    color: #fff;
+    background-color: #2d8cf0;
+    border-color: #2d8cf0;
+  }
+  .gantt_save_btn_set:hover {
+    background-color: #57a3f3;
+    border-color: #57a3f3;
+  }
+  .gantt_cancel_btn_set {
+    background-color: #fff;
+    border-color: #dcdee2;
+  }
+  .gantt_cancel_btn_set:hover {
+    color: #57a3f3;
+    background-color: #fff;
+    border-color: #57a3f3;
+  }
+  .gantt_delete_btn_set {
+    color: #fff;
+    background-color: #f90;
+    border-color: #f90;
+  }
+  .gantt_delete_btn_set:hover {
+    background-color: #ffad33;
+    border-color: #ffad33;
+  }
+}
