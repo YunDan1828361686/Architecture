@@ -97,6 +97,54 @@ export default {
       type: Function,
       default: (start, end, task) => {},
     },
+    // 重置类型
+    ganttTypes: {
+      type: Array,
+      required: true,
+      default: () => {
+        return [];
+      },
+    },
+    // 出现弹窗之前
+    onBeforeLightboxFun: {
+      type: Function,
+      default: (id) => {},
+    },
+    // 排序
+    ganttSort: {
+      type: String,
+      default: "",
+    },
+    // 新增任务
+    taskCreateFun: {
+      type: Function,
+      default: (data) => {},
+    },
+    // 更新任务
+    taskUpdateFun: {
+      type: Function,
+      default: (data, id) => {},
+    },
+    // 删除任务
+    taskDeleteFun: {
+      type: Function,
+      default: (id) => {},
+    },
+    // 新增链接
+    linkCreateFun: {
+      type: Function,
+      default: (data) => {},
+    },
+    // 更新链接
+    linkUpdateFun: {
+      type: Function,
+      default: (data, id) => {},
+    },
+    // 删除链接
+    linkDeleteFun: {
+      type: Function,
+      default: (id) => {},
+    },
   },
   data() {
     return {};
@@ -149,8 +197,14 @@ export default {
       gantt.config.grid_resize = true;
       // 设置时间线区域是否最初滚动以显示最早的任务
       gantt.config.initial_scroll = false;
+      // 将新增的弹窗的节点及其标签设置在同一行
+      gantt.config.wide_form = true;
+      // 设置任务的持续时间为工作时间而不是日历时间
+      gantt.config.work_time = false;
+      // 显示指定日期范围之外的任务
+      gantt.config.show_tasks_outside_timescale = true;
       // 设置用于解析数据集中的数据并将日期发送回服务器的日期格式
-      gantt.config.date_format = "%Y-%m-%d %H:%I:%S";
+      gantt.config.date_format = "%Y-%m-%d";
       // 是否开启全屏功能
       if (this_.ganttFullscreen) {
         // 全屏
@@ -231,12 +285,55 @@ export default {
       gantt.attachEvent("onContextMenu", this_.onContextMenuFun);
       // 设置左侧表格表头
       gantt.config.columns = this_.ganttColumns;
+      // 重置类型
+      let configTypes = {};
+      for (let i = 0; i < this_.ganttTypes.length; i++) {
+        const element1 = this_.ganttTypes[i];
+        configTypes[element1.typeName] = element1.typeName;
+        // 设置增加的类型的label
+        gantt.locale.labels["type_" + element1.typeName] = element1.optionName;
+        // 设置的弹窗的表单项的label
+        for (let k = 0; k < element1.popupForm.length; k++) {
+          const element2 = element1.popupForm[k];
+          gantt.locale.labels["section_" + element2.name] = element2.labelName;
+        }
+        if (i == 0) {
+          gantt.config.lightbox.sections = element1.popupForm;
+        } else {
+          gantt.config.lightbox[element1.typeName + "_sections"] =
+            element1.popupForm;
+        }
+      }
+      // 出现弹窗之前
+      gantt.attachEvent("onBeforeLightbox", this_.onBeforeLightboxFun);
+      // 重置类型
+      gantt.config.types = configTypes;
       // 初始化
       gantt.init(this_.$refs.gantt);
       // 数据解析
       gantt.parse(this_.ganttTasks);
       // 排序
-      gantt.sort("start_date");
+      gantt.sort(this_.ganttSort);
+
+      // 关于甘特图数据变化
+      gantt.createDataProcessor({
+        task: {
+          // 新增任务
+          create: this_.taskCreateFun,
+          // 更新任务
+          update: this_.taskUpdateFun,
+          // 删除任务
+          delete: this_.taskDeleteFun,
+        },
+        link: {
+          // 新增链接
+          create: this_.linkCreateFun,
+          // 更新链接
+          update: this_.linkUpdateFun,
+          // 删除链接
+          delete: this_.linkDeleteFun,
+        },
+      });
     },
     refreshGantt() {
       // 刷新数据

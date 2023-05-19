@@ -152,9 +152,31 @@
       }
       .gantt_section_time {
         padding: 10px !important;
-        select {
-          height: 28px;
-        }
+      }
+      select {
+        display: inline-block;
+        height: 30px;
+        line-height: 1.5;
+        padding: 4px 7px;
+        font-size: 14px;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        color: #515a6e;
+        background-color: #fff;
+        background-image: none;
+        position: relative;
+        cursor: text;
+        transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+      }
+      select:focus,
+      select:hover {
+        border-color: #57a3f3;
+      }
+      select:focus-visible {
+        border-color: #57a3f3;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
       }
     }
   }
