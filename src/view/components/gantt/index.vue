@@ -308,6 +308,58 @@ export default {
       gantt.attachEvent("onBeforeLightbox", this_.onBeforeLightboxFun);
       // 重置类型
       gantt.config.types = configTypes;
+      // // 增加的弹窗的按钮，前两个是自带的
+      // gantt.config.buttons_left = [
+      //   "dhx_save_btn",
+      //   "dhx_cancel_btn",
+      //   "complete_button",
+      // ];
+      // // 增加的弹窗的按钮的label
+      // gantt.locale.labels["complete_button"] = "完成";
+      // // 自定义弹窗按钮的事件
+      // gantt.attachEvent("onLightboxButton", function (button_id, node, e) {
+      //   if (button_id == "complete_button") {
+      //     var start_ = this_
+      //       .$dayjs(gantt.getLightboxValues().start_date)
+      //       .format("YYYY-MM-DD 00:00:00");
+      //     var end_ = this_
+      //       .$dayjs(gantt.getLightboxValues().end_date)
+      //       .format("YYYY-MM-DD 23:59:59");
+      //     // 重置一下数据
+      //     let addData_ = {
+      //       start_date: start_,
+      //       end_date: end_,
+      //       text: gantt.getLightboxValues().text,
+      //       type: gantt.getLightboxValues().type,
+      //       duration: gantt.getLightboxValues().duration,
+      //       parent: gantt.getLightboxValues().parent,
+      //       progress: gantt.getLightboxValues().progress,
+      //       priority: gantt.getLightboxValues().priority,
+      //       assigned: gantt.getLightboxValues().assigned.join(","),
+      //     };
+      //     if (gantt.getLightboxValues().$new) {
+      //       // 新增
+      //       // 先写接口，在回调后添加数据，这里的id模拟一下
+      //       addData_.id = this_.$dayjs().valueOf();
+      //       gantt.addTask(addData_);
+      //     } else {
+      //       // 编辑
+      //       // 先写接口，在回调后编辑数据
+      //       addData_.id = gantt.getLightboxValues().id;
+      //       gantt.addTask(addData_);
+      //     }
+      //     this_.$nextTick(() => {
+      //       // 删除自带的新增
+      //       gantt._cancel_lightbox();
+      //       // 刷新数据
+      //       gantt.refreshData();
+      //       gantt.refreshLink();
+      //       gantt.refreshTask();
+      //       gantt.hideLightbox();
+      //     });
+      //   }
+      // });
+
       // 初始化
       gantt.init(this_.$refs.gantt);
       // 数据解析
