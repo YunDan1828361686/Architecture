@@ -277,12 +277,28 @@ export default {
               type: "checkbox",
               options: [
                 {
-                  key: "entry1",
-                  label: "entry1",
+                  key: "小明",
+                  label: "小明",
                 },
                 {
-                  key: "entry2",
-                  label: "entry2",
+                  key: "小红",
+                  label: "小红",
+                },
+                {
+                  key: "小刚",
+                  label: "小刚",
+                },
+                {
+                  key: "大明",
+                  label: "大明",
+                },
+                {
+                  key: "大红",
+                  label: "大红",
+                },
+                {
+                  key: "大刚",
+                  label: "大刚",
                 },
               ],
               onchange: () => {
@@ -342,12 +358,28 @@ export default {
               type: "checkbox",
               options: [
                 {
-                  key: "entry1",
-                  label: "entry1",
+                  key: "小明",
+                  label: "小明",
                 },
                 {
-                  key: "entry2",
-                  label: "entry2",
+                  key: "小红",
+                  label: "小红",
+                },
+                {
+                  key: "小刚",
+                  label: "小刚",
+                },
+                {
+                  key: "大明",
+                  label: "大明",
+                },
+                {
+                  key: "大红",
+                  label: "大红",
+                },
+                {
+                  key: "大刚",
+                  label: "大刚",
                 },
               ],
               onchange: () => {
@@ -387,12 +419,28 @@ export default {
               type: "checkbox",
               options: [
                 {
-                  key: "entry1",
-                  label: "entry1",
+                  key: "小明",
+                  label: "小明",
                 },
                 {
-                  key: "entry2",
-                  label: "entry2",
+                  key: "小红",
+                  label: "小红",
+                },
+                {
+                  key: "小刚",
+                  label: "小刚",
+                },
+                {
+                  key: "大明",
+                  label: "大明",
+                },
+                {
+                  key: "大红",
+                  label: "大红",
+                },
+                {
+                  key: "大刚",
+                  label: "大刚",
                 },
               ],
               onchange: () => {
@@ -432,12 +480,28 @@ export default {
               type: "checkbox",
               options: [
                 {
-                  key: "entry1",
-                  label: "entry1",
+                  key: "小明",
+                  label: "小明",
                 },
                 {
-                  key: "entry2",
-                  label: "entry2",
+                  key: "小红",
+                  label: "小红",
+                },
+                {
+                  key: "小刚",
+                  label: "小刚",
+                },
+                {
+                  key: "大明",
+                  label: "大明",
+                },
+                {
+                  key: "大红",
+                  label: "大红",
+                },
+                {
+                  key: "大刚",
+                  label: "大刚",
                 },
               ],
               onchange: () => {

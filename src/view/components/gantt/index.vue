@@ -90,7 +90,9 @@ export default {
     // 网格区域单元格任务上显示的字
     task_textFun: {
       type: Function,
-      default: (start, end, task) => {},
+      default: (start, end, task) => {
+        return task.text;
+      },
     },
     // 右键事件，左侧表格和右侧网格都适用
     onContextMenuFun: {
@@ -307,7 +309,9 @@ export default {
       // 出现弹窗之前
       gantt.attachEvent("onBeforeLightbox", this_.onBeforeLightboxFun);
       // 重置类型
-      gantt.config.types = configTypes;
+      if (this_.ganttTypes.length) {
+        gantt.config.types = configTypes;
+      }
       // // 增加的弹窗的按钮，前两个是自带的
       // gantt.config.buttons_left = [
       //   "dhx_save_btn",
