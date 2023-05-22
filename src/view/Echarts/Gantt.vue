@@ -15,6 +15,9 @@
       :ganttTooltip="ganttTooltip"
       :ganttTooltipTextFun="ganttTooltipTextFun"
       :ganttTooltipLinkFun="ganttTooltipLinkFun"
+      :grid_folderFun="grid_folderFun"
+      :grid_fileFun="grid_fileFun"
+      :grid_openFun="grid_openFun"
       :task_classFun="task_classFun"
       :ganttFullscreen="ganttFullscreen"
       :ganttFullscreenIcon="ganttFullscreenIcon"
@@ -46,7 +49,7 @@ export default {
       // 设置表格行的默认高度
       row_height: 30,
       // 顶部表头的高度
-      scale_height: 120,
+      scale_height: 80,
       // 设置时间轴区域中列的最小宽度
       min_column_width: 40,
       // 是否开启悬浮框功能
@@ -75,7 +78,7 @@ export default {
           label: "名称",
           tree: true,
           width: "200",
-          template: function (task) {
+          template: (task) => {
             if (task.progress == 0.5)
               return "<div class='ganttColumnsHigh'>" + task.text + "</div>";
             return task.text;
@@ -91,6 +94,16 @@ export default {
           label: "分配给",
           width: 80,
           align: "center",
+        },
+        {
+          name: "progress",
+          label: "进度",
+          width: "80",
+          template: (task) => {
+            return `<div style="text-align:center;">${(
+              task.progress * 100
+            ).toFixed(2)}%</div>`;
+          },
         },
         { name: "add", width: 40 },
       ],
@@ -580,15 +593,38 @@ export default {
         ].join("<br>");
       }
     },
-    // 设置单元格样式
+    // 设置表格单元格样式
     task_classFun(start, end, task) {
-      if (task.progress == 0.5) {
-        return "ganttTaskHigh";
+      if (task.type == "project") {
+        return `ganttTaskProject`;
+      } else {
+        if (task.progress == 0.5) {
+          return "ganttTaskHigh";
+        }
       }
+    },
+    // 父项图标
+    grid_folderFun(item) {
+      // item.$open 区分展开收起
+      // return `<div><i class="ivu-icon ivu-icon-ios-paper" style="font-size:20px;height: 100%;line-height: 29px;"></i></div>`;
+    },
+    // 子项图标
+    grid_fileFun(item) {
+      // return `<div><i class="ivu-icon ivu-icon-md-paper" style="font-size:20px;height: 100%;line-height: 29px;"></i></div>`;
+    },
+    // 打开或关闭的图标
+    grid_openFun(item) {
+      return `<div class="gantt_tree_icon gantt_${
+        item.$open ? "close" : "open"
+      }"><i class="ivu-icon ivu-icon-ios-arrow-${
+        item.$open ? "dropdown" : "dropright"
+      }" style="font-size:20px;height: 100%;line-height: 29px;"></i></div>`;
     },
     // 网格区域单元格任务上显示的字
     task_textFun(start, end, task) {
-      if (task.type == "meeting") {
+      if (task.type == "project") {
+        return `<div class="gantt-project-left"></div><div class="gantt-project-right"></div>`;
+      } else if (task.type == "meeting") {
         return task.text;
       } else {
         return task.text + ` （进度${(task.progress * 100).toFixed(2)}%）`;
@@ -708,6 +744,43 @@ export default {
 </script>
 <style lang="less" scoped>
 .ganttBox {
+  // 自定义右侧任务的样式
+  /deep/ .ganttTaskProject {
+    height: 9px !important;
+    margin-top: 8px;
+    .gantt_task_content {
+      overflow: unset;
+    }
+  }
+  // 自定义右侧任务的type为project的样式
+  /deep/ .gantt_task_line.gantt_project {
+    border: none;
+    color: #fff;
+    background-color: #89e8a6;
+    .gantt-project-left {
+      position: absolute;
+      top: 8px;
+      left: 0px;
+      border-style: solid;
+      border-width: 0 0 8px 7px;
+      border-top-color: transparent;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      border-left-color: #69ca87 !important;
+    }
+    .gantt-project-right {
+      position: absolute;
+      top: 8px;
+      right: 0px;
+      border-style: solid;
+      border-width: 0 7px 8px 0;
+      border-top-color: transparent;
+      border-right-color: #69ca87;
+      border-bottom-color: transparent !important;
+      border-left-color: transparent;
+    }
+  }
+
   // 自定义线的样式
   /deep/ .startupMarker {
     background-color: aqua;

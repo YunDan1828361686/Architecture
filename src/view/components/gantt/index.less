@@ -25,9 +25,53 @@
     .gantt_task_scale .gantt_scale_cell {
       cursor: default;
     }
+    .gantt_grid_scale,
+    .gantt_task_scale {
+      box-sizing: content-box;
+    }
     // 设置网格上方的时间单元格
     .weekend {
       background: #f0dfe5 !important;
+    }
+    // 表格表头
+    .gantt_grid_scale .gantt_grid_head_cell {
+      font-size: 14px;
+      // font-weight: bold;
+      color: #3f424b;
+      background-color: #f2f3f5;
+      opacity: 1;
+    }
+    // 表头的加号
+    .gantt_grid_head_cell.gantt_grid_head_add:hover {
+      background-color: #e7edf4;
+    }
+    // 表内文字
+    .gantt_grid_data .gantt_cell {
+      font-size: 13px;
+      color: #3f424b;
+    }
+    // 表格悬停
+    .gantt_grid_data .gantt_row:hover {
+      background-color: #e9efff;
+    }
+    // 选中
+    .gantt_grid_data .gantt_row.gantt_selected,
+    .gantt_grid_data .gantt_row.odd.gantt_selected,
+    .gantt_task_row.gantt_selected {
+      background-color: #dce6ff;
+    }
+    // 网格上方日期单元格
+    .gantt_scale_cell {
+      font-size: 14px;
+      // font-weight: bold;
+      color: #3f424b;
+      background-color: #f2f3f5;
+      opacity: 1;
+    }
+    .gantt_tree_icon.gantt_close,
+    .gantt_tree_icon.gantt_open {
+      margin-right: 5px;
+      background-image: none;
     }
   }
 }

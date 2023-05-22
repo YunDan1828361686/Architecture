@@ -67,6 +67,21 @@ export default {
       type: Function,
       default: (event, node) => {},
     },
+    // 父项图标
+    grid_folderFun: {
+      type: Function,
+      default: (item) => {},
+    },
+    // 子项图标
+    grid_fileFun: {
+      type: Function,
+      default: (item) => {},
+    },
+    // 打开或关闭的图标
+    grid_openFun: {
+      type: Function,
+      default: (item) => {},
+    },
     // 设置单元格样式
     task_classFun: {
       type: Function,
@@ -176,11 +191,11 @@ export default {
       // 允许拖动任务
       gantt.config.drag_move = true;
       // 允许拖动任务进度
-      gantt.config.drag_progress = true;
+      gantt.config.drag_progress = false;
       // 启用在任务栏中显示进度
-      gantt.config.show_progress = true;
+      gantt.config.show_progress = false;
       // 是否可以添加Link
-      gantt.config.drag_links = false;
+      gantt.config.drag_links = true;
       // 只读模式：打开后不可以操作甘特图
       gantt.config.readonly = false;
       //是否显示左侧树表格
@@ -277,6 +292,12 @@ export default {
           });
         });
       }
+      // 父项图标
+      gantt.templates.grid_folder = this_.grid_folderFun;
+      // 子项图标
+      gantt.templates.grid_file = this_.grid_fileFun;
+      // 打开或关闭的图标
+      gantt.templates.grid_open = this_.grid_openFun;
       // 设置网格区域单元格样式
       gantt.templates.task_class = this_.task_classFun;
       // 给网格区域单元格添加右侧的注释
