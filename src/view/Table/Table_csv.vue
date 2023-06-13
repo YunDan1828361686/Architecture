@@ -367,7 +367,7 @@ export default {
       }
     },
     // 表数据
-    TableData_1: _debounce(function() {
+    TableData_1: _debounce(function () {
       // console.log(this.table_form_1);
       // Spin.show();
       this.loading_1 = true;
@@ -568,9 +568,9 @@ export default {
     },
   },
   watch: {
-    tableData_1: function() {
+    tableData_1: function () {
       // 给表格数据赋值后并渲染完成表格后执行
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         // Spin.hide();
         this.setChecked();
         this.loading_1 = false;
