@@ -38,7 +38,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  font-family: Microsoft YaHei,sans-serif;
+  font-family: Microsoft YaHei, sans-serif;
 }
 #app {
   overflow: overlay;

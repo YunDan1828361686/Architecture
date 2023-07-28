@@ -10,7 +10,8 @@
             icon="ios-cloud-upload-outline"
             :loading="uploadLoading"
             @click="handleUploadFile"
-          >上传文件</Button>
+            >上传文件</Button
+          >
         </Upload>
       </Row>
       <Row>
@@ -27,7 +28,11 @@
       </Row>
       <Row>
         <transition name="fade">
-          <Progress v-if="showProgress" :percent="progressPercent" :stroke-width="2">
+          <Progress
+            v-if="showProgress"
+            :percent="progressPercent"
+            :stroke-width="2"
+          >
             <div v-if="progressPercent == 100">
               <Icon type="ios-checkmark-circle"></Icon>
               <span>成功</span>
@@ -37,7 +42,11 @@
       </Row>
     </Card>
     <Row class="margin-top-10">
-      <Table :columns="tableTitle" :data="tableData" :loading="tableLoading"></Table>
+      <Table
+        :columns="tableTitle"
+        :data="tableData"
+        :loading="tableLoading"
+      ></Table>
     </Row>
   </div>
 </template>
@@ -54,7 +63,7 @@ export default {
       file: null,
       tableData: [],
       tableTitle: [],
-      tableLoading: false
+      tableLoading: false,
     };
   },
   methods: {
@@ -73,10 +82,7 @@ export default {
       this.$Message.info("上传的文件已删除！");
     },
     handleBeforeUpload(file) {
-      const fileExt = file.name
-        .split(".")
-        .pop()
-        .toLocaleLowerCase();
+      const fileExt = file.name.split(".").pop().toLocaleLowerCase();
       if (fileExt === "xlsx" || fileExt === "xls") {
         this.readFile(file);
         this.file = file;
@@ -86,7 +92,7 @@ export default {
           desc:
             "文件：" +
             file.name +
-            "不是EXCEL文件，请选择后缀为.xlsx或者.xls的EXCEL文件。"
+            "不是EXCEL文件，请选择后缀为.xlsx或者.xls的EXCEL文件。",
         });
       }
       return false;
@@ -95,22 +101,22 @@ export default {
     readFile(file) {
       const reader = new FileReader();
       reader.readAsArrayBuffer(file);
-      reader.onloadstart = e => {
+      reader.onloadstart = (e) => {
         this.uploadLoading = true;
         this.tableLoading = true;
         this.showProgress = true;
       };
-      reader.onprogress = e => {
+      reader.onprogress = (e) => {
         this.progressPercent = Math.round((e.loaded / e.total) * 100);
       };
-      reader.onerror = e => {
+      reader.onerror = (e) => {
         this.$Message.error("文件读取出错");
       };
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.$Message.info("文件读取成功");
         const data = e.target.result;
         const { header, results } = excel.read(data, "array");
-        const tableTitle = header.map(item => {
+        const tableTitle = header.map((item) => {
           return { title: item, key: item };
         });
         this.tableData = results;
@@ -119,12 +125,12 @@ export default {
         this.tableLoading = false;
         this.showRemoveFile = true;
         console.log(this.tableTitle, this.tableData);
-        localStorage.setItem('a',JSON.stringify(this.tableTitle))
-        localStorage.setItem('b',JSON.stringify(this.tableData))
+        localStorage.setItem("a", JSON.stringify(this.tableTitle));
+        localStorage.setItem("b", JSON.stringify(this.tableData));
       };
-    }
+    },
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
