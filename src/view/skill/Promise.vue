@@ -31,32 +31,32 @@ export default {
     },
   },
   mounted() {
-    // const this_ = this;
-    // function Promise1() {
-    //   return this_.$axios("/node2/test1", "post").then((res) => {
-    //     console.log("222");
-    //     let data = res.data;
-    //     return data;
-    //   });
-    // }
-    // function Promise2() {
-    //   return this_.$axios("/node2/test2", "post").then((res) => {
-    //     console.log("444");
-    //     let data = res.data;
-    //     return data;
-    //   });
-    // }
-    // async function fn() {
-    //   console.log("111");
-    //   let result1 = await Promise1()
-    //   console.log("333");
-    //   let result2 = await Promise2()
-    //   console.log("555");
-    //   console.log(result1, "666");
-    //   console.log(result2, "777");
-    //   console.log("888");
-    // }
-    // fn();
+    const this_ = this;
+    function Promise1() {
+      return this_.$axios("/node2/test1", "post").then((res) => {
+        console.log("222");
+        let data = res.data;
+        return data;
+      });
+    }
+    function Promise2() {
+      return this_.$axios("/node2/test2", "post").then((res) => {
+        console.log("444");
+        let data = res.data;
+        return data;
+      });
+    }
+    async function fn() {
+      console.log("111");
+      let result1 = await Promise1()
+      console.log("333");
+      let result2 = await Promise2()
+      console.log("555");
+      console.log(result1, "666");
+      console.log(result2, "777");
+      console.log("888");
+    }
+    fn();
     // return;
     // const this_ = this;
     // function Promise1() {
