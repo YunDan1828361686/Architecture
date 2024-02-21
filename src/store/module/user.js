@@ -1,6 +1,7 @@
 import { setToken, getToken } from '@/libs/util'
 import axios from 'axios'
 import Qs from 'qs'
+let $url = process.env.NODE_ENV === 'production' ? '' : '/api'
 export default {
   state: {
     userName: '',
@@ -42,8 +43,7 @@ export default {
     handleLogOut({ state, commit }) {
       return new Promise((resolve, reject) => {
         axios({
-          // url: '/logout',
-          url: '/api/logout',
+          url: $url + '/logout',
           method: 'post'
         }).then(() => {
           commit("setspinShow_", true)
@@ -73,7 +73,7 @@ export default {
     getUserInfo({ state, commit }, val) {
       return new Promise((resolve, reject) => {
         axios({
-          url: val.HttpApi + '/login',
+          url: $url + '/login',
           method: 'post',
           data: val,
           // data: Qs.stringify(val),
@@ -96,8 +96,7 @@ export default {
     getifInline({ state, commit }) {
       return new Promise((resolve, reject) => {
         axios({
-          // url: '/ifInline',
-          url: '/api/ifInline',
+          url: $url + '/ifInline',
           method: 'post',
         }).then(res => {
           resolve(res)
