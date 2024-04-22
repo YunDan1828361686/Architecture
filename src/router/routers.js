@@ -1,5 +1,5 @@
-import Main from '@/components/main'
-import parentView from '@/components/parent-view'
+import Main from "@/components/main";
+import parentView from "@/components/parent-view";
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -19,243 +19,243 @@ import parentView from '@/components/parent-view'
 
 export default [
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     meta: {
-      title: 'Login - 登录',
-      hideInMenu: true
+      title: "Login - 登录",
+      hideInMenu: true,
     },
-    component: () => import('@/view/login/login.vue')
+    component: () => import("@/view/login/login.vue"),
   },
   {
-    path: '/',
-    name: '_home',
-    redirect: '/home',
+    path: "/",
+    name: "_home",
+    redirect: "/home",
     component: Main,
     meta: {
       // hideInMenu: true,
-      notCache: true
+      notCache: true,
     },
     children: [
       {
-        path: '/home',
-        name: 'home',
+        path: "/home",
+        name: "home",
         meta: {
           // hideInMenu: true,
-          title: '首页',
+          title: "首页",
           notCache: true,
-          icon: 'md-home'
+          icon: "md-home",
         },
-        component: () => import('@/view/single-page/home')
+        component: () => import("@/view/single-page/home"),
       },
       {
-        path: '/Refresh',
-        name: 'Refresh',
+        path: "/Refresh",
+        name: "Refresh",
         meta: {
-          title: '刷新中~',
-          hideInMenu: true
+          title: "刷新中~",
+          hideInMenu: true,
         },
-        component: () => import('@/view/error-page/Refresh.vue')
-      }
-    ]
+        component: () => import("@/view/error-page/Refresh.vue"),
+      },
+    ],
   },
   {
-    path: '/components',
-    name: 'components',
+    path: "/components",
+    name: "components",
     meta: {
-      icon: 'logo-buffer',
-      title: '组件'
+      icon: "logo-buffer",
+      title: "组件",
     },
     component: Main,
     children: [
       {
-        path: 'count_to_page',
-        name: 'count_to_page',
+        path: "count_to_page",
+        name: "count_to_page",
         meta: {
-          icon: 'md-trending-up',
-          title: '数字渐变'
+          icon: "md-trending-up",
+          title: "数字渐变",
         },
-        component: () => import('@/view/components/count-to/count-to.vue')
+        component: () => import("@/view/components/count-to/count-to.vue"),
       },
       {
-        path: 'org_tree_page',
-        name: 'org_tree_page',
+        path: "org_tree_page",
+        name: "org_tree_page",
         meta: {
-          icon: 'ios-people',
-          title: '组织结构树'
+          icon: "ios-people",
+          title: "组织结构树",
         },
-        component: () => import('@/view/components/org-tree')
-      }
-    ]
+        component: () => import("@/view/components/org-tree"),
+      },
+    ],
   },
   {
-    path: '/tools_methods',
-    name: 'tools_methods',
+    path: "/tools_methods",
+    name: "tools_methods",
     meta: {
-      hideInBread: true
+      hideInBread: true,
     },
     component: Main,
     children: [
       {
-        path: 'tools_methods_page',
-        name: 'tools_methods_page',
+        path: "tools_methods_page",
+        name: "tools_methods_page",
         meta: {
-          icon: 'ios-hammer',
-          title: '工具方法',
-          beforeCloseName: 'before_close_normal'
+          icon: "ios-hammer",
+          title: "工具方法",
+          beforeCloseName: "before_close_normal",
         },
-        component: () => import('@/view/tools-methods/tools-methods.vue')
-      }
-    ]
+        component: () => import("@/view/tools-methods/tools-methods.vue"),
+      },
+    ],
   },
   {
-    path: '/skill',
-    name: 'skill',
+    path: "/skill",
+    name: "skill",
     meta: {
-      icon: 'ios-construct',
-      title: '技巧'
+      icon: "ios-construct",
+      title: "技巧",
     },
     component: Main,
     children: [
       {
-        path: 'Time',
-        name: 'Time',
+        path: "Time",
+        name: "Time",
         meta: {
-          title: 'Time'
+          title: "Time",
         },
-        component: () => import('@/view/skill/Time.vue')
+        component: () => import("@/view/skill/Time.vue"),
       },
       {
-        path: 'Promise',
-        name: 'Promise',
+        path: "Promise",
+        name: "Promise",
         meta: {
-          title: 'Promise'
+          title: "Promise",
         },
-        component: () => import('@/view/skill/Promise.vue')
+        component: () => import("@/view/skill/Promise.vue"),
       },
       {
-        path: 'Watch',
-        name: 'Watch',
+        path: "Watch",
+        name: "Watch",
         meta: {
-          title: 'Watch'
+          title: "Watch",
         },
-        component: () => import('@/view/skill/Watch.vue')
+        component: () => import("@/view/skill/Watch.vue"),
       },
       {
-        path: 'Vuex',
-        name: 'Vuex',
+        path: "Vuex",
+        name: "Vuex",
         meta: {
-          title: 'Vuex'
+          title: "Vuex",
         },
-        component: () => import('@/view/skill/Vuex.vue')
+        component: () => import("@/view/skill/Vuex.vue"),
       },
       {
-        path: 'Router_method',
-        name: 'Router_method',
+        path: "Router_method",
+        name: "Router_method",
         meta: {
-          title: 'Router_method'
+          title: "Router_method",
         },
-        component: () => import('@/view/skill/Router_method.vue')
+        component: () => import("@/view/skill/Router_method.vue"),
       },
       {
-        path: 'filter_obj',
-        name: 'filter_obj',
+        path: "filter_obj",
+        name: "filter_obj",
         meta: {
-          title: 'filter_obj'
+          title: "filter_obj",
         },
-        component: () => import('@/view/skill/filter_obj.vue')
+        component: () => import("@/view/skill/filter_obj.vue"),
       },
       {
-        path: 'Perform_optimization',
-        name: 'Perform_optimization',
+        path: "Perform_optimization",
+        name: "Perform_optimization",
         meta: {
-          title: 'Perform_optimization'
+          title: "Perform_optimization",
         },
-        component: () => import('@/view/skill/Perform_optimization.vue')
+        component: () => import("@/view/skill/Perform_optimization.vue"),
       },
       {
-        path: 'Vue_websocket',
-        name: 'Vue_websocket',
+        path: "Vue_websocket",
+        name: "Vue_websocket",
         meta: {
-          title: 'Vue_websocket'
+          title: "Vue_websocket",
         },
-        component: () => import('@/view/skill/Vue_websocket.vue')
+        component: () => import("@/view/skill/Vue_websocket.vue"),
       },
       {
-        path: 'Api',
-        name: 'Api',
+        path: "Api",
+        name: "Api",
         meta: {
-          title: 'Api'
+          title: "Api",
         },
-        component: () => import('@/view/skill/Api.vue')
+        component: () => import("@/view/skill/Api.vue"),
       },
       {
-        path: 'specification',
-        name: 'specification',
+        path: "specification",
+        name: "specification",
         meta: {
-          title: 'specification'
+          title: "specification",
         },
-        component: () => import('@/view/skill/specification.vue')
-      }
-    ]
+        component: () => import("@/view/skill/specification.vue"),
+      },
+    ],
   },
   {
-    path: '/Table',
-    name: 'Table',
+    path: "/Table",
+    name: "Table",
     meta: {
-      icon: 'md-menu',
-      title: '表格'
+      icon: "md-menu",
+      title: "表格",
     },
     component: Main,
     children: [
       {
-        path: 'Table_csv',
-        name: 'Table_csv',
+        path: "Table_csv",
+        name: "Table_csv",
         meta: {
-          title: 'Table_csv'
+          title: "Table_csv",
         },
-        component: () => import('@/view/Table/Table_csv.vue')
+        component: () => import("@/view/Table/Table_csv.vue"),
       },
       {
-        path: 'Table_excel',
-        name: 'Table_excel',
+        path: "Table_excel",
+        name: "Table_excel",
         meta: {
-          title: 'Table_excel'
+          title: "Table_excel",
         },
-        component: () => import('@/view/Table/Table_excel.vue')
+        component: () => import("@/view/Table/Table_excel.vue"),
       },
       {
-        path: 'Table_tree',
-        name: 'Table_tree',
+        path: "Table_tree",
+        name: "Table_tree",
         meta: {
-          title: 'Table_tree'
+          title: "Table_tree",
         },
-        component: () => import('@/view/Table/Table_tree.vue')
+        component: () => import("@/view/Table/Table_tree.vue"),
       },
       {
-        path: 'Table_expand',
-        name: 'Table_expand',
+        path: "Table_expand",
+        name: "Table_expand",
         meta: {
-          title: 'Table_expand'
+          title: "Table_expand",
         },
-        component: () => import('@/view/Table/Table_expand.vue')
+        component: () => import("@/view/Table/Table_expand.vue"),
       },
       {
-        path: 'Form_search',
-        name: 'Form_search',
+        path: "Form_search",
+        name: "Form_search",
         meta: {
-          title: 'Form_search'
+          title: "Form_search",
         },
-        component: () => import('@/view/Table/Form_search.vue')
+        component: () => import("@/view/Table/Form_search.vue"),
       },
       {
-        path: 'More_seach',
-        name: 'More_seach',
+        path: "More_seach",
+        name: "More_seach",
         meta: {
-          title: 'More_seach'
+          title: "More_seach",
         },
-        component: () => import('@/view/Table/More_seach.vue')
-      }
+        component: () => import("@/view/Table/More_seach.vue"),
+      },
       // {
       //   path: 'level_2_2',
       //   name: 'level_2_2',
@@ -283,175 +283,222 @@ export default [
       //     }
       //   ]
       // },
-
-    ]
+    ],
   },
   {
-    path: '/File',
-    name: 'File',
+    path: "/File",
+    name: "File",
     meta: {
-      icon: 'md-paper',
-      title: 'File'
+      icon: "md-paper",
+      title: "File",
     },
     component: Main,
     children: [
       {
-        path: 'Upload_img',
-        name: 'Upload_img',
+        path: "Upload_img",
+        name: "Upload_img",
         meta: {
-          title: 'Upload_img'
+          title: "Upload_img",
         },
-        component: () => import('@/view/File/Upload_img.vue')
+        component: () => import("@/view/File/Upload_img.vue"),
       },
       {
-        path: 'Upload_zip',
-        name: 'Upload_zip',
+        path: "Upload_zip",
+        name: "Upload_zip",
         meta: {
-          title: 'Upload_zip'
+          title: "Upload_zip",
         },
-        component: () => import('@/view/File/Upload_zip.vue')
+        component: () => import("@/view/File/Upload_zip.vue"),
       },
       {
-        path: 'Download',
-        name: 'Download',
+        path: "Download",
+        name: "Download",
         meta: {
-          title: 'Download'
+          title: "Download",
         },
-        component: () => import('@/view/File/Download.vue')
+        component: () => import("@/view/File/Download.vue"),
       },
       {
-        path: 'Upload_excel',
-        name: 'Upload_excel',
+        path: "Upload_excel",
+        name: "Upload_excel",
         meta: {
-          title: 'Upload_excel'
+          title: "Upload_excel",
         },
-        component: () => import('@/view/File/Upload_excel.vue')
+        component: () => import("@/view/File/Upload_excel.vue"),
       },
       {
-        path: 'Download_excel',
-        name: 'Download_excel',
+        path: "Download_excel",
+        name: "Download_excel",
         meta: {
-          title: 'Download_excel'
+          title: "Download_excel",
         },
-        component: () => import('@/view/File/Download_excel.vue')
-      }
-    ]
+        component: () => import("@/view/File/Download_excel.vue"),
+      },
+    ],
   },
   {
-    path: '/Echarts',
-    name: 'Echarts',
+    path: "/Echarts",
+    name: "Echarts",
     meta: {
-      icon: 'md-trending-up',
-      title: 'Echarts'
+      icon: "md-trending-up",
+      title: "Echarts",
     },
     component: Main,
     children: [
       {
-        path: 'Double_Y',
-        name: 'Double_Y',
+        path: "echartsCards",
+        name: "echartsCards",
         meta: {
-          title: 'Double_Y'
+          title: "常规卡片加echarts",
         },
-        component: () => import('@/view/Echarts/Double_Y.vue')
+        component: () => import("@/view/Echarts/echartsCards.vue"),
       },
       {
-        path: 'Demo',
-        name: 'Demo',
+        path: "postTwoEcharts",
+        name: "postTwoEcharts",
         meta: {
-          title: 'Demo'
+          title: "一个接口渲染两个echarts",
         },
-        component: () => import('@/view/Echarts/Demo.vue')
+        component: () => import("@/view/Echarts/postTwoEcharts.vue"),
       },
       {
-        path: 'Gantt',
-        name: 'Gantt',
+        path: "postTwoEchartsV2",
+        name: "postTwoEchartsV2",
         meta: {
-          title: 'Gantt'
+          title: "两个接口同时渲染两个echarts",
         },
-        component: () => import('@/view/Echarts/Gantt.vue')
+        component: () => import("@/view/Echarts/postTwoEchartsV2.vue"),
       },
-    ]
+      {
+        path: "proportionV1",
+        name: "proportionV1",
+        meta: {
+          title: "占比图V1",
+        },
+        component: () => import("@/view/Echarts/proportionV1.vue"),
+      },
+      {
+        path: "proportionV2",
+        name: "proportionV2",
+        meta: {
+          title: "占比图V2",
+        },
+        component: () => import("@/view/Echarts/proportionV2.vue"),
+      },
+      {
+        path: "mapV1",
+        name: "mapV1",
+        meta: {
+          title: "地图V1",
+        },
+        component: () => import("@/view/Echarts/mapV1.vue"),
+      },
+      {
+        path: "mapV2",
+        name: "mapV2",
+        meta: {
+          title: "地图V2",
+        },
+        component: () => import("@/view/Echarts/mapV2.vue"),
+      },
+      {
+        path: "Demo",
+        name: "Demo",
+        meta: {
+          title: "Demo",
+        },
+        component: () => import("@/view/Echarts/Demo.vue"),
+      },
+      {
+        path: "Gantt",
+        name: "Gantt",
+        meta: {
+          title: "Gantt",
+        },
+        component: () => import("@/view/Echarts/Gantt.vue"),
+      },
+    ],
   },
   {
-    path: '/Map',
-    name: 'Map',
+    path: "/Map",
+    name: "Map",
     meta: {
-      icon: 'md-map',
-      title: 'Map'
+      icon: "md-map",
+      title: "Map",
     },
     component: Main,
     children: [
       {
-        path: 'Map1',
-        name: 'Map1',
+        path: "Map1",
+        name: "Map1",
         meta: {
-          title: 'Map1'
+          title: "Map1",
         },
-        component: () => import('@/view/Map/Map1.vue')
+        component: () => import("@/view/Map/Map1.vue"),
       },
       {
-        path: 'Map2',
-        name: 'Map2',
+        path: "Map2",
+        name: "Map2",
         meta: {
-          title: 'Map2'
+          title: "Map2",
         },
-        component: () => import('@/view/Map/Map2.vue')
-      }
-    ]
+        component: () => import("@/view/Map/Map2.vue"),
+      },
+    ],
   },
   {
-    path: '/argu',
-    name: 'argu',
+    path: "/argu",
+    name: "argu",
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
     },
     component: Main,
     children: [
       {
-        path: 'params/:id',
-        name: 'params',
+        path: "params/:id",
+        name: "params",
         meta: {
-          icon: 'md-flower',
-          title: route => `${route.params.id}`,
+          icon: "md-flower",
+          title: (route) => `${route.params.id}`,
           notCache: true,
-          beforeCloseName: 'before_close_normal'
+          beforeCloseName: "before_close_normal",
         },
-        component: () => import('@/view/argu-page/params.vue')
+        component: () => import("@/view/argu-page/params.vue"),
       },
       {
-        path: 'query',
-        name: 'query',
+        path: "query",
+        name: "query",
         meta: {
-          icon: 'md-flower',
-          title: route => `${route.query.id}`,
-          notCache: true
+          icon: "md-flower",
+          title: (route) => `${route.query.id}`,
+          notCache: true,
         },
-        component: () => import('@/view/argu-page/query.vue')
-      }
-    ]
+        component: () => import("@/view/argu-page/query.vue"),
+      },
+    ],
   },
   {
-    path: '/401',
-    name: 'error_401',
+    path: "/401",
+    name: "error_401",
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
     },
-    component: () => import('@/view/error-page/401.vue')
+    component: () => import("@/view/error-page/401.vue"),
   },
   {
-    path: '/500',
-    name: 'error_500',
+    path: "/500",
+    name: "error_500",
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
     },
-    component: () => import('@/view/error-page/500.vue')
+    component: () => import("@/view/error-page/500.vue"),
   },
   {
-    path: '*',
-    name: 'error_404',
+    path: "*",
+    name: "error_404",
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
     },
-    component: () => import('@/view/error-page/404.vue')
-  }
-]
+    component: () => import("@/view/error-page/404.vue"),
+  },
+];

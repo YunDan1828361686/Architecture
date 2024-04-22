@@ -88,8 +88,8 @@ export default {
     var arr_2 = _.uniqWith(arr_1, _.isEqual);
     console.log(arr_1, arr_2, "================");
 
-    var aaaa = [{a: 1,b: 2},2];
-    var bbbb = [{a: 1,b: 2},2];
+    var aaaa = [{ a: 1, b: 2 }, 2];
+    var bbbb = [{ a: 1, b: 2 }, 2];
     console.log(_.isEqual(aaaa, bbbb));
     return;
     // 去重，仅保留第一次出现的元素

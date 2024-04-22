@@ -19,8 +19,8 @@
 // 浏览器窗口大小发生变化
 import { on, off } from "@/libs/tools";
 import echarts from "echarts";
-// import DataV from "@/libs/DataV.json";
-import DataV from "@/libs/DataV2.json";
+// import DataV1 from "@/libs/DataV1.json";
+import DataV2 from "@/libs/DataV2.json";
 import tdTheme from "@/libs/echarts_them.json";
 import { _debounce } from "@/libs/Perform_optimization.js";
 echarts.registerTheme("tdTheme", tdTheme);
@@ -210,7 +210,7 @@ export default {
     // 存储已经init的echarts实例
     this.$set(this.myCharts_dom, "0", echarts.init(myCharts, "tdTheme"));
     this.$nextTick(() => {
-      echarts.registerMap("china", DataV);
+      echarts.registerMap("china", DataV2);
       // 让第一个加进去的渲染
       this.myCharts_dom[0].setOption(option, true);
       // 添加点击事件

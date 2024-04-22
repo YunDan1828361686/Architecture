@@ -21,7 +21,6 @@ import { on, off } from "@/libs/tools";
 import echarts from "echarts";
 import tdTheme from "@/libs/echarts_them.json";
 import { _debounce } from "@/libs/Perform_optimization.js";
-import { getCoordinateSystemDimensions } from "echarts/lib/echarts";
 echarts.registerTheme("tdTheme", tdTheme);
 export default {
   name: "Demo",
