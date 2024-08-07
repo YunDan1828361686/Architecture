@@ -38,7 +38,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://192.168.201.34:3002', // 设置你调用的接口域名和端口号 别忘了加http
+        target: 'http://127.0.0.1:3002', // 设置你调用的接口域名和端口号 别忘了加http
         // target: 'http://127.0.0.1:3000', // 公网IP
         changeOrigin: true,
         pathRewrite: {

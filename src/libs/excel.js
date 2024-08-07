@@ -9,12 +9,12 @@ function auto_width(ws, data) {
       if (val == null) {
         return { wch: 10 };
       } else if (val.toString().charCodeAt(0) > 255) {
-      /*if chinese*/
+        /*if chinese*/
         return { wch: val.toString().length * 2 };
       } else {
         return { wch: val.toString().length };
       }
-    })
+    }),
   );
   /*start in the first row*/
   let result = colWidth[0];
@@ -32,7 +32,7 @@ function json_to_array(key, jsonData) {
   return jsonData.map((v) =>
     key.map((j) => {
       return v[j];
-    })
+    }),
   );
 }
 
@@ -44,7 +44,7 @@ function fixdata(data) {
   for (; l < data.byteLength / w; ++l)
     o += String.fromCharCode.apply(
       null,
-      new Uint8Array(data.slice(l * w, l * w + w))
+      new Uint8Array(data.slice(l * w, l * w + w)),
     );
   o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
   return o;
@@ -62,6 +62,7 @@ function get_header_row(sheet) {
       sheet[
         XLSX.utils.encode_cell({ c: C, r: R })
       ]; /* find the cell in the first row */
+    console.log(cell);
     var hdr = "UNKNOWN " + C; // <-- replace with your desired default
     if (cell && cell.t) hdr = XLSX.utils.format_cell(cell);
     headers.push(hdr);

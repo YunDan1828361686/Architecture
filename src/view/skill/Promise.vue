@@ -33,33 +33,33 @@
     mounted() {
       const this_ = this;
       // 第一个
-      function Promise1() {
-        return this_.$axios("/node2/test1", "post").then((res) => {
-          console.log("222");
-          let data = res.data;
-          return data;
-        });
-      }
-      function Promise2() {
-        return this_.$axios("/node2/test2", "post").then((res) => {
-          console.log("444");
-          let data = res.data;
-          return data;
-        });
-      }
-      async function fn() {
-        console.log("111");
-        let result1 = await Promise1();
-        console.log("333");
-        let result2 = await Promise2();
-        console.log("555");
-        console.log(result1, "666");
-        console.log(result2, "777");
-        console.log("888");
-      }
-      fn();
-      function fn() {
-      }
+      // function Promise1() {
+      //   return this_.$axios("/node2/test1", "post").then((res) => {
+      //     console.log("222");
+      //     let data = res.data;
+      //     return data;
+      //   });
+      // }
+      // function Promise2() {
+      //   return this_.$axios("/node2/test2", "post").then((res) => {
+      //     console.log("444");
+      //     let data = res.data;
+      //     return data;
+      //   });
+      // }
+      // async function fn() {
+      //   console.log("111");
+      //   let result1 = await Promise1();
+      //   console.log("333");
+      //   let result2 = await Promise2();
+      //   console.log("555");
+      //   console.log(result1, "666");
+      //   console.log(result2, "777");
+      //   console.log("888");
+      // }
+      // fn();
+      // function fn() {
+      // }
       // 第二个
       // function Promise1() {
       //   return this_.$axios("/node2/test1", "post").then((res) => {
@@ -99,45 +99,45 @@
       // fn();
 
       // 第三个
-      // let pA = new Promise((resolve, reject) => {
-      //   this.$axios("/node2/test1", "post")
-      //     .then((res) => {
-      //       resolve(res.data);
-      //     })
-      //     .catch((err) => {
-      //       reject(err);
-      //     });
-      // });
-      // let pB = new Promise((resolve, reject) => {
-      //   this.$axios("/node2/test2", "post")
-      //     .then((res) => {
-      //       // resolve(res.data);
-      //       reject("报错了");
-      //     })
-      //     .catch((err) => {
-      //       reject(err);
-      //     });
-      // });
-      // // Promise.all([pA, pB])
-      // //   .then((result) => {
-      // //     let pAres = result[0];
-      // //     let pBres = result[1];
-      // //     console.log(pAres, pBres);
-      // //   })
-      // //   .catch((err) => {});
-      // Promise.all(
-      //   [pA, pB].map((p) => {
-      //     return p.then((res) => res).catch((err) => err);
-      //   })
-      // )
+      let pA = new Promise((resolve, reject) => {
+        this.$axios("/node2/test1", "post")
+          .then((res) => {
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+      let pB = new Promise((resolve, reject) => {
+        this.$axios("/node2/test2", "post")
+          .then((res) => {
+            // resolve(res.data);
+            reject("报错了");
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+      // Promise.all([pA, pB])
       //   .then((result) => {
       //     let pAres = result[0];
       //     let pBres = result[1];
       //     console.log(pAres, pBres);
       //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      //   .catch((err) => {});
+      Promise.all(
+        [pA, pB].map((p) => {
+          return p.then((res) => res).catch((err) => err);
+        })
+      )
+        .then((result) => {
+          let pAres = result[0];
+          let pBres = result[1];
+          console.log(pAres, pBres);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
       // 第四个
       // function timeoutA() {
