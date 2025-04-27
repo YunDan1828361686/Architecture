@@ -12,13 +12,6 @@
       return {
         // 创建并发控制器实例（最大并发数2）
         controller: createConcurrency(1),
-        tasks: [
-          { id: 1, time: 2000 },
-          { id: 2, time: 1000 },
-          { id: 3, time: 1500 },
-          { id: 4, time: 3000 },
-          { id: 5, time: 1000 },
-        ],
       };
     },
     computed: {},
