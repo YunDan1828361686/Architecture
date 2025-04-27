@@ -1,0 +1,75 @@
+@import "~view-design/src/styles/index.less";
+
+// @menu-dark-title: #001529;
+// @menu-dark-active-bg: #000c17;
+// @layout-sider-background: #001529;
+@layout-sider-background: #ffffff;
+.ivu-menu-item-active > .ivu-menu-submenu-title {
+  color: #3388ff;
+  .ivu-icon-ios-people {
+    color: #3388ff;
+  }
+}
+.ivu-menu-vertical .ivu-menu-item,
+.ivu-menu-vertical .ivu-menu-submenu-title {
+  width: 85%;
+  margin: 0 auto;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 14px 0px 14px 18px;
+}
+.ivu-menu-vertical .ivu-menu-submenu-title-icon {
+  right: 0px;
+  margin-right: 0px;
+}
+.ivu-menu-item-active > i {
+  color: #ffffff;
+}
+.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
+  background-color: #3388ff;
+  color: #ffffff;
+}
+.side-menu-wrapper li {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.ivu-message {
+  z-index: 9999 !important;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+  -webkit-border-radius: 0;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+  border: 2px solid #fff;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px;
+}
+.ivu-table-wrapper {
+  overflow: hidden;
+}
+.ivu-table-fixed::before,
+.ivu-table-fixed-right::before {
+  display: none;
+}
+.ivu-table-fixed-right {
+  box-shadow: -2px -4px 6px -2px rgba(0, 0, 0, 0.2);
+}

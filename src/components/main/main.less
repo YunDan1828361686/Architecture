@@ -1,0 +1,83 @@
+.main {
+  .logo-con {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    img {
+      height: 64px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .header-con {
+    background: #fff;
+    padding: 0 20px;
+    width: 100%;
+  }
+  .main-layout-con {
+    height: 100%;
+    // overflow: hidden;
+  }
+  .main-content-con {
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  .tag-nav-wrapper {
+    padding: 0;
+    height: 40px;
+    background: #f0f0f0;
+  }
+  .content-wrapper {
+    // 给路由跳转位置增加spin
+    // position: relative;
+    height: ~"calc(100% - 80px)";
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  .left-sider {
+    .ivu-layout-sider-children {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-right: -4px;
+      height: ~"calc(100% - 48px)" !important;
+    }
+  }
+}
+.ivu-menu-item {
+  display: flex !important;
+  align-items: center;
+}
+.ivu-menu-submenu-title {
+  display: flex !important;
+  align-items: center;
+}
+.collased-menu-dropdown {
+  width: 100%;
+  margin: 0;
+  line-height: normal;
+  padding: 7px 0 6px 16px;
+  clear: both;
+  font-size: 12px !important;
+  white-space: nowrap;
+  list-style: none;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  &:hover {
+    background: rgba(100, 100, 100, 0.1);
+  }
+  & * {
+    color: #515a6e;
+  }
+  .ivu-menu-item > i {
+    margin-right: 12px !important;
+  }
+  .ivu-menu-submenu > .ivu-menu > .ivu-menu-item > i {
+    margin-right: 8px !important;
+  }
+}
+
+.ivu-select-dropdown.ivu-dropdown-transfer {
+  max-height: 400px;
+}
