@@ -13,7 +13,7 @@
     "lib": "vue-cli-service build --target lib ./exportCommon.js --name Jcomponents --dest lib"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "cascader-multi": "^2.0.3",
     "countup": "^1.8.2",
     "dayjs": "^1.11.7",
